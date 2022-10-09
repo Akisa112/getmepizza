@@ -1,4 +1,4 @@
-export default function UsernamePage({}) {
+export default function dynamicUserPage({}) {
     return (
         <main>
             <div>

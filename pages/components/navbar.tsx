@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { UserContext } from '../libs/context';
 
 export default function NavBar() {
-    const user = 'test';
-    const username = '';
+    const { user, username } = useContext(UserContext)
 
 
     return (
@@ -20,7 +21,7 @@ export default function NavBar() {
                             <Link href={`/admin`}>ADMIN</Link>
                         </li>
                         <li className='mx-2  text-sm'>
-                            <Link href={`/${username}`}><Image src={user?.photoURL}/></Link>
+                            <Link href={`/${username}`}><img className='rounded-full' width={'30px'} src={user?.photoURL}/></Link>
                         </li>
                     </>
                 )}
