@@ -4,9 +4,21 @@ import Image from 'next/image';
 import ElonsDev from '../public/elonsdev.png'
 import NavBar from './components/navbar';
 import Footer from './components/footer';
+import { firestore, postToJSON, userToJson } from './libs/firebase';
+import UsersFeed from './components/UsersList';
 
+const LIMIT = 3;
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  const usersQuery = firestore.collection('users');
+  const users = (await usersQuery.get()).docs.map(userToJson);
+  return {
+    props: {users},
+  }
+}
+
+export default function Home(props) {
+  console.log(props)
   return (
     <div className='bg-slate-50'>
       <Head>
@@ -38,51 +50,12 @@ export default function Home() {
         </section>
 
         <section className='px-3 md:px-20'>
-          <nav className='pt-10 mb-1'>
-            <ul className='flex items-center overflow-x-auto scrollbar-hide snap-x scroll-auto'>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Artists</Link>
-              </li>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Podcasters</Link>
-              </li>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Musicians</Link>
-              </li>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Gamers</Link>
-              </li>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Influencers</Link>
-              </li>
-              <li className='min-w-fit mx-2 bg-gray-200 rounded-full text-sm px-4  py-4 font-semibold snap-center'>
-                <Link href={"/"}>Streamers</Link>
-              </li>
-            </ul>
-          </nav>
-
+          <h1>LATEST CREATORS</h1>
+          
+          
           <nav className='pt-1 mb-5'>
             <ul className='flex items-center overflow-x-auto scrollbar-hide snap-x scroll-auto'>
-              <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
-                <Image width={'150px'} height={'150px'} src={ElonsDev}/>
-                <p className='max-w-[150px] font-Montserrat text-sm'><span className='font-CircularMedium  '>ElonsDev</span> is coding the next big dapp.</p>
-                <p className=' text-sm text-left mt-1 font-CircularMedium'>🍕 525 Supporters</p>
-              </li>
-              <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
-                <Image width={'150px'} height={'150px'} src={ElonsDev}/>
-                <p className='max-w-[150px] font-Montserrat text-sm'><span className='font-CircularMedium  '>ElonsDev</span> is coding the next big dapp.</p>
-                <p className=' text-sm text-left mt-1 font-CircularMedium'>🍕 525 Supporters</p>
-              </li>
-              <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
-                <Image width={'150px'} height={'150px'} src={ElonsDev}/>
-                <p className='max-w-[150px] font-Montserrat text-sm'><span className='font-CircularMedium  '>ElonsDev</span> is coding the next big dapp.</p>
-                <p className=' text-sm text-left mt-1 font-CircularMedium'>🍕 525 Supporters</p>
-              </li>
-              <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
-                <Image width={'150px'} height={'150px'} src={ElonsDev}/>
-                <p className='max-w-[150px] font-Montserrat text-sm'><span className='font-CircularMedium  '>ElonsDev</span> is coding the next big dapp.</p>
-                <p className=' text-sm text-left mt-1 font-CircularMedium'>🍕 525 Supporters</p>
-              </li>
+              <UsersFeed users={props}/>
             </ul>
           </nav>
           

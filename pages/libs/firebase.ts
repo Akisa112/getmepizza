@@ -48,3 +48,10 @@ export function postToJSON(doc) {
     updatedAt: data.updatedAt.toMillis(),
   };
 }
+
+export function userToJson(user) {
+  const data = user.data();
+  return {
+    ...data,
+  }
+}
