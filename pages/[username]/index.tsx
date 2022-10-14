@@ -10,7 +10,7 @@ export async function getServerSideProps({ query }) {
   const userDoc = await getUserWithUsername(username);
 
   // JSON serializable data
-  let user = userDoc.data();
+  let user = null;
   let posts = null;
 
   if (userDoc) {
@@ -21,6 +21,13 @@ export async function getServerSideProps({ query }) {
       .orderBy('createdAt', 'desc')
       .limit(5);
     posts = (await postsQuery.get()).docs.map(postToJSON);
+  }
+
+  // If no user, short circuit to 404 page
+  if (!userDoc) {
+    return {
+      notFound: true,
+    };
   }
 
   return {

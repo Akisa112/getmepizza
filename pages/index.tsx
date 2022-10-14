@@ -7,10 +7,10 @@ import Footer from './components/footer';
 import { firestore, postToJSON, userToJson } from './libs/firebase';
 import UsersFeed from './components/UsersList';
 
-const LIMIT = 3;
+const LIMIT = 10;
 
 export async function getServerSideProps(context) {
-  const usersQuery = firestore.collection('users');
+  const usersQuery = firestore.collection('users').limit(LIMIT);
   const users = (await usersQuery.get()).docs.map(userToJson);
   return {
     props: {users},
