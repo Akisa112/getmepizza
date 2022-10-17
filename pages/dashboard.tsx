@@ -9,7 +9,7 @@ export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
 
   return (
-    <main className='h-screen flex flex-col'>
+    <main className='h-screen flex flex-col justify-between'>
       <NavBar />
       <AuthCheck>
         <div className='mt-4 m-5 flex justify-between'>
