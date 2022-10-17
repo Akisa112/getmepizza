@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/libs/context.js", "pages/_app.js", "pages/libs/firebase.js"  ],
   "exclude": [
     "node_modules"
   ]

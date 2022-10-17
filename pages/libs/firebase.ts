@@ -23,6 +23,7 @@ export const firestore = firebase.firestore();
 export const storage = firebase.storage(); 
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const twitterAuthProvider = new firebase.auth.TwitterAuthProvider();
+export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 /**`
  * Gets a users/{uid} document with username
