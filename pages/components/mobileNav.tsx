@@ -18,9 +18,9 @@ export default function MobileNav(username) {
     <div className='m-8 font-CircularMedium mt-16'>
       <ul className='items-center justify-center space-y-4  '>
         <li className='text-sm flex'>
-          <BiHome className='mr-2 text-lg fill-orange-600' />
+          <BiHome className='mr-2 text-lg' />
           <Link className='' href='/dashboard'>
-            Home
+            Dashboard
           </Link>
         </li>
 

@@ -8,7 +8,7 @@ import debounce from "lodash.debounce";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-export default function Enter(props) {
+export default function Enter() {
   const { user, username } = useContext(UserContext);
 
   // 1. user signed out <SignInButton />
@@ -164,6 +164,7 @@ function UsernameForm() {
           <div className='mx-2 text-center py-2 px-4 rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
             <span>getme.pizza/</span>
             <input
+              className='border-none focus:ring-0'
               name='username'
               placeholder='yourname'
               value={formValueUserName}
@@ -180,7 +181,7 @@ function UsernameForm() {
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>About</h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
             <textarea
-              className='w-full px-4'
+              className='w-full px-4 border-none focus:ring-0'
               rows={4}
               placeholder='Hey, I just created a page here. You can now buy me a pizza with any crypto!'
               {...register("about", {
@@ -200,7 +201,7 @@ function UsernameForm() {
           </h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
             <input
-              className='w-full px-4'
+              className='w-full px-4 border-none focus:ring-0'
               type='url'
               placeholder='https://'
               {...register("website", { required: true, maxLength: 80 })}
@@ -215,7 +216,7 @@ function UsernameForm() {
           </h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
             <input
-              className='w-full px-4'
+              className='w-full px-4 border-none focus:ring-0'
               type='text'
               placeholder='0x...'
               {...register("ethAddress", {

@@ -17,7 +17,7 @@ function PostItem({ post, admin = false }) {
     <div className='mt-6 mx-3 text-left px-3 py-2 border-2  border-gray-200 rounded-lg'>
       <div className='flex justify-between'>
         <Link href={`/${post.username}/${post.slug}`}>
-          <h2 className='font-bold text-xl'>
+          <h2 className='font-bold text-xl cursor-pointer'>
             <a>{post.title}</a>
           </h2>
         </Link>
@@ -30,7 +30,7 @@ function PostItem({ post, admin = false }) {
             ) : (
               <p className='font-CircularMedium text-sm text-red-600'>Draft</p>
             )}
-            <Link href={`/admin/${post.slug}`}>
+            <Link href={`/posts/${post.slug}`}>
               <h3>
                 <button className=' font-CircularMedium bg-gray-200 rounded-full w-12  text-center md:max-w-xs md:mx-auto'>
                   Edit

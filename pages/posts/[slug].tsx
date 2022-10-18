@@ -1,0 +1,127 @@
+import AuthCheck from "../components/AuthCheck";
+import { firestore, auth, serverTimestamp } from "../libs/firebase";
+
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import { useForm } from "react-hook-form";
+import ReactMarkdown from "react-markdown";
+
+import toast from "react-hot-toast";
+
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
+export default function AdminPostEdit(props) {
+  return (
+    <AuthCheck>
+      <PostManager />
+    </AuthCheck>
+  );
+}
+
+function PostManager() {
+  const router = useRouter();
+  const { slug } = router.query;
+
+  const postRef = firestore
+    .collection("users")
+    .doc(auth.currentUser.uid)
+    .collection("posts")
+    .doc(slug);
+  const [post] = useDocumentDataOnce(postRef);
+
+  return (
+    <main className='h-screen flex flex-col justify-between'>
+      {post && (
+        <>
+          <div className='mt-5 ml-4'>
+            <Link href='../posts'>
+              <button className='flex font-CircularMedium bg-gray-200 rounded-full mt-2 py-2 w-32 md:max-w-xs md:mx-auto'>
+                <AiOutlineArrowLeft className='text-lg mt-0.5 mr-5 ml-4' />
+                Posts
+              </button>
+            </Link>
+          </div>
+
+          <section className='mt-16 m-6 h-full'>
+            <h1 className='font-CircularMedium font-bold text-3xl'>
+              {post.title}
+            </h1>
+            <Link href={`/${post.username}/${post.slug}`}>
+              <h4 className='mt-2 font-CircularMedium text-sm hover:text-orange-600 cursor-pointer'>
+                https://getme.pizza/{post.username}/{post.slug}
+              </h4>
+            </Link>
+            <PostForm postRef={postRef} defaultValues={post} />
+          </section>
+        </>
+      )}
+    </main>
+  );
+}
+
+function PostForm({ defaultValues, postRef }) {
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const updatePost = async (values) => {
+    /* await postRef.update({
+      context,
+      published,
+      updatedAt: serverTimestamp(),
+    });
+
+    reset({ context, published });
+
+    toast.success("Post updated successfully!"); */
+  };
+
+  return (
+    <form
+      className='h-full py-4 flex flex-col justify-between'
+      onSubmit={handleSubmit(updatePost)}
+    >
+      <textarea
+        className='flex-1 w-full px-4  rounded-xl h-2/3'
+        rows={4}
+        placeholder={defaultValues.context}
+        {...register("context", {
+          required: true,
+          minLength: 20,
+          maxLength: 128,
+        })}
+      />
+      <div className='flex-2 mt-12 mb-12'>
+        <div className='flex justify-between'>
+          <button
+            type='submit'
+            className='py-2 px-4 font-CircularMedium bg-yellow-400 rounded-full md:max-w-xs'
+          >
+            Save Changes
+          </button>
+          <fieldset>
+            <input
+              id='published'
+              className='peer  px-4 py-4 mt-1 rounded-full text-orange-600 focus:ring-slate-50'
+              type='checkbox'
+              {...register("published", {
+                required: false,
+              })}
+            />
+            <label className=' font-CircularMedium mx-3 align-middle hidden peer-checked:inline'>
+              Live
+            </label>
+            <div className='inline font-CircularMedium mx-2 align-middle peer-checked:hidden'>
+              Draft
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+  );
+}

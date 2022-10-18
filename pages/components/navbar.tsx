@@ -24,15 +24,22 @@ export default function NavBar() {
           <ul className='flex items-center md:mr-4'>
             {username && (
               <div className='bg-white flex rounded-full p-2 -mt-2'>
-                <button
-                  className='p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border'
+                <p
+                  className='p-2 text-gray-700 rounded-md outline-none'
                   onClick={() => setMovbileNavOpen(!mobileNavOpen)}
                 >
-                  {mobileNavOpen ? <></> : <FaHamburger />}
-                </button>
+                  {mobileNavOpen ? (
+                    <>
+                      <AiOutlineClose />
+                    </>
+                  ) : (
+                    <FaHamburger />
+                  )}
+                </p>
                 <li className='mx-2  text-sm'>
-                  <Link href={`/${username}`}>
+                  <Link href={`/dashboard`}>
                     <img
+                      referrerPolicy='no-referrer'
                       className='rounded-full'
                       width={"30px"}
                       src={user?.photoURL}

@@ -1,10 +1,10 @@
-import AuthCheck from "./components/AuthCheck";
-import PostFeed from "./components/PostFeed";
-import NavBar from "./components/navbar";
-import Footer from "./components/footer";
+import AuthCheck from "../components/AuthCheck";
+import PostFeed from "../components/PostFeed";
+import NavBar from "../components/navbar";
+import Footer from "../components/footer";
 import { useContext, useState } from "react";
-import { UserContext } from "./libs/context";
-import { firestore, auth, serverTimestamp } from "./libs/firebase";
+import { UserContext } from "../libs/context";
+import { firestore, auth, serverTimestamp } from "../libs/firebase";
 
 import { MdIosShare } from "react-icons/md";
 
@@ -18,11 +18,11 @@ export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
 
   return (
-    <main className='h-screen flex flex-col justify-between'>
+    <main className='h-screen flex flex-col justify-between md:max-w-4xl md:mx-auto'>
       <NavBar />
       <AuthCheck>
         <CreateNewPost />
-        <hr />
+
         <PostList />
       </AuthCheck>
       <Footer />
@@ -41,10 +41,13 @@ function PostList() {
   const posts = querySnapshot?.docs.map((doc) => doc.data());
 
   return (
-    <div className='mx-4 mt-4'>
-      <h1 className='font-CircularMedium text-xl'>Manage your Posts</h1>
-      <PostFeed posts={posts} admin />
-    </div>
+    <>
+      <hr className='md:w-2/3 md:mx-auto' />
+      <div className='mx-4 mt-4 md:w-1/2 md:mx-auto'>
+        <h1 className='font-CircularMedium text-xl'>Manage your Posts</h1>
+        <PostFeed posts={posts} admin />
+      </div>
+    </>
   );
 }
 
@@ -87,7 +90,7 @@ function CreateNewPost() {
     toast.success("Post created!");
 
     // Imperative navigation after doc is set
-    router.push(`/admin/${slug}`);
+    router.push(`/posts/${slug}`);
   };
 
   return (
@@ -101,7 +104,8 @@ function CreateNewPost() {
         />
       </div>
       <p className='text-xs mt-1'>
-        <strong>Slug:</strong> {slug}
+        <strong>https://getme.pizza/</strong>
+        {slug}
       </p>
       <button
         type='submit'

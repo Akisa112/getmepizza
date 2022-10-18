@@ -8,8 +8,9 @@ export default function UserProfile({ user, posts }) {
   const [page, setPage] = useState("HOME");
 
   return (
-    <div className='text-center mt-12'>
+    <div className='text-center mt-12 md:max-w-4xl md:mx-auto'>
       <img
+        referrerPolicy='no-referrer'
         src={user.photoURL || "/hacker.png"}
         className='m-auto rounded-full'
       />
@@ -21,7 +22,7 @@ export default function UserProfile({ user, posts }) {
         <i>@{user.username}</i>
       </p>
       <p className='text-gray-500 text-sm'>{user.supporters} supporters</p>
-      <nav className='pt-4 lg:pb-6'>
+      <nav className='pt-4 pb-2 lg:pb-6'>
         <ul className='flex mx-6 justify-center'>
           <li
             onClick={() => setPage("HOME")}
@@ -38,9 +39,9 @@ export default function UserProfile({ user, posts }) {
         </ul>
       </nav>
       {page === "HOME" ? (
-        <div className='lg:flex'>
-          <BuyPizza user={user} />
-          <div>
+        <div className='md:flex md:mx-auto justify-center'>
+          <BuyPizza className='' user={user} />
+          <div className='md:w-1/2'>
             <div className='mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 '>
               <p>{user.about}</p>
               <br />
@@ -66,14 +67,12 @@ export default function UserProfile({ user, posts }) {
           </div>
         </div>
       ) : (
-        <>
-          <div className='lg:flex'>
-            <div className='mx-1 lg:w-2/3'>
-              <PostFeed posts={posts} admin />
-            </div>
-            <BuyPizza user={user} />
+        <div className='md:flex md:mx-auto justify-center'>
+          <div className='md:w-[24rem]'>
+            <PostFeed posts={posts} admin />
           </div>
-        </>
+          <BuyPizza className='w-full' user={user} />
+        </div>
       )}
     </div>
   );

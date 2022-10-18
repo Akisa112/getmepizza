@@ -1,8 +1,8 @@
-import { getUserWithUsername, postToJSON } from '../libs/firebase';
-import UserProfile from '../components/UserProfile';
+import { getUserWithUsername, postToJSON } from "../libs/firebase";
+import UserProfile from "../components/UserProfile";
 
-import NavBar from '../components/navbar';
-import Footer from '../components/footer';
+import NavBar from "../components/navbar";
+import PoweredBy from "../components/poweredby";
 
 export async function getServerSideProps({ query }) {
   const { username } = query;
@@ -16,9 +16,9 @@ export async function getServerSideProps({ query }) {
   if (userDoc) {
     user = userDoc.data();
     const postsQuery = userDoc.ref
-      .collection('posts')
-      .where('published', '==', true)
-      .orderBy('createdAt', 'desc')
+      .collection("posts")
+      .where("published", "==", true)
+      .orderBy("createdAt", "desc")
       .limit(5);
     posts = (await postsQuery.get()).docs.map(postToJSON);
   }
@@ -36,13 +36,13 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function UserProfilePage({ user, posts }) {
-    console.log(user)
+  console.log(user);
   return (
-    <main>
-        <NavBar/>
+    <main className='h-screen flex flex-col justify-between'>
+      <NavBar />
       <UserProfile user={user} posts={posts} />
-      
-      <Footer/>
+
+      <PoweredBy />
     </main>
   );
 }
