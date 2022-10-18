@@ -12,8 +12,11 @@ import { BsLightning } from "react-icons/bs";
 import { ImEmbed2 } from "react-icons/im";
 import Link from "next/link";
 import { auth } from "../libs/firebase";
+import { useRouter } from "next/router";
 
 export default function MobileNav(username) {
+  const router = useRouter();
+
   return (
     <div className='m-8 font-CircularMedium mt-16'>
       <ul className='items-center justify-center space-y-4  '>
@@ -58,7 +61,10 @@ export default function MobileNav(username) {
       <ul className='items-center justify-center space-y-4 '>
         <li className='text-sm flex'>
           <RiLogoutBoxRLine className='mr-2 text-lg' />
-          <p className='cursor-pointer' onClick={() => auth.signOut()}>
+          <p
+            className='cursor-pointer'
+            onClick={() => auth.signOut().then(() => router.push(`./`))}
+          >
             Logout
           </p>
         </li>

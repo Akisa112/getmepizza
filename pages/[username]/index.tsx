@@ -36,7 +36,6 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function UserProfilePage({ user, posts }) {
-  console.log(user);
   return (
     <main className='h-screen flex flex-col justify-between'>
       <NavBar />

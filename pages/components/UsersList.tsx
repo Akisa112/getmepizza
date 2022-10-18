@@ -9,15 +9,21 @@ export default function UsersFeed({ users }) {
 function UserItem({ user }) {
   return (
     <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
-      <img
-        referrerPolicy='no-referrer'
-        width={"150px"}
-        height={"150px"}
-        src={user.photoURL}
-      />
+      <Link href={`/${user.username}`}>
+        <img
+          className='cursor-pointer'
+          referrerPolicy='no-referrer'
+          width={"150px"}
+          height={"150px"}
+          src={user.photoURL}
+        />
+      </Link>
+
       <p className='max-w-[150px] font-Montserrat text-sm'>
-        <span className='font-CircularMedium  '>{user.username}</span> is coding
-        the next big dapp.
+        <span className='font-CircularMedium  '>
+          <Link href={`/${user.username}`}>{user.username}</Link>
+        </span>{" "}
+        is coding the next big dapp.
       </p>
       <p className=' text-sm text-left mt-1 font-CircularMedium'>
         🍕 {user.supporters} Supporters

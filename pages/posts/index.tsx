@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import kebabCase from "lodash.kebabcase";
 import toast from "react-hot-toast";
+import MobileNav from "../components/mobileNav";
 
 export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
@@ -21,6 +22,9 @@ export default function Dashboard({}) {
     <main className='h-screen flex flex-col justify-between md:max-w-4xl md:mx-auto'>
       <NavBar />
       <AuthCheck>
+        <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
+          <MobileNav username={username} />
+        </div>
         <CreateNewPost />
 
         <PostList />

@@ -4,7 +4,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import PostContent from '../components/PostContent';
 import NavBar from '../components/navbar';
 import UserCard from '../components/UserCard';
-import Footer from '../components/footer';
+import PoweredBy from '../components/poweredby';
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -63,15 +63,16 @@ export default function Post(props) {
   const [realtimePost] = useDocumentData(postRef);
 
   const post = realtimePost || props.post;
-  console.log(props.user.user)
   return (
-    <main>
+    <main className='flex flex-col min-h-screen justify-between'>
       <NavBar/>
-      <UserCard  user={props.user}/>
-      <section>
-        <PostContent post={post} />
-      </section>
-
+      <div className='flex-1'>
+        <UserCard  user={props.user}/>
+        <section>
+          <PostContent post={post} />
+        </section>
+      </div>
+      <PoweredBy/>
 
     </main>
   );

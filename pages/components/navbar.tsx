@@ -33,14 +33,16 @@ export default function NavBar() {
                       <AiOutlineClose />
                     </>
                   ) : (
-                    <FaHamburger />
+                    <div className='lg:hidden'>
+                      <FaHamburger />
+                    </div>
                   )}
                 </p>
                 <li className='mx-2  text-sm'>
                   <Link href={`/dashboard`}>
                     <img
                       referrerPolicy='no-referrer'
-                      className='rounded-full'
+                      className='rounded-full cursor-pointer'
                       width={"30px"}
                       src={user?.photoURL}
                     />

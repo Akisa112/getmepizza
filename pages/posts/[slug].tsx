@@ -12,6 +12,8 @@ import toast from "react-hot-toast";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
+import PoweredBy from "../components/poweredby";
+
 export default function AdminPostEdit(props) {
   return (
     <AuthCheck>
@@ -32,24 +34,24 @@ function PostManager() {
   const [post] = useDocumentDataOnce(postRef);
 
   return (
-    <main className='h-screen flex flex-col justify-between'>
+    <main className='h-screen  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (
         <>
           <div className='mt-5 ml-4'>
             <Link href='../posts'>
-              <button className='flex font-CircularMedium bg-gray-200 rounded-full mt-2 py-2 w-32 md:max-w-xs md:mx-auto'>
+              <button className='flex font-CircularMedium bg-gray-200 rounded-full mt-2 py-2 w-32 mx-2 md:max-w-xs '>
                 <AiOutlineArrowLeft className='text-lg mt-0.5 mr-5 ml-4' />
                 Posts
               </button>
             </Link>
           </div>
 
-          <section className='mt-16 m-6 h-full'>
+          <section className='mt-4 mx-6'>
             <h1 className='font-CircularMedium font-bold text-3xl'>
               {post.title}
             </h1>
             <Link href={`/${post.username}/${post.slug}`}>
-              <h4 className='mt-2 font-CircularMedium text-sm hover:text-orange-600 cursor-pointer'>
+              <h4 className='mt-2 mb-2 font-CircularMedium text-sm hover:text-orange-600 cursor-pointer'>
                 https://getme.pizza/{post.username}/{post.slug}
               </h4>
             </Link>
@@ -57,6 +59,7 @@ function PostManager() {
           </section>
         </>
       )}
+      <PoweredBy />
     </main>
   );
 }
@@ -83,12 +86,12 @@ function PostForm({ defaultValues, postRef }) {
 
   return (
     <form
-      className='h-full py-4 flex flex-col justify-between'
+      className='   flex flex-col justify-between'
       onSubmit={handleSubmit(updatePost)}
     >
       <textarea
-        className='flex-1 w-full px-4  rounded-xl h-2/3'
-        rows={4}
+        className='flex-1 w-full px-4 rounded-xl'
+        rows={22}
         placeholder={defaultValues.context}
         {...register("context", {
           required: true,
@@ -96,7 +99,7 @@ function PostForm({ defaultValues, postRef }) {
           maxLength: 128,
         })}
       />
-      <div className='flex-2 mt-12 mb-12'>
+      <div className='flex-2 mt-4 '>
         <div className='flex justify-between'>
           <button
             type='submit'
@@ -107,7 +110,7 @@ function PostForm({ defaultValues, postRef }) {
           <fieldset>
             <input
               id='published'
-              className='peer  px-4 py-4 mt-1 rounded-full text-orange-600 focus:ring-slate-50'
+              className='peer  px-4 py-4 mt-1 rounded-full text-green-600 focus:ring-slate-50'
               type='checkbox'
               {...register("published", {
                 required: false,
