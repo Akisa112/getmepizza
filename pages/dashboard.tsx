@@ -9,6 +9,9 @@ import { getUserWithUsername } from "./libs/firebase";
 import { useState } from "react";
 import MobileNav from "./components/mobileNav";
 
+// 1. Show username
+// 2. TO DO: Show earnings from contract using Moralis
+// 3. TO DO: Invite functionality
 export default function Dashboard({}) {
   const { username } = useContext(UserContext);
 
@@ -23,8 +26,7 @@ export default function Dashboard({}) {
       console.log(error);
     }
   };
-
-  setTimeout(() => fetchUser(), 3000);
+  fetchUser();
 
   return (
     <main className='h-screen flex flex-col justify-between '>

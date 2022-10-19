@@ -1,16 +1,16 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
-import ElonsDev from "../public/elonsdev.png";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
-import { firestore, postToJSON, userToJson } from "./libs/firebase";
+import { firestore, userToJson } from "./libs/firebase";
 import UsersFeed from "./components/UsersList";
 import { TbHandClick } from "react-icons/tb";
 
+// Set a limit for getting users to display to 10 for now.
 const LIMIT = 10;
 
-export async function getServerSideProps(context) {
+// Returns a users array as props from firestore based on the limit above.
+export async function getServerSideProps() {
   const usersQuery = firestore.collection("users").limit(LIMIT);
   const users = (await usersQuery.get()).docs.map(userToJson);
   return {
@@ -18,6 +18,10 @@ export async function getServerSideProps(context) {
   };
 }
 
+/**`
+ * Homepage takes in users array as props from getServerSideProps
+ * @param  {Array} props
+ */
 export default function Home(props) {
   return (
     <div className='bg-slate-50'>
@@ -62,6 +66,7 @@ export default function Home(props) {
           </div>
         </section>
 
+        {/* Creators Section */}
         <section className='px-3 md:px-20'>
           <h1>LATEST CREATORS</h1>
 
@@ -72,6 +77,7 @@ export default function Home(props) {
           </nav>
         </section>
 
+        {/* Info Section */}
         <section className='bg-yellow-50 pb-10 rounded-3xl '>
           <div className='px-3 md:px-20'>
             <h4 className='text-center pt-10 text-gray-500 pb-5 tracking-wide'>
@@ -102,6 +108,7 @@ export default function Home(props) {
           </div>
         </section>
 
+        {/* Action Section */}
         <section className='pt-10 mb-5'>
           <h2 className='text-3xl font-bold text-center px-2 leading-10 py-5'>
             Made for web3 creators

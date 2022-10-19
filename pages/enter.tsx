@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 export default function Enter() {
   const { user, username } = useContext(UserContext);
 
+  // If user exists route to dashboard page
   if (user) {
     const router = useRouter();
     router.push(`/dashboard`);
@@ -63,7 +64,22 @@ function SignOutButton() {
   return <button onClick={() => auth.signOut()}>Sign Out</button>;
 }
 
-// Username form
+// Show the user if the username is valid or not based on current state
+function UsernameMessage({ username, isValid, loading, userNameIsEmpty }) {
+  if (loading) {
+    return <p>Checking...</p>;
+  } else if (isValid) {
+    return <p className='text-green-600'>{username} is available!</p>;
+  } else if (username && !isValid) {
+    return <p className='text-red-500'>That username is taken!</p>;
+  } else if (userNameIsEmpty) {
+    return <p className='text-red-500'>Please enter a valid username!</p>;
+  } else {
+    return <p></p>;
+  }
+}
+
+// Username form and logic to handle checking if username is available, submit and onchange events
 function UsernameForm() {
   const [formValueUserName, setFormValueUserName] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -123,8 +139,7 @@ function UsernameForm() {
     }
   };
 
-  //
-
+  // Everytime the username formvalue changes, checkUsername
   useEffect(() => {
     checkUsername(formValueUserName);
   }, [formValueUserName]);
@@ -245,18 +260,4 @@ function UsernameForm() {
       </section>
     )
   );
-}
-
-function UsernameMessage({ username, isValid, loading, userNameIsEmpty }) {
-  if (loading) {
-    return <p>Checking...</p>;
-  } else if (isValid) {
-    return <p className='text-green-600'>{username} is available!</p>;
-  } else if (username && !isValid) {
-    return <p className='text-red-500'>That username is taken!</p>;
-  } else if (userNameIsEmpty) {
-    return <p className='text-red-500'>Please enter a valid username!</p>;
-  } else {
-    return <p></p>;
-  }
 }

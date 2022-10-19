@@ -2,26 +2,23 @@ import { auth, firestore } from "./libs/firebase";
 import NavBar from "./components/navbar";
 import PoweredBy from "./components/poweredby";
 import { UserContext } from "./libs/context";
-import { useEffect, useState, useCallback, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import AuthCheck from "./components/AuthCheck";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
-import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 import MobileNav from "./components/mobileNav";
 
 export default function AdminPage({}) {
   const { username } = useContext(UserContext);
 
-  const postRef = firestore.collection("users").doc(auth.currentUser.uid);
-  const [user] = useDocumentDataOnce(postRef);
-
-  console.log(auth.currentUser.uid);
+  let postRef = firestore.collection("users").doc(auth.currentUser.uid);
+  let [user] = useDocumentDataOnce(postRef);
 
   const {
     handleSubmit,
     register,
-    watch,
     reset,
     formState: { errors },
   } = useForm({ defaultValues: user, mode: "onChange" });
@@ -32,6 +29,36 @@ export default function AdminPage({}) {
 
   const onSubmit = async (values) => {
     console.log(values);
+
+    const displayName = values.displayName;
+    const photoURL = user.photoURL;
+    const supporters = user.supporters;
+    const username = user.username;
+    const about = values.about;
+    const website = values.website;
+    const ethAddress = values.ethAddress;
+
+    await postRef.update({
+      about,
+      displayName,
+      ethAddress,
+      photoURL,
+      supporters,
+      username,
+      website,
+    });
+
+    reset({
+      about,
+      displayName,
+      ethAddress,
+      photoURL,
+      supporters,
+      username,
+      website,
+    });
+
+    toast.success("Post updated successfully!");
   };
 
   return (
@@ -46,11 +73,8 @@ export default function AdminPage({}) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className='mx-4 flex justify-between'>
-            <img
-              referrerPolicy='no-referrer'
-              src={""}
-              className='w-16 mb-6 rounded-full'
-            />
+            <div className='w-16 mb-6 border-none'></div>
+
             <div>
               <h1 className='text-right mb-2 mt-2 font-CircularMedium text-2xl'>
                 {username}
