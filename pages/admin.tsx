@@ -1,49 +1,34 @@
-import { auth, firestore, googleAuthProvider } from "./libs/firebase";
+import { auth, firestore } from "./libs/firebase";
 import NavBar from "./components/navbar";
-import Image from "next/image";
 import PoweredBy from "./components/poweredby";
 import { UserContext } from "./libs/context";
 import { useEffect, useState, useCallback, useContext } from "react";
-import debounce from "lodash.debounce";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import AuthCheck from "./components/AuthCheck";
-import Link from "next/link";
+import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import { useRouter } from "next/router";
 
 import MobileNav from "./components/mobileNav";
-
-import { getUserWithUsername, postToJSON } from "./libs/firebase";
 
 export default function AdminPage({}) {
   const { username } = useContext(UserContext);
 
-  const [userDisplayName, setUserDisplayName] = useState("");
-  const [userImage, setUserImage] = useState("");
-  const [userAbout, setUserAbout] = useState("");
-  const [userWebsite, setUserWebsite] = useState("");
-  const [userEthAddy, setUserEthAddy] = useState("");
+  const postRef = firestore.collection("users").doc(auth.currentUser.uid);
+  const [user] = useDocumentDataOnce(postRef);
 
-  const fetchUser = async () => {
-    try {
-      const userDoc = await getUserWithUsername(username);
-      const user = userDoc.data();
-      setUserDisplayName(user.displayName);
-      setUserImage(user.photoURL);
-      setUserAbout(user.about);
-      setUserWebsite(user.website);
-      setUserEthAddy(user.ethAddress);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  fetchUser();
+  console.log(auth.currentUser.uid);
 
   const {
     handleSubmit,
     register,
+    watch,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: user, mode: "onChange" });
+
+  useEffect(() => {
+    reset(user);
+  }, [user]);
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -63,7 +48,7 @@ export default function AdminPage({}) {
           <div className='mx-4 flex justify-between'>
             <img
               referrerPolicy='no-referrer'
-              src={userImage}
+              src={""}
               className='w-16 mb-6 rounded-full'
             />
             <div>
@@ -78,8 +63,9 @@ export default function AdminPage({}) {
             <input
               className='w-full px-4 border-none focus:ring-0'
               type='text'
-              placeholder={userDisplayName}
-              {...register("name", { maxLength: 80 })}
+              placeholder={""}
+              ref={register}
+              {...register("displayName", { maxLength: 80 })}
             />
           </div>
           <p className='text-red-500 mx-3 text-left mb-4'>
@@ -91,7 +77,7 @@ export default function AdminPage({}) {
             <textarea
               className='w-full px-4 border-none focus:ring-0'
               rows={4}
-              placeholder={userAbout}
+              placeholder={""}
               {...register("about", {
                 minLength: 20,
                 maxLength: 128,
@@ -110,7 +96,7 @@ export default function AdminPage({}) {
             <input
               className='w-full px-4 border-none focus:ring-0'
               type='url'
-              placeholder={userWebsite}
+              placeholder={""}
               {...register("website", { maxLength: 80 })}
             />
           </div>
@@ -125,7 +111,8 @@ export default function AdminPage({}) {
             <input
               className='w-full px-4 border-none focus:ring-0'
               type='text'
-              placeholder={userEthAddy}
+              placeholder={""}
+              ref={register}
               {...register("ethAddress", {
                 maxLength: 64,
                 pattern: /^0x[a-fA-F0-9]{40}$/g,

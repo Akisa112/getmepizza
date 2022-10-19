@@ -1,12 +1,10 @@
 import AuthCheck from "../components/AuthCheck";
 import { firestore, auth, serverTimestamp } from "../libs/firebase";
 
-import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import { useForm } from "react-hook-form";
-import ReactMarkdown from "react-markdown";
 
 import toast from "react-hot-toast";
 
@@ -32,7 +30,7 @@ function PostManager() {
     .collection("posts")
     .doc(slug);
   const [post] = useDocumentDataOnce(postRef);
-
+  console.log(post);
   return (
     <main className='h-screen  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (

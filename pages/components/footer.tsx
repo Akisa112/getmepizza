@@ -20,8 +20,10 @@ export default function Footer() {
           </li>
         </ul>
       </nav>
-      <Link href='https://twitter.com/getme_pizza'>
-        <FiTwitter className=' mx-auto my-5 text-2xl hover:text-orange-500 cursor-pointer' />
+      <Link href={"https://twitter.com/getme_pizza"}>
+        <a className=' mx-auto my-5  text-2xl hover:text-orange-500 cursor-pointer'>
+          <FiTwitter className='mx-auto' />
+        </a>
       </Link>
       <Link href='./'>
         <p className='text-center mt-2 font-Montserrat  hover:text-orange-500 cursor-pointer'>

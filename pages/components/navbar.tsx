@@ -36,7 +36,7 @@ export default function NavBar() {
           <ul className='flex items-center '>
             {username && (
               <div className='bg-white flex rounded-full p-2 '>
-                <p
+                <div
                   className='p-2 text-gray-700 rounded-md outline-none'
                   onClick={() => setMovbileNavOpen(!mobileNavOpen)}
                 >
@@ -49,7 +49,7 @@ export default function NavBar() {
                       <FaHamburger />
                     </div>
                   )}
-                </p>
+                </div>
                 <li className='mx-2 '>
                   <Link href={`/dashboard`}>
                     <img
