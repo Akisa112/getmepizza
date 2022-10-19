@@ -11,6 +11,11 @@ import { useRouter } from "next/router";
 export default function Enter() {
   const { user, username } = useContext(UserContext);
 
+  if (user) {
+    const router = useRouter();
+    router.push(`/dashboard`);
+  }
+
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />

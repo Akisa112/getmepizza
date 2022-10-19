@@ -69,11 +69,15 @@ function PostForm({ defaultValues, postRef }) {
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues, mode: "onChange" });
 
   const updatePost = async (values) => {
-    /* await postRef.update({
+    const context = values.context;
+    const published = values.published;
+
+    await postRef.update({
       context,
       published,
       updatedAt: serverTimestamp(),
@@ -81,7 +85,7 @@ function PostForm({ defaultValues, postRef }) {
 
     reset({ context, published });
 
-    toast.success("Post updated successfully!"); */
+    toast.success("Post updated successfully!");
   };
 
   return (
@@ -93,6 +97,7 @@ function PostForm({ defaultValues, postRef }) {
         className='flex-1 w-full px-4 rounded-xl'
         rows={22}
         placeholder={defaultValues.context}
+        ref={register}
         {...register("context", {
           required: true,
           minLength: 20,
@@ -112,6 +117,7 @@ function PostForm({ defaultValues, postRef }) {
               id='published'
               className='peer  px-4 py-4 mt-1 rounded-full text-green-600 focus:ring-slate-50'
               type='checkbox'
+              ref={register}
               {...register("published", {
                 required: false,
               })}

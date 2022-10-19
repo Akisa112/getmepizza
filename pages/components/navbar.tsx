@@ -15,15 +15,27 @@ export default function NavBar() {
 
   return (
     <main className=' bg-slate-50 pt-10 font-CircularMedium '>
-      <section className='px-3 py-3  md:px-20 md:bg-white lg:max-w-4xl lg:mx-auto rounded-full '>
+      <section className='px-3 py-2  md:px-5 md:bg-white lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
-          <Link href={"/"}>
-            <h1 className='text-2xl md:pl-4'>getme.🍕</h1>
-          </Link>
+          {username ? (
+            <>
+              <Link href={"/"}>
+                <h1 className='text-4xl md:pl-1 cursor-pointer self-center'>
+                  🍕
+                </h1>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href={"/"}>
+                <h1 className='text-2xl md:pl-4 cursor-pointer'>getme.🍕</h1>
+              </Link>
+            </>
+          )}
 
-          <ul className='flex items-center md:mr-4'>
+          <ul className='flex items-center '>
             {username && (
-              <div className='bg-white flex rounded-full p-2 -mt-2'>
+              <div className='bg-white flex rounded-full p-2 '>
                 <p
                   className='p-2 text-gray-700 rounded-md outline-none'
                   onClick={() => setMovbileNavOpen(!mobileNavOpen)}
@@ -38,12 +50,12 @@ export default function NavBar() {
                     </div>
                   )}
                 </p>
-                <li className='mx-2  text-sm'>
+                <li className='mx-2 '>
                   <Link href={`/dashboard`}>
                     <img
                       referrerPolicy='no-referrer'
                       className='rounded-full cursor-pointer'
-                      width={"30px"}
+                      width={"35px"}
                       src={user?.photoURL}
                     />
                   </Link>

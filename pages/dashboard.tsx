@@ -1,6 +1,6 @@
 import AuthCheck from "./components/AuthCheck";
 import NavBar from "./components/navbar";
-import Footer from "./components/footer";
+import PoweredBy from "./components/poweredby";
 import { useContext } from "react";
 import { UserContext } from "./libs/context";
 import { MdIosShare } from "react-icons/md";
@@ -81,7 +81,7 @@ export default function Dashboard({}) {
           </div>
         </div>
       </AuthCheck>
-      <Footer />
+      <PoweredBy />
     </main>
   );
 }

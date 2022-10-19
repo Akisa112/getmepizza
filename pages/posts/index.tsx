@@ -1,7 +1,7 @@
 import AuthCheck from "../components/AuthCheck";
 import PostFeed from "../components/PostFeed";
 import NavBar from "../components/navbar";
-import Footer from "../components/footer";
+import PoweredBy from "../components/poweredby";
 import { useContext, useState } from "react";
 import { UserContext } from "../libs/context";
 import { firestore, auth, serverTimestamp } from "../libs/firebase";
@@ -29,7 +29,7 @@ export default function Dashboard({}) {
 
         <PostList />
       </AuthCheck>
-      <Footer />
+      <PoweredBy />
     </main>
   );
 }
