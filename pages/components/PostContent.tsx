@@ -21,7 +21,7 @@ export default function PostContent({ post }) {
       <ReactMarkdown className='mx-4 mb-4'>{post?.context}</ReactMarkdown>
       <aside className='mx-4'>
         <p>
-          <strong>{post.heartCount || 0} 🤍</strong>
+          <strong>{post.heartCount || 0} 🔥</strong>
         </p>
       </aside>
     </div>

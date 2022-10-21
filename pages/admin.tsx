@@ -61,12 +61,14 @@ export default function AdminPage({}) {
     console.log(values);
 
     const displayName = values.displayName;
-    const photoURL = user.photoURL;
+    const photoURL = userEditedPhotoURL ? userEditedPhotoURL : user.photoURL;
     const supporters = user.supporters;
     const username = user.username;
     const about = values.about;
     const website = values.website;
     const ethAddress = values.ethAddress;
+
+    console.log(photoURL);
 
     await postRef.update({
       about,

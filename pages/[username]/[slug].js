@@ -6,6 +6,10 @@ import NavBar from '../components/navbar';
 import UserCard from '../components/UserCard';
 import PoweredBy from '../components/poweredby';
 
+import HeartButton from '../components/HeartButton';
+import AuthCheck from '../components/AuthCheck';
+import Link from 'next/link';
+
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
@@ -68,9 +72,20 @@ export default function Post(props) {
       <NavBar/>
       <div className='flex-1'>
         <UserCard  user={props.user}/>
-        <section>
+        <section className='md:max-w-3xl md:mx-auto'>
           <PostContent post={post} />
+          <div className='-mt-10 text-right mr-4'>
+          <AuthCheck  fallback={
+            <Link href="/enter">
+              <button>💗 Sign Up</button>
+            </Link>
+          }>
+            <HeartButton  postRef={postRef}/>
+          </AuthCheck>
+          </div>
+          
         </section>
+        
       </div>
       <PoweredBy/>
 

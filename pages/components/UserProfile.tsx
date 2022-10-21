@@ -12,7 +12,7 @@ export default function UserProfile({ user, posts }) {
       <img
         referrerPolicy='no-referrer'
         src={user.photoURL || "/hacker.png"}
-        className='m-auto rounded-full'
+        className='m-auto rounded-full h-[150px] w-[150px] '
       />
 
       <h1 className='text-4xl mt-3 font-bold'>

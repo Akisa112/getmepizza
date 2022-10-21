@@ -1,16 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../libs/context";
-import { useState } from "react";
 
 import { FaHamburger } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import MobileNav from "./mobileNav";
+import { getUserWithUsername } from "../libs/firebase";
 
 export default function NavBar() {
-  const { user, username } = useContext(UserContext);
+  const { username } = useContext(UserContext);
+  const [userProfilePic, setUserProfilePic] = useState("");
+
+  const fetchUser = async () => {
+    try {
+      const userDoc = await getUserWithUsername(username);
+      const user = userDoc.data();
+      setUserProfilePic(user.photoURL);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchUser();
+
   const [mobileNavOpen, setMovbileNavOpen] = useState(false);
 
   return (
@@ -56,7 +69,7 @@ export default function NavBar() {
                       referrerPolicy='no-referrer'
                       className='rounded-full cursor-pointer'
                       width={"35px"}
-                      src={user?.photoURL}
+                      src={userProfilePic}
                     />
                   </Link>
                 </li>

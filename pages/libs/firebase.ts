@@ -24,6 +24,7 @@ export const storage = firebase.storage();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const twitterAuthProvider = new firebase.auth.TwitterAuthProvider();
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+export const increment = firebase.firestore.FieldValue.increment;
 
 /**`
  * Gets a users/{uid} document with username
@@ -33,6 +34,7 @@ export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
   const usersRef = firestore.collection('users');
   const query = usersRef.where('username', '==', username).limit(1);
   const userDoc = (await query.get()).docs[0];
+  console.log('Reading User from Firestore')
   return userDoc;
 }
 

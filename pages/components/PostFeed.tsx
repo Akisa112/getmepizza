@@ -51,7 +51,7 @@ function PostItem({ post, admin = false }) {
         <p>
           {wordCount} words. {minutesToRead} min read
         </p>
-        <p className=''>❤️ {post.heartCount || 0}</p>
+        <p className=''>🔥 {post.heartCount || 0}</p>
       </footer>
     </div>
   );

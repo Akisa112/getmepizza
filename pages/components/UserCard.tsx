@@ -6,7 +6,7 @@ export default function UserCard(user) {
       <img
         referrerPolicy='no-referrer'
         src={user.user.photoURL || "/hacker.png"}
-        className='m-auto rounded-full'
+        className='m-auto h-[150px] w-[150px] rounded-full'
       />
 
       <h1 className='text-4xl mt-3 font-bold'>
