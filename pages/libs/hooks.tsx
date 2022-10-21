@@ -1,6 +1,6 @@
-import { auth, firestore } from './firebase';
-import { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, firestore } from "./firebase";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 // Custom hook to read  auth record and user profile doc
 export function useUserData() {
@@ -12,7 +12,7 @@ export function useUserData() {
     let unsubscribe;
 
     if (user) {
-      const ref = firestore.collection('users').doc(user.uid);
+      const ref = firestore.collection("users").doc(user.uid);
       unsubscribe = ref.onSnapshot((doc) => {
         setUsername(doc.data()?.username);
       });
@@ -24,4 +24,17 @@ export function useUserData() {
   }, [user]);
 
   return { user, username };
+}
+
+export function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      resolve(e.target.result);
+    };
+    reader.readAsDataURL(blob);
+    reader.onerror = () => {
+      reject(new Error("文件流异常"));
+    };
+  });
 }

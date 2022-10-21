@@ -5,11 +5,7 @@ import PoweredBy from "../components/poweredby";
 import { useContext, useState } from "react";
 import { UserContext } from "../libs/context";
 import { firestore, auth, serverTimestamp } from "../libs/firebase";
-
-import { MdIosShare } from "react-icons/md";
-
 import { useRouter } from "next/router";
-
 import { useCollection } from "react-firebase-hooks/firestore";
 import kebabCase from "lodash.kebabcase";
 import toast from "react-hot-toast";

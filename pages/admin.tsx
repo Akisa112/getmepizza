@@ -2,19 +2,49 @@ import { auth, firestore } from "./libs/firebase";
 import NavBar from "./components/navbar";
 import PoweredBy from "./components/poweredby";
 import { UserContext } from "./libs/context";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthCheck from "./components/AuthCheck";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import toast from "react-hot-toast";
-
 import MobileNav from "./components/mobileNav";
+import { useDropzone } from "react-dropzone";
+import { getUserWithUsername } from "./libs/firebase";
+import { BiCamera } from "react-icons/bi";
+import { blobToBase64 } from "./libs/hooks";
+import { upLoadIPFS } from "./libs/moralis";
 
 export default function AdminPage({}) {
   const { username } = useContext(UserContext);
 
+  const [userPhotoURL, setUserPhotoURL] = useState("./hacker.png");
+  const [userEditedPhotoURL, setUserEditedPhotoURL] = useState("");
+
+  const fetchUser = async () => {
+    try {
+      const userDoc = await getUserWithUsername(username);
+      const user = userDoc.data();
+      setUserPhotoURL(user.photoURL);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchUser();
+
   let postRef = firestore.collection("users").doc(auth.currentUser.uid);
   let [user] = useDocumentDataOnce(postRef);
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    try {
+      const data = await acceptedFiles[0];
+      const content = await blobToBase64(data);
+      const ipfsObject = await upLoadIPFS(content);
+      setUserEditedPhotoURL(ipfsObject);
+    } catch (error) {
+      alert(error);
+    }
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const {
     handleSubmit,
@@ -73,7 +103,33 @@ export default function AdminPage({}) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className='mx-4 flex justify-between'>
-            <div className='w-16 mb-6 border-none'></div>
+            <div className='w-16 mb-6 border-none'>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <img
+                    className='rounded-full border-dashed border-gray-800 border-2 cursor-pointer'
+                    src={userPhotoURL}
+                  />
+                ) : (
+                  <div className='relative'>
+                    <img
+                      className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 border-2 cursor-pointer'
+                      src={userPhotoURL}
+                    />
+                    {userEditedPhotoURL && (
+                      <img
+                        className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 border-2 cursor-pointer'
+                        src={userEditedPhotoURL}
+                      />
+                    )}
+                    <div className='absolute top-5 left-5 p-1 bg-neutral-400 bg-opacity-80 rounded-full'>
+                      <BiCamera />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
 
             <div>
               <h1 className='text-right mb-2 mt-2 font-CircularMedium text-2xl'>
