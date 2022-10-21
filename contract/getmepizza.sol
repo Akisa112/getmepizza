@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+
+// 0x65be856DF4a4422F36D4d786EC705B490D852889
+
+
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -33,10 +37,10 @@ contract GetMePizza is ERC721, Ownable {
     // Maps an address to how much they can withdraw.
     mapping (address => uint256) public creatorsPizzaMoney;
 
-    uint256 public feePercantage = 5000;
+    uint256 public feePercantage = 500; //5%
     uint256 public fees;
 
-    constructor() ERC721("MyToken", "MTK") {}
+    constructor() ERC721("PizzaBoxes", "PIZZA") {}
 
     /**
     * @dev Buy a pizza for the creator and mint the donator a pizza box NFT.

@@ -53,7 +53,10 @@ const fantomChain: Chain = {
 };
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, binanceChain, chain.polygon, fantomChain],
+  [
+    chain.polygonMumbai,
+    // chain.mainnet, binanceChain, chain.polygon, fantomChain,
+  ],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     publicProvider(),
