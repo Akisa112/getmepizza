@@ -16,12 +16,8 @@ import BinanceLogo from "../public/binance.png";
 import FantomLogo from "../public/fantom.png";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import {
-  useAccount,
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-} from "wagmi";
+
+import { usePrepareContractWrite, useContractWrite } from "wagmi";
 
 // 1. Show username
 // 2. TO DO: Show earnings from contract using Moralis
@@ -32,10 +28,7 @@ export default function Dashboard({}) {
   const [share, setShare] = useState(false);
 
   const getEarningsFrom = async () => {
-    const get = await getEarnings(
-      "0x9AFd3a2AAC444123b33f1fcD5f26F9B63E9EA53d",
-      "MUMBAI"
-    );
+    const get = await getEarnings(userETH, "MUMBAI");
     setEarningsPoly(Number(get) / 1000000000000000000);
   };
 
@@ -51,6 +44,23 @@ export default function Dashboard({}) {
       setShare(false);
     }, 2000);
   };
+
+  const { config } = usePrepareContractWrite({
+    address: "0xb4D137536Ae7962eFD6b09905801D8108B43d0D8",
+    abi: [
+      {
+        inputs: [],
+        name: "withdrawTips",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+    ],
+    functionName: "withdrawTips",
+    enabled: true,
+  });
+
+  const { write } = useContractWrite(config);
 
   return (
     <main className='h-[calc(100vh-107px)] flex flex-col justify-between '>
@@ -124,11 +134,18 @@ export default function Dashboard({}) {
               </p>
             </div>
           </div>
-          <div className='text-center mb-4'>
-            <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto  hover:scale-105 transition-all'>
-              Withdraw
-            </button>
-          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              write?.();
+            }}
+          >
+            <div className='text-center mb-4'>
+              <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto  hover:scale-105 transition-all'>
+                Withdraw
+              </button>
+            </div>
+          </form>
 
           <div className='mb-8'>
             <ConnectButton />

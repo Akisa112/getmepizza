@@ -33,7 +33,7 @@ a {
 .iekbcc0 {
   justify-content: center !important;
   box-shadow: none !important;
-  border-radius: 25px;
+
   padding-left: 40px;
   padding-right: 40px;
 
@@ -44,4 +44,7 @@ a {
 .ju367v9c {
   background-color: #facc14 !important;
   color: black !important;
+  border-radius: 25px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
 }

@@ -80,9 +80,6 @@ export default function BuyPizza(user) {
     hash: data?.hash,
   });
 
-  if (isSuccess) {
-  }
-
   return (
     <div className='mt-1  m-4 w-[400px] h-[500px] flex flex-col justify-center  border-2 border-gray-200 rounded-lg '>
       <h4 className='font-CircularMedium text-2xl'>
