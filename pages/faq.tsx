@@ -1,12 +1,11 @@
 import Link from "next/link";
-import NavBar from "./components/navbar";
+
 import Footer from "./components/footer";
 import { FiTwitter } from "react-icons/fi";
 
 export default function Custom404() {
   return (
-    <main className='h-screen flex flex-col justify-between lg:max-w-5xl lg:mx-auto'>
-      <NavBar />
+    <main className='h-[calc(100vh-107px)] flex flex-col justify-between lg:max-w-5xl lg:mx-auto'>
       <section className='px-3 py-6 mb-6 md:px-20'>
         <div>
           <h1 className='text-4xl font-bold text-center px-2 py-2 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 '>

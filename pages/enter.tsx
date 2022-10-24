@@ -1,5 +1,5 @@
 import { auth, firestore, googleAuthProvider } from "./libs/firebase";
-import NavBar from "./components/navbar";
+
 import Image from "next/image";
 import Footer from "./components/footer";
 import { UserContext } from "./libs/context";
@@ -21,7 +21,7 @@ export default function Enter() {
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
   return (
-    <main className=' flex flex-col min-h-screen font-CircularMedium lg:max-w-5xl lg:mx-auto bg-slate-50'>
+    <main className=' flex flex-col min-h-[calc(100vh-107px)] font-CircularMedium lg:max-w-5xl lg:mx-auto bg-slate-50'>
       <div className='mx-auto text-center mt-20'>
         {user ? (
           !username ? (
@@ -50,7 +50,7 @@ function SignInButton() {
 
   return (
     <button
-      className=' bg-white rounded-full text-lg  py-2 px-3 text-center lg:inline'
+      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:bg-orange-100 transition-all'
       onClick={signInWithGoogle}
     >
       Sign in with <Image width={"18px"} height={"18px"} src={"/google.png"} />

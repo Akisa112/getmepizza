@@ -51,9 +51,7 @@ export default function UserProfile({ user, posts }) {
                 <p className='text-orange-600'>{user.website}</p>
               </Link>
             </div>
-            <h4 className='font-CircularMedium text-left mx-4 mt-8 text-gray-500 '>
-              RECENT SUPPORTERS
-            </h4>
+
             <Supporters user={user} />
           </div>
         </div>

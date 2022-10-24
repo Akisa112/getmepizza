@@ -80,6 +80,9 @@ export default function BuyPizza(user) {
     hash: data?.hash,
   });
 
+  if (isSuccess) {
+  }
+
   return (
     <div className='mt-1  m-4 w-[400px] h-[500px] flex flex-col justify-center  border-2 border-gray-200 rounded-lg '>
       <h4 className='font-CircularMedium text-2xl'>
@@ -133,7 +136,7 @@ export default function BuyPizza(user) {
           <button
             disabled={!write || isLoading}
             type='submit'
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto'
           >
             {isLoading ? "Processing..." : "Support $5"}
           </button>

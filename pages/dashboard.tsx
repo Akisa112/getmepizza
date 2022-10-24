@@ -1,30 +1,58 @@
 import AuthCheck from "./components/AuthCheck";
-import NavBar from "./components/navbar";
+
 import PoweredBy from "./components/poweredby";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "./libs/context";
 import { MdIosShare } from "react-icons/md";
 import Link from "next/link";
+import Image from "next/image";
 
 import { useState } from "react";
 import MobileNav from "./components/mobileNav";
+import { getEarnings } from "./libs/moralis";
+
+import PolygonLogo from "../public/polygon.png";
+import BinanceLogo from "../public/binance.png";
+import FantomLogo from "../public/fantom.png";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import {
+  useAccount,
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 
 // 1. Show username
 // 2. TO DO: Show earnings from contract using Moralis
 // 3. TO DO: Invite functionality
 export default function Dashboard({}) {
-  const { username } = useContext(UserContext);
+  const { username, userETH } = useContext(UserContext);
+  const [earningsPoly, setEarningsPoly] = useState(0);
+
+  const getEarningsFrom = async () => {
+    const get = await getEarnings(
+      "0x9AFd3a2AAC444123b33f1fcD5f26F9B63E9EA53d",
+      "MUMBAI"
+    );
+    setEarningsPoly(Number(get) / 1000000000000000000);
+  };
+
+  useEffect(() => {
+    if (earningsPoly === 0) {
+      getEarningsFrom();
+    }
+  }, [userETH]);
 
   return (
-    <main className='h-screen flex flex-col justify-between '>
-      <NavBar />
+    <main className='h-[calc(100vh-107px)] flex flex-col justify-between '>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />
         </div>
 
-        <div className='md:w-[600px] md:mx-auto'>
-          <div className='mt-4 m-5 flex justify-between '>
+        <div className='md:w-[600px] md:mx-auto '>
+          <div className='mt-8 m-5 flex justify-between '>
             <div>
               <h2 className='font-CircularMedium '>Hello, @{username}</h2>
               <Link className='hover:text-orange-600' href={`/${username}`}>
@@ -41,10 +69,54 @@ export default function Dashboard({}) {
             </div>
           </div>
           <hr />
-          <div className='mt-10 mb-12 m-5'>
-            <h4 className='font-CircularMedium text-xl'>Earnings</h4>
-            <p className='mt-4 font-CircularMedium text-6xl'>$0</p>
+          <h4 className='mt-8 mx-4 font-CircularMedium text-xl'>
+            Available to withdraw:
+          </h4>
+          <div className='flex justify-between '>
+            <div className='  m-5'>
+              <h4 className='font-CircularMedium '>
+                <span className='text-xs mr-2 align-bottom '>
+                  <Image width='20px' height='20px' src={BinanceLogo} />
+                </span>
+                BSC{" "}
+              </h4>
+              <p className='mt-2 font-CircularMedium text-5xl'>
+                {earningsPoly}{" "}
+              </p>
+            </div>
+            <div className='  m-5'>
+              <h4 className='font-CircularMedium '>
+                <span className='text-xs mr-2 align-bottom '>
+                  <Image width='20px' height='20px' src={PolygonLogo} />
+                </span>
+                MATIC{" "}
+              </h4>
+              <p className='mt-2 font-CircularMedium text-5xl'>
+                {earningsPoly}{" "}
+              </p>
+            </div>
+            <div className='  m-5'>
+              <h4 className='font-CircularMedium '>
+                <span className='text-xs mr-2 align-bottom '>
+                  <Image width='20px' height='20px' src={FantomLogo} />
+                </span>
+                FTM{" "}
+              </h4>
+              <p className='mt-2 font-CircularMedium text-5xl'>
+                {earningsPoly}{" "}
+              </p>
+            </div>
           </div>
+          <div className='text-center mb-4'>
+            <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto'>
+              Withdraw
+            </button>
+          </div>
+
+          <div className='mb-8'>
+            <ConnectButton />
+          </div>
+
           <hr />
           <div className='mt-10 m-5'>
             <p className='text-gray-500'>

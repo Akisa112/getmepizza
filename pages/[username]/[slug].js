@@ -2,7 +2,7 @@
 import { firestore, getUserWithUsername, postToJSON } from '../libs/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import PostContent from '../components/PostContent';
-import NavBar from '../components/navbar';
+
 import UserCard from '../components/UserCard';
 import PoweredBy from '../components/poweredby';
 
@@ -68,8 +68,8 @@ export default function Post(props) {
 
   const post = realtimePost || props.post;
   return (
-    <main className='flex flex-col min-h-screen justify-between'>
-      <NavBar/>
+    <main className='flex flex-col min-h-[calc(100vh-107px)] justify-between'>
+ 
       <div className='flex-1'>
         <UserCard  user={props.user}/>
         <section className='md:max-w-3xl md:mx-auto'>

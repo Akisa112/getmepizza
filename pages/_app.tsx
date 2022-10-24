@@ -8,6 +8,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import NavBar from "./components/navbar";
 
 const binanceChain: Chain = {
   id: 56,
@@ -76,12 +77,12 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }) {
   const userData = useUserData();
-
   return (
     <>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <UserContext.Provider value={userData}>
+            <NavBar />
             <Component {...pageProps} />
             <Toaster />
           </UserContext.Provider>

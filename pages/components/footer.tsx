@@ -20,16 +20,20 @@ export default function Footer() {
           </li>
         </ul>
       </nav>
-      <Link href={"https://twitter.com/getme_pizza"}>
-        <a className=' mx-auto my-5  text-2xl hover:text-orange-500 cursor-pointer'>
-          <FiTwitter className='mx-auto' />
-        </a>
-      </Link>
-      <Link href='./'>
-        <p className='text-center mt-2 font-Montserrat  hover:text-orange-500 cursor-pointer'>
-          getme.🍕
-        </p>
-      </Link>
+      <div className='mt-2 w-2 mx-auto'>
+        <Link href={"https://twitter.com/getme_pizza"}>
+          <a className='text-2xl hover:text-orange-500 cursor-pointer'>
+            <FiTwitter className='mx-auto' />
+          </a>
+        </Link>
+      </div>
+      <div className='mt-3 text-center mx-auto'>
+        <Link href='./'>
+          <a className='font-Montserrat  hover:text-orange-500 cursor-pointer'>
+            getme.🍕
+          </a>
+        </Link>
+      </div>
     </section>
   );
 }

@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import { firestore, userToJson } from "./libs/firebase";
 import UsersFeed from "./components/UsersList";
 import { TbHandClick } from "react-icons/tb";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { GiCrossedChains } from "react-icons/gi";
 
 // Set a limit for getting users to display to 10 for now.
 const LIMIT = 10;
@@ -32,8 +33,6 @@ export default function Home(props) {
       </Head>
 
       <main className='  font-CircularMedium lg:max-w-5xl lg:mx-auto'>
-        <NavBar />
-
         <section className='px-3 md:px-20'>
           <div>
             <h1 className='text-3xl font-bold text-center px-2 py-2 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 '>
@@ -44,14 +43,18 @@ export default function Home(props) {
               with pizza of course.
             </p>
             <div className='mx-2 text-center py-4 rounded-full bg-white mb-4 text-lg lg:max-w-lg lg:mx-auto'>
-              <span>getme.pizza/</span>
+              <span className=''>getme.pizza/</span>
               <input
                 type={"text"}
-                className='active:border-slate-50 border-none focus:ring-0'
+                className='pl-0 border-none focus:ring-0'
                 placeholder={"yourname"}
               ></input>
-              <span className='hidden px-6 bg-yellow-400 rounded-full text-lg  py-3 text-center lg:inline'>
-                <Link href='/enter'>Start my page</Link>
+              <span className='hidden  lg:inline'>
+                <Link href='/enter'>
+                  <a className='px-6 bg-yellow-400 cursor-pointer rounded-full text-lg  py-3 text-center   hover:text-xl hover:bg-orange-400 transition-all'>
+                    Start my page
+                  </a>
+                </Link>
               </span>
             </div>
 
@@ -95,15 +98,9 @@ export default function Home(props) {
           </div>
 
           <div className='px-3 md:px-20'>
-            <h4 className='text-center pt-10 text-gray-500 pb-5 tracking-wide'>
-              COMING SOON...
-            </h4>
-            <h2 className='text-3xl font-bold text-center px-2 leading-10 pb-5'>
-              We are building.
-            </h2>
             <p className='pt-8 px-2 py-4 text-center text-gray-800 font-Montserrat font-bold leading-7 text-lg'>
               Membership tools and ways to sell your digital items easily are
-              coming next...
+              coming soon...
             </p>
           </div>
         </section>
@@ -122,7 +119,7 @@ export default function Home(props) {
             </p>
           </div>
           <div className='pt-8'>
-            <TbHandClick className='mb-4 mx-auto text-center text-4xl text-orange-500' />
+            <GiTakeMyMoney className='mb-4 mx-auto text-center text-4xl text-orange-500' />
             <p className='mx-auto text-center max-w-[250px] font-Montserrat text-sm'>
               You will get your crypto paid out{" "}
               <span className='font-CircularMedium  '>instantly</span>, while
@@ -130,18 +127,21 @@ export default function Home(props) {
             </p>
           </div>
           <div className='pt-8 pb-10'>
-            <TbHandClick className='mb-4 mx-auto text-center text-4xl text-orange-500' />
+            <GiCrossedChains className='mb-4 mx-auto text-center text-4xl text-orange-500' />
             <p className=' mx-auto text-center max-w-[250px] font-Montserrat text-sm'>
               Tips and memo's are{" "}
               <span className='font-CircularMedium  '>transparent</span> and{" "}
               <span className='font-CircularMedium  '>on-chain</span>.
             </p>
           </div>
-          <Link href='/enter'>
-            <div className='mx-10 bg-yellow-400 rounded-full  py-2 text-center md:max-w-xs md:mx-auto'>
-              Start my page
-            </div>
-          </Link>
+          <div className='text-center h-[50px]'>
+            <Link href='/enter'>
+              <a className='mx-10 bg-yellow-400 rounded-full  py-3 px-10  cursor-pointer md:max-w-xs md:mx-auto  hover:text-xl hover:bg-orange-400 transition-all'>
+                Start my page
+              </a>
+            </Link>
+          </div>
+
           <p className=' px-2 py-2 text-center text-gray-800 font-Montserrat font-bold leading-7 text-xs'>
             *It's free and takes only a minute.
           </p>

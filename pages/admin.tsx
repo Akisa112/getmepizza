@@ -1,5 +1,5 @@
 import { auth, firestore } from "./libs/firebase";
-import NavBar from "./components/navbar";
+
 import PoweredBy from "./components/poweredby";
 import { UserContext } from "./libs/context";
 import { useEffect, useContext, useCallback, useState } from "react";
@@ -99,8 +99,7 @@ export default function AdminPage({}) {
   };
 
   return (
-    <main className='h-screen flex flex-col justify-between'>
-      <NavBar />
+    <main className='h-[calc(100vh-107px)] flex flex-col justify-between'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />

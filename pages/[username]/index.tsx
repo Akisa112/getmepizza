@@ -1,7 +1,6 @@
 import { getUserWithUsername, postToJSON } from "../libs/firebase";
 import UserProfile from "../components/UserProfile";
 
-import NavBar from "../components/navbar";
 import PoweredBy from "../components/poweredby";
 
 export async function getServerSideProps({ query }) {
@@ -37,8 +36,7 @@ export async function getServerSideProps({ query }) {
 
 export default function UserProfilePage({ user, posts }) {
   return (
-    <main className='h-screen flex flex-col justify-between'>
-      <NavBar />
+    <main className='h-[calc(100vh-107px)] flex flex-col justify-between'>
       <UserProfile user={user} posts={posts} />
 
       <PoweredBy />

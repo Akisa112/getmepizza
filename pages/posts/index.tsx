@@ -1,6 +1,6 @@
 import AuthCheck from "../components/AuthCheck";
 import PostFeed from "../components/PostFeed";
-import NavBar from "../components/navbar";
+
 import PoweredBy from "../components/poweredby";
 import { useContext, useState } from "react";
 import { UserContext } from "../libs/context";
@@ -15,8 +15,7 @@ export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
 
   return (
-    <main className='h-screen flex flex-col justify-between md:max-w-4xl md:mx-auto'>
-      <NavBar />
+    <main className='h-[calc(100vh-107px)] flex flex-col justify-between md:max-w-4xl md:mx-auto'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />

@@ -33,4 +33,15 @@ a {
 .iekbcc0 {
   justify-content: center !important;
   box-shadow: none !important;
+  border-radius: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  color: black;
+  font-family: "Circular Medium";
+}
+
+.ju367v9c {
+  background-color: #facc14 !important;
+  color: black !important;
 }

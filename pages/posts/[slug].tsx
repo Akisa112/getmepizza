@@ -28,7 +28,7 @@ function PostManager() {
   const [post] = useDocumentDataOnce(postRef);
   console.log(post);
   return (
-    <main className='h-screen  md:w-[800px] md:mx-auto flex flex-col justify-between'>
+    <main className='h-[calc(100vh-107px)]  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (
         <>
           <div className='mt-5 ml-4'>

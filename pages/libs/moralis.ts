@@ -24,7 +24,7 @@ export async function upLoadIPFS(content) {
 
 
 
-export async function getMemos(ethAddress) {
+export async function getMemos(ethAddress, chosenChain) {
 
     const abi = [{
         "inputs": [
@@ -79,18 +79,18 @@ export async function getMemos(ethAddress) {
     }];
 
     const functionName = 'getMemos';
-
     const address = '0xb4D137536Ae7962eFD6b09905801D8108B43d0D8';
-    
-   
-    const chain = EvmChain.MUMBAI;
-
+  
+    let chain; 
+    if (chosenChain === 'MUMBAI') {
+        chain = EvmChain.MUMBAI
+    }
+    ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
 
     await Moralis.start({
         apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
         // ...and any other configuration
     });
-
     console.log(ethAddress);
     const response = await Moralis.EvmApi.utils.runContractFunction({
         abi,
@@ -99,6 +99,54 @@ export async function getMemos(ethAddress) {
         chain,
         params: {_creator: ethAddress}
     });
-    console.log(response.result); 
+    
     return(response.result);
+}
+
+export async function getEarnings(ethAddress, chosenChain) {
+    const abi = [{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "creatorsPizzaMoney",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}];
+
+    const functionName = 'creatorsPizzaMoney';
+    const address = '0xb4D137536Ae7962eFD6b09905801D8108B43d0D8';
+  
+    let chain; 
+    if (chosenChain === 'MUMBAI') {
+        chain = EvmChain.MUMBAI
+    }
+    ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
+
+    await Moralis.start({
+        apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+        // ...and any other configuration
+    });
+    console.log(ethAddress);
+    const response = await Moralis.EvmApi.utils.runContractFunction({
+        abi,
+        functionName,
+        address,
+        chain,
+        params: {'': ethAddress}
+    });
+    
+    return(response.result);
+
+
 }

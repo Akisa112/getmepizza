@@ -23,14 +23,14 @@ export default function MobileNav(username) {
         <li className='text-sm flex'>
           <BiHome className='mr-2 text-lg' />
           <Link className='' href='/dashboard'>
-            Dashboard
+            <a className=' hover:text-orange-500 transition-all'>Dashboard</a>
           </Link>
         </li>
 
         <li className='text-sm flex'>
           <AiOutlineLayout className='mr-2 text-lg' />
           <Link className='' href={`/${username.username}`}>
-            View page
+            <a className=' hover:text-orange-500 transition-all'>View page</a>
           </Link>
           <HiOutlineExternalLink className='ml-2' />
         </li>
@@ -42,7 +42,7 @@ export default function MobileNav(username) {
         <li className='text-sm flex'>
           <RiArticleLine className='mr-2 text-lg' />
           <Link className='' href='/posts'>
-            Posts
+            <a className=' hover:text-orange-500 transition-all'>Posts</a>
           </Link>
         </li>
       </ul>
@@ -53,7 +53,7 @@ export default function MobileNav(username) {
         <li className='text-sm flex'>
           <MdPersonOutline className='mr-2 text-lg' />
           <Link className='' href='/admin'>
-            My Account
+            <a className=' hover:text-orange-500 transition-all'>My Account</a>
           </Link>
         </li>
       </ul>
@@ -65,7 +65,7 @@ export default function MobileNav(username) {
             className='cursor-pointer'
             onClick={() => auth.signOut().then(() => router.push(`./`))}
           >
-            Logout
+            <a className=' hover:text-orange-500 transition-all'>Logout</a>
           </p>
         </li>
       </ul>

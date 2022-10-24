@@ -8,7 +8,7 @@ import MobileNav from "./mobileNav";
 import { CgProfile } from "react-icons/cg";
 
 export default function NavBar() {
-  const { username } = useContext(UserContext);
+  const { username, userPhoto } = useContext(UserContext);
 
   const [mobileNavOpen, setMovbileNavOpen] = useState(false);
 
@@ -17,19 +17,19 @@ export default function NavBar() {
       <section className='px-3 py-2  md:px-5 md:bg-white lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (
-            <>
+            <div>
               <Link href={"/"}>
-                <h1 className='text-4xl md:pl-1 cursor-pointer self-center'>
+                <a className='text-4xl md:pl-1 cursor-pointer self-center'>
                   🍕
-                </h1>
+                </a>
               </Link>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <Link href={"/"}>
-                <h1 className='text-2xl md:pl-4 cursor-pointer'>getme.🍕</h1>
+                <a className='text-2xl md:pl-4 cursor-pointer'>getme.🍕</a>
               </Link>
-            </>
+            </div>
           )}
 
           <ul className='flex items-center '>
@@ -51,15 +51,12 @@ export default function NavBar() {
                 </div>
                 <li className='mx-2 '>
                   <Link href={`/dashboard`}>
-                    {/* <img
+                    <img
                       referrerPolicy='no-referrer'
                       className='rounded-full cursor-pointer'
                       width={"35px"}
-                      src={user.photoURL}
-                    /> */}
-                    <a>
-                      <CgProfile className='text-2xl' />
-                    </a>
+                      src={userPhoto}
+                    />
                   </Link>
                 </li>
                 <div>
@@ -84,13 +81,21 @@ export default function NavBar() {
             {!username && (
               <>
                 <li className='mx-2  text-sm'>
-                  <Link href={"/faq"}>FAQ</Link>
+                  <Link href={"/faq"}>
+                    <a>FAQ</a>
+                  </Link>
                 </li>
                 <li className='mx-2  text-sm'>
-                  <Link href={"/explore"}>Explore</Link>
+                  <Link href={"/explore"}>
+                    <a>Explore</a>
+                  </Link>
                 </li>
-                <li className='mx-2 bg-yellow-400 rounded-full text-sm px-4  py-2'>
-                  <Link href={"/enter"}>Sign up</Link>
+                <li className='mx-2 '>
+                  <Link href={"/enter"}>
+                    <a className='bg-yellow-400 rounded-full text-sm px-4  py-2 cursor-pointer hover:bg-orange-400 transition-all'>
+                      Sign up
+                    </a>
+                  </Link>
                 </li>
               </>
             )}
