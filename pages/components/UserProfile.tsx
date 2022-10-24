@@ -3,6 +3,8 @@ import { useState } from "react";
 import PostFeed from "./PostFeed";
 import BuyPizza from "./BuyPizza";
 
+import { Supporters } from "./Supporters";
+
 // UI component for user profile
 export default function UserProfile({ user, posts }) {
   const [page, setPage] = useState("HOME");
@@ -52,18 +54,7 @@ export default function UserProfile({ user, posts }) {
             <h4 className='font-CircularMedium text-left mx-4 mt-8 text-gray-500 '>
               RECENT SUPPORTERS
             </h4>
-            <div className='mt-1 mx-4 p-2 py-4 text-left border-2 border-gray-200 rounded-lg '>
-              <p>@Someone bought a pizza</p>
-            </div>
-            <div className='mt-1 mx-4 p-2 py-4 text-left border-2 border-gray-200 rounded-lg '>
-              <p>@Someone bought a pizza</p>
-            </div>
-            <div className='mt-1 mx-4 p-2 py-4 text-left border-2 border-gray-200 rounded-lg '>
-              <p>@Someone bought a pizza</p>
-            </div>
-            <div className='mt-1 mx-4 p-2 py-4 text-left border-2 border-gray-200 rounded-lg '>
-              <p>@Someone bought a pizza</p>
-            </div>
+            <Supporters user={user} />
           </div>
         </div>
       ) : (

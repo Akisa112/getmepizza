@@ -8,6 +8,8 @@ import {
 import { useState, useEffect } from "react";
 import debounce from "lodash.debounce";
 import { ethers } from "ethers";
+import Image from "next/image";
+import dancingpizza from "../../public/dancingpizza.gif";
 
 export default function BuyPizza(user) {
   let isConnected = null;
@@ -127,11 +129,11 @@ export default function BuyPizza(user) {
         <div className='mt-3 mx-4'>
           <ConnectButton />
         </div>
-        {isConnected && (
+        {isConnected && !isSuccess && (
           <button
             disabled={!write || isLoading}
             type='submit'
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:text-gray-500 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto'
           >
             {isLoading ? "Processing..." : "Support $5"}
           </button>
@@ -139,23 +141,15 @@ export default function BuyPizza(user) {
       </form>
 
       {isSuccess && (
-        <div className='absolute left-0 top-0 h-full w-full flex flex-col justify-center  bg-slate-100 bg-opacity-60'>
-          <div>
-            {/* NEED TO ADD A CLOSE BUTTON HERE WITH !isSuccess onClick to make this go away */}
-            <h4 className='absolute left-1/2 transform -translate-x-1/2 max-w-[400px]  mt-7 font-CircularMedium text-white text-2xl'>
-              {user.user.displayName} about to eat pizza!
-            </h4>
-            <h4 className='absolute left-1/2 top-1/2 translate-y-1/2 transform -translate-x-1/2 max-w-[400px]  mt-16 font-CircularMedium text-white text-2xl'>
-              Check your wallet... we didn't forget about you.
-            </h4>
-            <iframe
-              className='m-auto text-center'
-              src='https://giphy.com/embed/kVXtSmeOZoRIQ'
-              width='480'
-              height='362'
-              frameBorder='0'
-              allowFullScreen
-            ></iframe>
+        <div className='mx-8  rounded-2xl'>
+          <h4 className='mt-3  font-CircularMedium text-2xl '>
+            {user.user.displayName} about to eat!
+          </h4>
+          <h4 className=' font-CircularMedium'>
+            ...we've sent you an NFT as receipt. :)
+          </h4>
+          <div className='absolute left-1/3 top-1/2 mt-28'>
+            <Image src={dancingpizza} />
           </div>
         </div>
       )}

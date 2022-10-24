@@ -31,11 +31,17 @@ export const increment = firebase.firestore.FieldValue.increment;
  * @param  {string} username
  */
  export async function getUserWithUsername(username) {
-  const usersRef = firestore.collection('users');
-  const query = usersRef.where('username', '==', username).limit(1);
-  const userDoc = (await query.get()).docs[0];
-  console.log('Reading User from Firestore')
-  return userDoc;
+  if (username) {
+    console.log('Reading User from Firestore')
+    const usersRef = firestore.collection('users');
+    const query = usersRef.where('username', '==', username).limit(1);
+    const userDoc = (await query.get()).docs[0];
+    
+    return userDoc;
+  } else {
+    return (!username);
+  }
+  
 }
 
 /**`

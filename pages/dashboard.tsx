@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "./libs/context";
 import { MdIosShare } from "react-icons/md";
 import Link from "next/link";
-import { getUserWithUsername } from "./libs/firebase";
+
 import { useState } from "react";
 import MobileNav from "./components/mobileNav";
 
@@ -14,19 +14,6 @@ import MobileNav from "./components/mobileNav";
 // 3. TO DO: Invite functionality
 export default function Dashboard({}) {
   const { username } = useContext(UserContext);
-
-  const [userDisplayName, setUserDisplayName] = useState("");
-
-  const fetchUser = async () => {
-    try {
-      const userDoc = await getUserWithUsername(username);
-      const user = userDoc.data();
-      setUserDisplayName(user.displayName);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchUser();
 
   return (
     <main className='h-screen flex flex-col justify-between '>
@@ -39,7 +26,7 @@ export default function Dashboard({}) {
         <div className='md:w-[600px] md:mx-auto'>
           <div className='mt-4 m-5 flex justify-between '>
             <div>
-              <h2 className='font-CircularMedium '>Hello, {userDisplayName}</h2>
+              <h2 className='font-CircularMedium '>Hello, @{username}</h2>
               <Link className='hover:text-orange-600' href={`/${username}`}>
                 <p className='hover:text-orange-600 hover:cursor-pointer'>
                   getme.pizza/{username}

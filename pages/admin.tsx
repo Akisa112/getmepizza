@@ -17,7 +17,7 @@ import { upLoadIPFS } from "./libs/moralis";
 export default function AdminPage({}) {
   const { username } = useContext(UserContext);
 
-  const [userPhotoURL, setUserPhotoURL] = useState("./hacker.png");
+  const [userPhotoURL, setUserPhotoURL] = useState("");
   const [userEditedPhotoURL, setUserEditedPhotoURL] = useState("");
 
   const fetchUser = async () => {
@@ -29,7 +29,12 @@ export default function AdminPage({}) {
       console.log(error);
     }
   };
-  fetchUser();
+
+  if (username) {
+    if (!userPhotoURL) {
+      fetchUser();
+    }
+  }
 
   let postRef = firestore.collection("users").doc(auth.currentUser.uid);
   let [user] = useDocumentDataOnce(postRef);
