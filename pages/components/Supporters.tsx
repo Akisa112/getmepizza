@@ -95,7 +95,7 @@ export function Supporters(user) {
         <div className='flex justify-end mx-2 mb-3'>
           <button
             disabled={chain === "MUMBAI"}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               changeChains("MUMBAI");
             }}
@@ -104,7 +104,7 @@ export function Supporters(user) {
           </button>
           <button
             disabled={chain === "BINANCE"}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               changeChains("BINANCE");
             }}
@@ -113,7 +113,7 @@ export function Supporters(user) {
           </button>
           <button
             disabled={end}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {}}
           >
             Fantom
@@ -123,7 +123,7 @@ export function Supporters(user) {
         <div className='flex justify-center'>
           <button
             disabled={start}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               onPrevPage();
             }}
@@ -132,7 +132,7 @@ export function Supporters(user) {
           </button>
           <button
             disabled={end}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               onNextPage();
             }}

@@ -31,9 +31,9 @@ function PostManager() {
     <main className='h-[calc(100vh-107px)]  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (
         <>
-          <div className='mt-5 ml-4'>
+          <div className='mt-5 ml-4 '>
             <Link href='../posts'>
-              <button className='flex font-CircularMedium bg-gray-200 rounded-full mt-2 py-2 w-32 mx-2 md:max-w-xs '>
+              <button className='flex font-CircularMedium bg-gray-200 rounded-full mt-2 py-2 w-32 mx-2 md:max-w-xs hover:scale-105 transition-all'>
                 <AiOutlineArrowLeft className='text-lg mt-0.5 mr-5 ml-4' />
                 Posts
               </button>
@@ -103,21 +103,21 @@ function PostForm({ defaultValues, postRef }) {
         <div className='flex justify-between'>
           <button
             type='submit'
-            className='py-2 px-4 font-CircularMedium bg-yellow-400 rounded-full md:max-w-xs'
+            className='py-2 px-4 font-CircularMedium bg-yellow-400 rounded-full md:max-w-xs hover:scale-105 transition-all'
           >
             Save Changes
           </button>
-          <fieldset>
+          <fieldset className='hover:scale-105 transition-all'>
             <input
               id='published'
-              className='peer  px-4 py-4 mt-1 rounded-full text-green-600 focus:ring-slate-50'
+              className='peer cursor-pointer px-4 py-4 mt-1 rounded-full text-green-600 focus:ring-slate-50'
               type='checkbox'
               ref={register}
               {...register("published", {
                 required: false,
               })}
             />
-            <label className=' font-CircularMedium mx-3 align-middle hidden peer-checked:inline'>
+            <label className=' font-CircularMedium mx-3 align-middle hidden peer-checked:inline '>
               Live
             </label>
             <div className='inline font-CircularMedium mx-2 align-middle peer-checked:hidden'>

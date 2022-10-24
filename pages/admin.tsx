@@ -211,7 +211,7 @@ export default function AdminPage({}) {
 
           <button
             type='submit'
-            className=' bg-yellow-400 rounded-full mt-6 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto'
+            className=' bg-yellow-400 rounded-full mt-6 py-3 h-[50px] min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all '
           >
             Save Changes
           </button>

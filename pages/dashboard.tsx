@@ -29,6 +29,7 @@ import {
 export default function Dashboard({}) {
   const { username, userETH } = useContext(UserContext);
   const [earningsPoly, setEarningsPoly] = useState(0);
+  const [share, setShare] = useState(false);
 
   const getEarningsFrom = async () => {
     const get = await getEarnings(
@@ -43,6 +44,13 @@ export default function Dashboard({}) {
       getEarningsFrom();
     }
   }, [userETH]);
+
+  const callShare = () => {
+    setShare(true);
+    setTimeout(() => {
+      setShare(false);
+    }, 2000);
+  };
 
   return (
     <main className='h-[calc(100vh-107px)] flex flex-col justify-between '>
@@ -63,8 +71,17 @@ export default function Dashboard({}) {
             </div>
 
             <div>
-              <button className='m-auto flex font-CircularMedium bg-gray-200 rounded-full py-3 w-28 text-center md:max-w-xs md:mx-auto'>
-                <MdIosShare className='text-xl ml-3 mr-2' /> Share
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `https://getme.pizza/${username}`
+                  );
+                  callShare();
+                }}
+                className='m-auto flex font-CircularMedium bg-gray-200 rounded-full py-3 w-28 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+              >
+                <MdIosShare className='text-xl ml-3 mr-2' />{" "}
+                {share ? "Copied!" : "Share"}
               </button>
             </div>
           </div>
@@ -108,7 +125,7 @@ export default function Dashboard({}) {
             </div>
           </div>
           <div className='text-center mb-4'>
-            <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto'>
+            <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto  hover:scale-105 transition-all'>
               Withdraw
             </button>
           </div>
@@ -134,7 +151,7 @@ export default function Dashboard({}) {
 
               <button
                 type='submit'
-                className=' bg-yellow-400 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto'
+                className=' bg-yellow-400 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all'
               >
                 Send Invite
               </button>

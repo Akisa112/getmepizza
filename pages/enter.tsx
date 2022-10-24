@@ -50,7 +50,7 @@ function SignInButton() {
 
   return (
     <button
-      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:bg-orange-100 transition-all'
+      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all'
       onClick={signInWithGoogle}
     >
       Sign in with <Image width={"18px"} height={"18px"} src={"/google.png"} />

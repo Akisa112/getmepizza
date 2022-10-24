@@ -17,7 +17,7 @@ export default function NavBar() {
       <section className='px-3 py-2  md:px-5 md:bg-white lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (
-            <div>
+            <div className='pt-2'>
               <Link href={"/"}>
                 <a className='text-4xl md:pl-1 cursor-pointer self-center'>
                   🍕
@@ -90,9 +90,9 @@ export default function NavBar() {
                     <a>Explore</a>
                   </Link>
                 </li>
-                <li className='mx-2 '>
+                <li className='mx-2 hover:scale-105 transition-all'>
                   <Link href={"/enter"}>
-                    <a className='bg-yellow-400 rounded-full text-sm px-4  py-2 cursor-pointer hover:bg-orange-400 transition-all'>
+                    <a className='bg-yellow-400 rounded-full text-sm px-4  py-2 cursor-pointer '>
                       Sign up
                     </a>
                   </Link>

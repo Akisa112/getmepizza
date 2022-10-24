@@ -58,7 +58,7 @@ export default function UserProfile({ user, posts }) {
       ) : (
         <div className='md:flex md:mx-auto justify-center'>
           <div className='md:w-[24rem]'>
-            <PostFeed posts={posts} admin />
+            <PostFeed posts={posts} />
           </div>
           <BuyPizza className='w-full' user={user} />
         </div>

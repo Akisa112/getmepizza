@@ -136,7 +136,7 @@ export default function BuyPizza(user) {
           <button
             disabled={!write || isLoading}
             type='submit'
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           >
             {isLoading ? "Processing..." : "Support $5"}
           </button>

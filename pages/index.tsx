@@ -51,7 +51,7 @@ export default function Home(props) {
               ></input>
               <span className='hidden  lg:inline'>
                 <Link href='/enter'>
-                  <a className='px-6 bg-yellow-400 cursor-pointer rounded-full text-lg  py-3 text-center   hover:text-xl hover:bg-orange-400 transition-all'>
+                  <a className='px-6 bg-yellow-400 cursor-pointer rounded-full text-lg  py-3 text-center   hover:text-xl  transition-all'>
                     Start my page
                   </a>
                 </Link>
@@ -134,9 +134,9 @@ export default function Home(props) {
               <span className='font-CircularMedium  '>on-chain</span>.
             </p>
           </div>
-          <div className='text-center h-[50px]'>
+          <div className='text-center h-[50px] hover:scale-105 transition-all'>
             <Link href='/enter'>
-              <a className='mx-10 bg-yellow-400 rounded-full  py-3 px-10  cursor-pointer md:max-w-xs md:mx-auto  hover:text-xl hover:bg-orange-400 transition-all'>
+              <a className='mx-10 bg-yellow-400 rounded-full  py-3 px-10  cursor-pointer md:max-w-xs md:mx-auto  '>
                 Start my page
               </a>
             </Link>
