@@ -16,8 +16,15 @@ import BinanceLogo from "../public/binance.png";
 import FantomLogo from "../public/fantom.png";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { toast } from "react-hot-toast";
 
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+  useAccount,
+  useNetwork,
+} from "wagmi";
 
 // 1. Show username
 // 2. TO DO: Show earnings from contract using Moralis
@@ -26,16 +33,18 @@ export default function Dashboard({}) {
   const { username, userETH } = useContext(UserContext);
   const [earningsPoly, setEarningsPoly] = useState(0);
   const [share, setShare] = useState(false);
+  const { address, isConnected } = useAccount();
+  const { chain } = useNetwork();
 
   const getEarningsFrom = async () => {
-    const get = await getEarnings(userETH, "MUMBAI");
-    setEarningsPoly(Number(get) / 1000000000000000000);
+    try {
+      const get = await getEarnings(userETH, "MUMBAI");
+      setEarningsPoly(Number(get) / 1000000000000000000);
+    } catch (error) {}
   };
 
   useEffect(() => {
-    if (earningsPoly === 0) {
-      getEarningsFrom();
-    }
+    getEarningsFrom();
   }, [userETH]);
 
   const callShare = () => {
@@ -45,7 +54,11 @@ export default function Dashboard({}) {
     }, 2000);
   };
 
-  const { config } = usePrepareContractWrite({
+  const {
+    config,
+    error: prepareError,
+    isError: isPrepareError,
+  } = usePrepareContractWrite({
     address: "0xb4D137536Ae7962eFD6b09905801D8108B43d0D8",
     abi: [
       {
@@ -60,7 +73,17 @@ export default function Dashboard({}) {
     enabled: true,
   });
 
-  const { write } = useContractWrite(config);
+  const { data, error, isError, write } = useContractWrite(config);
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      toast.success(`Withdrawn ${chain.name} tips successfully!`);
+      setTimeout(() => {
+        getEarningsFrom();
+      }, 1000);
+    },
+  });
 
   return (
     <main className='h-[calc(100vh-107px)] flex flex-col justify-between '>
@@ -88,9 +111,9 @@ export default function Dashboard({}) {
                   );
                   callShare();
                 }}
-                className='m-auto flex font-CircularMedium bg-gray-200 rounded-full py-3 w-28 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+                className='m-auto flex font-CircularMedium bg-yellow-400 rounded-full py-3 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
               >
-                <MdIosShare className='text-xl ml-3 mr-2' />{" "}
+                <MdIosShare className='text-xl ml-5 mr-2' />{" "}
                 {share ? "Copied!" : "Share"}
               </button>
             </div>
@@ -107,9 +130,7 @@ export default function Dashboard({}) {
                 </span>
                 BSC{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-5xl'>
-                {earningsPoly}{" "}
-              </p>
+              <p className='mt-2 font-CircularMedium text-5xl'>0</p>
             </div>
             <div className='  m-5'>
               <h4 className='font-CircularMedium '>
@@ -129,9 +150,7 @@ export default function Dashboard({}) {
                 </span>
                 FTM{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-5xl'>
-                {earningsPoly}{" "}
-              </p>
+              <p className='mt-2 font-CircularMedium text-5xl'>0</p>
             </div>
           </div>
           <form
@@ -141,15 +160,28 @@ export default function Dashboard({}) {
             }}
           >
             <div className='text-center mb-4'>
-              <button className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto  hover:scale-105 transition-all'>
-                Withdraw
+              <button
+                disabled={!write || isLoading || earningsPoly === 0}
+                className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
+              >
+                {isLoading ? "Withdrawing..." : "Withdraw"}
               </button>
             </div>
           </form>
 
-          <div className='mb-8'>
+          <div className='mb-4'>
             <ConnectButton />
           </div>
+
+          {isConnected && (
+            <div className='mb-8 text-center'>
+              <p className='font-CircularMedium text-xs mx-auto  w-[300px]'>
+                {address === userETH
+                  ? `You are connected to withdraw your tips on ${chain.name}.`
+                  : `Please connect to your address set in My Account (${userETH}) to withdraw your tips.`}
+              </p>
+            </div>
+          )}
 
           <hr />
           <div className='mt-10 m-5'>

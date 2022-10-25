@@ -1,6 +1,13 @@
 import { getMemos } from "../libs/moralis";
-import { useEffect, useState } from "react";
-import { firestore } from "../libs/firebase";
+import { useContext, useEffect, useState } from "react";
+
+import { successTxContext } from "./UserProfile";
+
+import PolygonLogo from "../../public/polygon.png";
+import BinanceLogo from "../../public/binance.png";
+import FantomLogo from "../../public/fantom.png";
+
+import Image from "next/image";
 
 export function Supporters(user) {
   const [mems, setMems] = useState([]);
@@ -15,6 +22,8 @@ export function Supporters(user) {
   const [start, setStart] = useState(true);
   const [end, setEnd] = useState(false);
   const [chain, setChain] = useState("MUMBAI");
+
+  const { successfullTx } = useContext(successTxContext);
 
   const onNextPage = () => {
     if (page < pages) {
@@ -41,7 +50,7 @@ export function Supporters(user) {
     if (user.user.ethAddress) {
       memoArray = await getMemos(user.user.ethAddress, chain);
       setMemsMumbai(memoArray.reverse());
-      setMems(memsMumbai);
+      setMems(memoArray);
       setPages(Math.ceil(memoArray.length / memePerPage));
     }
   };
@@ -51,6 +60,14 @@ export function Supporters(user) {
       memos();
     }
   }, [mems]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (successfullTx) {
+        memos();
+      }
+    }, 1000);
+  }, [successfullTx]);
 
   const createdAt = (number) => {
     return new Date(Number(number));
@@ -78,7 +95,7 @@ export function Supporters(user) {
               {memo[3]} {memo[4]}
             </p>
             <p className='text-xs  font-CircularMedium'>
-              {memo[5] / 100000000000000000} MATIC
+              {memo[5] / 1000000000000000000} MATIC
             </p>
           </div>
           <div className='text-left text-xs'>
@@ -94,28 +111,38 @@ export function Supporters(user) {
         </h4>
         <div className='flex justify-end mx-2 mb-3'>
           <button
-            disabled={chain === "MUMBAI"}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-            onClick={() => {
-              changeChains("MUMBAI");
-            }}
-          >
-            Mumbai
-          </button>
-          <button
             disabled={chain === "BINANCE"}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            className='font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               changeChains("BINANCE");
             }}
           >
+            <span className='text-xs mr-2 align-bottom '>
+              <Image width='20px' height='20px' src={BinanceLogo} />
+            </span>
             Binance
           </button>
           <button
+            disabled={chain === "MUMBAI"}
+            className='font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            onClick={() => {
+              changeChains("MUMBAI");
+            }}
+          >
+            <span className='text-xs mr-2 align-bottom '>
+              <Image width='20px' height='20px' src={PolygonLogo} />
+            </span>
+            Mumbai
+          </button>
+
+          <button
             disabled={end}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            className='font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {}}
           >
+            <span className='text-xs mr-2 align-bottom '>
+              <Image width='20px' height='20px' src={FantomLogo} />
+            </span>
             Fantom
           </button>
         </div>
@@ -123,7 +150,7 @@ export function Supporters(user) {
         <div className='flex justify-center'>
           <button
             disabled={start}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-300 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
             onClick={() => {
               onPrevPage();
             }}
@@ -132,7 +159,7 @@ export function Supporters(user) {
           </button>
           <button
             disabled={end}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-500 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               onNextPage();
             }}

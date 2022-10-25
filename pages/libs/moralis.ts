@@ -104,6 +104,7 @@ export async function getMemos(ethAddress, chosenChain) {
 }
 
 export async function getEarnings(ethAddress, chosenChain) {
+    
     const abi = [{
 		"inputs": [
 			{
@@ -138,15 +139,19 @@ export async function getEarnings(ethAddress, chosenChain) {
         // ...and any other configuration
     });
     console.log(ethAddress);
-    const response = await Moralis.EvmApi.utils.runContractFunction({
-        abi,
-        functionName,
-        address,
-        chain,
-        params: {'': ethAddress}
-    });
-    
-    return(response.result);
 
+    if (ethAddress !== null) {
+        const response = await Moralis.EvmApi.utils.runContractFunction({
+            abi,
+            functionName,
+            address,
+            chain,
+            params: {'': ethAddress}
+        });
+        
+        return(response.result);
+    }
+    
+    return console.log('no eth addy')
 
 }

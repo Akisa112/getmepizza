@@ -29,11 +29,17 @@ export default function Heart({ postRef }) {
   };
 
   return heartDoc?.exists ? (
-    <button className='text-2xl' onClick={removeHeart}>
+    <button
+      className='text-2xl hover:scale-110 transition-all'
+      onClick={removeHeart}
+    >
       🧯
     </button>
   ) : (
-    <button className='text-2xl' onClick={addHeart}>
+    <button
+      className='text-2xl hover:scale-110 transition-all'
+      onClick={addHeart}
+    >
       🔥
     </button>
   );

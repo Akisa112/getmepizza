@@ -56,6 +56,7 @@ const fantomChain: Chain = {
 const { chains, provider } = configureChains(
   [
     chain.polygonMumbai,
+    binanceChain,
     // chain.mainnet, binanceChain, chain.polygon, fantomChain,
   ],
   [
