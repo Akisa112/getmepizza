@@ -111,7 +111,7 @@ export default function Dashboard({}) {
                   );
                   callShare();
                 }}
-                className='m-auto flex font-CircularMedium bg-yellow-400 rounded-full py-3 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+                className='m-auto flex font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
               >
                 <MdIosShare className='text-xl ml-5 mr-2' />{" "}
                 {share ? "Copied!" : "Share"}
@@ -162,7 +162,7 @@ export default function Dashboard({}) {
             <div className='text-center mb-4'>
               <button
                 disabled={!write || isLoading || earningsPoly === 0}
-                className=' font-CircularMedium bg-yellow-400 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
+                className=' font-CircularMedium bg-yellow-300 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
               >
                 {isLoading ? "Withdrawing..." : "Withdraw"}
               </button>
@@ -176,9 +176,15 @@ export default function Dashboard({}) {
           {isConnected && (
             <div className='mb-8 text-center'>
               <p className='font-CircularMedium text-xs mx-auto  w-[300px]'>
-                {address === userETH
-                  ? `You are connected to withdraw your tips on ${chain.name}.`
-                  : `Please connect to your address set in My Account (${userETH}) to withdraw your tips.`}
+                {earningsPoly === 0 ? (
+                  `You have no tips on ${chain.name}. Switch chains or share your link to get more tips!`
+                ) : (
+                  <>
+                    {address === userETH
+                      ? `You are connected to withdraw your ${chain.name} tips. Switch chains to withdraw on other chains.`
+                      : `Please connect to your address set in My Account (${userETH}) to withdraw your tips.`}
+                  </>
+                )}
               </p>
             </div>
           )}
@@ -200,7 +206,7 @@ export default function Dashboard({}) {
 
               <button
                 type='submit'
-                className=' bg-yellow-400 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+                className=' bg-yellow-300 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all'
               >
                 Send Invite
               </button>

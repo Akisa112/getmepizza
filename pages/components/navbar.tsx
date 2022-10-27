@@ -92,8 +92,15 @@ export default function NavBar() {
                 </li>
                 <li className='mx-2 hover:scale-105 transition-all'>
                   <Link href={"/enter"}>
-                    <a className='bg-yellow-400 rounded-full text-sm px-4  py-2 cursor-pointer '>
-                      Sign up
+                    <a className='bg-white rounded-full text-sm px-4  py-2 cursor-pointer '>
+                      Sign in
+                    </a>
+                  </Link>
+                </li>
+                <li className='mx-2 hover:scale-105 transition-all'>
+                  <Link href={"/enter"}>
+                    <a className='bg-yellow-300 rounded-full text-sm px-4  py-2 cursor-pointer '>
+                      Sign in
                     </a>
                   </Link>
                 </li>

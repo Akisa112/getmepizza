@@ -25,7 +25,7 @@ export default function UserProfile({ user, posts }) {
       <p className='text-xs'>
         <i>@{user.username}</i>
       </p>
-      <p className='text-gray-500 text-sm'>{user.supporters} supporters</p>
+
       <nav className='pt-4 pb-2 lg:pb-6'>
         <ul className='flex mx-6 justify-center'>
           <li

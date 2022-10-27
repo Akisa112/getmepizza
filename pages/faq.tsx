@@ -16,7 +16,7 @@ export default function Custom404() {
             twitter @elonsdev
           </p>
 
-          <div className=' mx-2 font-CircularMedium bg-yellow-400 rounded-full text-lg  py-3  cursor-pointer'>
+          <div className=' mx-2 font-CircularMedium bg-yellow-300 rounded-full text-lg  py-3  cursor-pointer'>
             <div className='flex items-center justify-center'>
               <FiTwitter className='mr-2 text-lg' />
               <Link href='https://twitter.com/elonsdev'>

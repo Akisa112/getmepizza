@@ -8,7 +8,7 @@ export default function UsersFeed({ users }) {
 
 function UserItem({ user }) {
   return (
-    <li className='mx-2 px-1 py-4  snap-center min-w-fit'>
+    <li className='mx-2 px-1 py-4  snap-center min-w-fit hover:scale-105 transition-all'>
       <Link href={`/${user.username}`}>
         <img
           className='cursor-pointer'
@@ -19,15 +19,14 @@ function UserItem({ user }) {
         />
       </Link>
 
-      <p className='max-w-[150px] font-Montserrat text-sm'>
+      <p className='max-w-[150px] h-[60px] line-clamp-3 mt-2 font-Montserrat text-sm'>
         <span className='font-CircularMedium  '>
           <Link href={`/${user.username}`}>{user.username}</Link>
         </span>{" "}
-        is coding the next big dapp.
+        {user.about}
       </p>
-      <p className=' text-sm text-left mt-1 font-CircularMedium'>
-        🍕 {user.supporters} Supporters
-      </p>
+
+      <p className=' text-sm text-left mt-1 font-CircularMedium'></p>
     </li>
   );
 }

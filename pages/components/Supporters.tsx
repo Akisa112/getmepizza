@@ -150,7 +150,7 @@ export function Supporters(user) {
         <div className='flex justify-center'>
           <button
             disabled={start}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
+            className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
             onClick={() => {
               onPrevPage();
             }}
@@ -159,7 +159,7 @@ export function Supporters(user) {
           </button>
           <button
             disabled={end}
-            className='font-CircularMedium bg-yellow-400 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+            className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
             onClick={() => {
               onNextPage();
             }}

@@ -252,7 +252,7 @@ function UsernameForm() {
 
           <button
             type='submit'
-            className=' bg-yellow-400 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto'
+            className=' bg-yellow-300 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto'
           >
             Continue
           </button>

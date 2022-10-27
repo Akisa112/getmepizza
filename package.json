@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^0.7.2",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "blob-url-to-file": "^1.0.0",
     "connectkit": "^0.0.2",
     "Dante2": "^0.5.0-rc4",

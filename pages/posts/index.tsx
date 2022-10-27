@@ -109,7 +109,7 @@ function CreateNewPost() {
       <button
         type='submit'
         disabled={!isValid}
-        className='className="m-auto font-CircularMedium bg-yellow-400 disabled:bg-gray-200 rounded-full mt-2 py-3 w-72 text-center md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
+        className='className="m-auto font-CircularMedium bg-yellow-300 disabled:bg-gray-200 rounded-full mt-2 py-3 w-72 text-center md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
       >
         Create a post
       </button>

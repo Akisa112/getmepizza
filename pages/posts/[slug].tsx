@@ -103,7 +103,7 @@ function PostForm({ defaultValues, postRef }) {
         <div className='flex justify-between'>
           <button
             type='submit'
-            className='py-2 px-4 font-CircularMedium bg-yellow-400 rounded-full md:max-w-xs hover:scale-105 transition-all'
+            className='py-2 px-4 font-CircularMedium bg-yellow-300 rounded-full md:max-w-xs hover:scale-105 transition-all'
           >
             Save Changes
           </button>

@@ -19,7 +19,7 @@ export default function Custom404() {
           That page does not seem to exist.
         </h1>
         <Link href='/'>
-          <button className='m-auto font-CircularMedium bg-yellow-400 rounded-full mt-6 py-3 w-72 text-center md:max-w-xs md:mx-auto'>
+          <button className='m-auto font-CircularMedium bg-yellow-300 rounded-full mt-6 py-3 w-72 text-center md:max-w-xs md:mx-auto'>
             Go home
           </button>
         </Link>

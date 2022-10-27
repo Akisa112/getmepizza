@@ -35,7 +35,7 @@ export default function Home(props) {
       <main className='  font-CircularMedium lg:max-w-5xl lg:mx-auto'>
         <section className='px-3 md:px-20'>
           <div>
-            <h1 className='text-3xl font-bold text-center px-2 py-2 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 '>
+            <h1 className='text-3xl font-bold text-center px-2 py-2 mt-8 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 '>
               We can all use a slice of 🍕 sometimes...
             </h1>
             <p className='pt-8 px-2 py-8 max-w-sm mx-auto text-center text-gray-800 font-Montserrat font-bold leading-7 text-lg md:text-xl md:max-w-md lg:max-w-4xl lg:text-2xl lg:px-40'>
@@ -51,7 +51,7 @@ export default function Home(props) {
               ></input>
               <span className='hidden  lg:inline'>
                 <Link href='/enter'>
-                  <a className='px-6 bg-yellow-400 cursor-pointer rounded-full text-lg  py-3 text-center   hover:text-xl  transition-all'>
+                  <a className='px-6 bg-yellow-300 cursor-pointer rounded-full text-lg  py-3 text-center   hover:text-xl  transition-all'>
                     Start my page
                   </a>
                 </Link>
@@ -59,7 +59,7 @@ export default function Home(props) {
             </div>
 
             <Link href='/enter'>
-              <div className='mx-2 bg-yellow-400 rounded-full text-lg  py-3 text-center lg:hidden'>
+              <div className='mx-2 bg-yellow-300 rounded-full text-lg  py-3 text-center lg:hidden'>
                 Start my page
               </div>
             </Link>
@@ -136,7 +136,7 @@ export default function Home(props) {
           </div>
           <div className='text-center h-[50px] hover:scale-105 transition-all'>
             <Link href='/enter'>
-              <a className='mx-10 bg-yellow-400 rounded-full  py-3 px-10  cursor-pointer md:max-w-xs md:mx-auto  '>
+              <a className='mx-10 bg-yellow-300 rounded-full  py-3 px-10  cursor-pointer md:max-w-xs md:mx-auto  '>
                 Start my page
               </a>
             </Link>
