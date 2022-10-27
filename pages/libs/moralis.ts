@@ -27,59 +27,64 @@ export async function upLoadIPFS(content) {
 export async function getMemos(ethAddress, chosenChain) {
 
     const abi = [{
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_creator",
-                "type": "address"
-            }
-        ],
-        "name": "getMemos",
-        "outputs": [
-            {
-                "components": [
-                    {
-                        "internalType": "address",
-                        "name": "from",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "to",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "timestamp",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "name",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "message",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    }
-                ],
-                "internalType": "struct GetMePizza.Memo[]",
-                "name": "",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }];
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "getMemos",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "slices",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct GetMePizza.Memo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},];
 
     const functionName = 'getMemos';
-    const address = '0xb4D137536Ae7962eFD6b09905801D8108B43d0D8';
+    const address = '0xbc437F46FDD24B23048Fcd2dfdF031E6378bd1C9';
   
     let chain; 
     if (chosenChain === 'MUMBAI') {
@@ -126,7 +131,7 @@ export async function getEarnings(ethAddress, chosenChain) {
 	}];
 
     const functionName = 'creatorsPizzaMoney';
-    const address = '0xb4D137536Ae7962eFD6b09905801D8108B43d0D8';
+    const address = '0xbc437F46FDD24B23048Fcd2dfdF031E6378bd1C9';
   
     let chain; 
     if (chosenChain === 'MUMBAI') {

@@ -59,7 +59,7 @@ export default function Dashboard({}) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0xb4D137536Ae7962eFD6b09905801D8108B43d0D8",
+    address: "0xbc437F46FDD24B23048Fcd2dfdF031E6378bd1C9",
     abi: [
       {
         inputs: [],

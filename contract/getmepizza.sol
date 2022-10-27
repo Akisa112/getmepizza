@@ -7,6 +7,39 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import './Base64.sol';
 
+// Create a small library to convert timestamp to readable date for the NFT.
+library toReadableDate {
+    uint constant SECONDS_PER_DAY = 24 * 60 * 60;
+    int constant OFFSET19700101 = 2440588;
+
+    function _daysToDate(uint timestamp) internal pure returns (string memory) {
+        uint _days = timestamp / SECONDS_PER_DAY;
+        int __days = int(_days);
+
+        int L = __days + 68569 + OFFSET19700101;
+        int N = 4 * L / 146097;
+        L = L - (146097 * N + 3) / 4;
+        int _year = 4000 * (L + 1) / 1461001;
+        L = L - 1461 * _year / 4 + 31;
+        int _month = 80 * L / 2447;
+        int _day = L - 2447 * _month / 80;
+        L = _month / 11;
+        _month = _month + 2 - 12 * L;
+        _year = 100 * (N - 49) + _year + L;
+
+        string memory year = Strings.toString(uint(_year));
+        string memory month = Strings.toString(uint(_month));
+        string memory day = Strings.toString(uint(_day));
+
+        string memory result = string(abi.encodePacked(
+            day, '/', month, '/', year
+        ));
+
+        return result;
+    } 
+    
+}
+
 contract GetMePizza is ERC721, Ownable {
     using SafeMath for uint256;
     // Event to emit when a Memo is created.
@@ -148,7 +181,7 @@ contract GetMePizza is ERC721, Ownable {
             '<text style="font-size:30px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-231.45 -300.01)"><tspan x="315.868" style="fill:#707070" y="372.242">GETME.',unicode"🍕",'</tspan></text>'
             '<text style="font-size:9px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -282.01)"><tspan x="315.868" style="fill:#707070" y="374.242">YOUR FAV DIGITAL PIZZA HOUSE</tspan></text>'
             '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="375.242">CHK: ',Strings.toString(_tokenId),'</tspan></text>'
-            '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="385.242">',Strings.toString(currentMemo.timestamp),'</tspan></text>'
+            '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="385.242">',toReadableDate._daysToDate(currentMemo.timestamp),'</tspan></text>'
             '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="395.242">NAME: ',currentMemo.name,'</tspan></text>'
             '<text style="font-size:13.109px;letter-spacing:0;line-height:125%;word-spacing:0;fill:#707188" xml:space="preserve" y="328.534" x="311.919" transform="translate(-246.45 -288.01)">'
                 '<tspan x="313.919" y="394.441">--------------------------</tspan>'
@@ -174,7 +207,8 @@ contract GetMePizza is ERC721, Ownable {
 
         return result;
     }
-        
+
+   
         
     /**
     * @dev Overrides the tokenURI function to return the onchain URI for a tokenId.
@@ -192,9 +226,7 @@ contract GetMePizza is ERC721, Ownable {
                                 abi.encodePacked(
                                     '{"name": "GetMe.Pizza Receipt", "description": "This is a GetMe.Pizza receipt", "image": "data:image/svg+xml;base64,',
                                     Base64.encode(bytes(getReceiptSvg(tokenId))),
-                                    '","attributes":',
-                                    ""
-                                    '}'
+                                    '"}'
                                 )
                             )
                         )

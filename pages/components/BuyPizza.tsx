@@ -7,7 +7,7 @@ import {
 } from "wagmi";
 import { useState, useEffect, useContext } from "react";
 import debounce from "lodash.debounce";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 
 import { toast } from "react-hot-toast";
 
@@ -44,13 +44,13 @@ export default function BuyPizza(user) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0xb4D137536Ae7962eFD6b09905801D8108B43d0D8",
+    address: "0xbc437F46FDD24B23048Fcd2dfdF031E6378bd1C9",
     abi: [
       {
         inputs: [
           {
             internalType: "address",
-            name: "to",
+            name: "_to",
             type: "address",
           },
           {
@@ -63,6 +63,16 @@ export default function BuyPizza(user) {
             name: "_message",
             type: "string",
           },
+          {
+            internalType: "uint256",
+            name: "_slices",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "_receipt",
+            type: "bool",
+          },
         ],
         name: "buyPizza",
         outputs: [],
@@ -74,7 +84,13 @@ export default function BuyPizza(user) {
     overrides: {
       value: ethers.utils.parseEther("0.01"),
     },
-    args: [user.user.ethAddress, finalDonaterName, finalMemo],
+    args: [
+      user.user.ethAddress,
+      finalDonaterName,
+      finalMemo,
+      BigNumber.from(5),
+      true,
+    ],
     enabled: true,
   });
 
