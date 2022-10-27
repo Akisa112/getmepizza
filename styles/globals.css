@@ -49,6 +49,10 @@ a {
   padding-right: 40px !important;
 }
 
+[data-rk] .ju367v2m {
+  justify-content: space-between !important;
+}
+
 #buypizzaconnecter .ju367va {
   display: flex;
   flex-wrap: wrap;

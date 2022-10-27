@@ -44,7 +44,7 @@ export default function BuyPizza(user) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0xbc437F46FDD24B23048Fcd2dfdF031E6378bd1C9",
+    address: "0x01A6D1Daa96318c5E65Fb313337D91B540d4F533",
     abi: [
       {
         inputs: [
@@ -168,10 +168,6 @@ export default function BuyPizza(user) {
           </button>
         )}
       </form>
-
-      {(isPrepareError || isError) && (
-        <div>Error: {(prepareError || error)?.message}</div>
-      )}
     </div>
   );
 }

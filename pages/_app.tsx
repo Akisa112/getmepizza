@@ -11,25 +11,25 @@ import { publicProvider } from "wagmi/providers/public";
 import NavBar from "./components/navbar";
 
 const binanceChain: Chain = {
-  id: 56,
-  name: "Binance Smart Chain",
+  id: 97,
+  name: "BSC Testnet",
   network: "BinanceSmartChain",
   iconUrl:
     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
   iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: "BinanceSmartChain",
-    symbol: "BSC",
+    name: "Smart Chain - Testnet",
+    symbol: "TBNB",
   },
   rpcUrls: {
-    default: "https://bsc-dataseed.binance.org/",
+    default: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   },
   blockExplorers: {
-    default: { name: "BSCScan", url: "https://bscscan.com" },
-    etherscan: { name: "BSCScan", url: "https://bscscan.com" },
+    default: { name: "BSCScan", url: "https://testnet.bscscan.com" },
+    etherscan: { name: "BSCScan", url: "https://testnet.bscscan.com" },
   },
-  testnet: false,
+  testnet: true,
 };
 
 const fantomChain: Chain = {

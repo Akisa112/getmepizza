@@ -15,13 +15,13 @@ export function Supporters(user) {
   const [memsMumbai, setMemsMumbai] = useState([]);
   const [memsBinance, setMemsBinance] = useState([]);
   const [memsFantom, setMemsFantom] = useState([]);
+  const [chain, setChain] = useState("Polygon Mumbai");
 
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const memePerPage = 4;
   const [start, setStart] = useState(true);
   const [end, setEnd] = useState(false);
-  const [chain, setChain] = useState("MUMBAI");
 
   const { successfullTx } = useContext(successTxContext);
 
@@ -45,28 +45,56 @@ export function Supporters(user) {
     }
   };
 
-  const memos = async () => {
-    let memoArray;
+  const memosPoly = async () => {
+    let memoArrayPoly;
     if (user.user.ethAddress) {
-      memoArray = await getMemos(user.user.ethAddress, chain);
-      setMemsMumbai(memoArray.reverse());
-      setMems(memoArray);
-      setPages(Math.ceil(memoArray.length / memePerPage));
+      memoArrayPoly = await getMemos(user.user.ethAddress, "Polygon Mumbai");
+      setMemsMumbai(memoArrayPoly.reverse());
+      setMems(memoArrayPoly);
+      setPages(Math.ceil(memoArrayPoly.length / memePerPage));
+
+      if (Math.ceil(memoArrayPoly.length / memePerPage) === 1) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+    }
+  };
+
+  const memosBinance = async () => {
+    let memoArrayBinance;
+    if (user.user.ethAddress) {
+      memoArrayBinance = await getMemos(user.user.ethAddress, "BSC Testnet");
+      setMemsBinance(memoArrayBinance.reverse());
+      setPages(Math.ceil(memoArrayBinance.length / memePerPage));
+      if (Math.ceil(memoArrayBinance.length / memePerPage) === 1) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
     }
   };
 
   useEffect(() => {
-    if (mems.length === 0) {
-      memos();
+    if (memsBinance.length === 0) {
+      memosBinance();
     }
-  }, [mems]);
+    if (memsMumbai.length === 0) {
+      memosPoly();
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       if (successfullTx) {
-        memos();
+        if (chain === "Polygon Mumbai") {
+          memosPoly();
+        }
+        if (chain === "BSC Testnet") {
+          memosBinance();
+        }
       }
-    }, 1000);
+    }, 2000);
   }, [successfullTx]);
 
   const createdAt = (number) => {
@@ -74,100 +102,132 @@ export function Supporters(user) {
   };
 
   const changeChains = (chosenChain) => {
-    if (chosenChain === "MUMBAI") {
+    if (chosenChain === "Polygon Mumbai") {
+      setPage(1);
       setMems(memsMumbai);
-    } else if (chosenChain === "BINANCE") {
+      setPages(Math.ceil(memsMumbai.length / memePerPage));
+      if (Math.ceil(memsMumbai.length / memePerPage) === 1) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+      setStart(true);
+      setChain("Polygon Mumbai");
+    } else if (chosenChain === "BSC Testnet") {
+      setPage(1);
       setMems(memsBinance);
-      setChain("BINANCE");
+      setPages(Math.ceil(memsBinance.length / memePerPage));
+      if (Math.ceil(memsBinance.length / memePerPage) === 1) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+      setStart(true);
+      setChain("BSC Testnet");
     }
   };
 
-  if (mems) {
-    const memsLis = mems
-      .slice((page - 1) * memePerPage, page * memePerPage)
-      .map((memo, i) => (
-        <li
-          className='mt-1 mx-4 p-2  border-2 border-gray-200 rounded-lg bg-gray-100 '
-          key={"memo_" + i}
+  const memsLis = mems
+    .slice((page - 1) * memePerPage, page * memePerPage)
+    .map((memo, i) => (
+      <li
+        className='mt-1 mx-4 p-2  border-2 border-gray-200 rounded-lg bg-gray-100 '
+        key={"memo_" + i}
+      >
+        <div className=' flex justify-between'>
+          <p>
+            {memo[3]} {memo[4]}
+          </p>
+          <p className='text-xs  font-CircularMedium'>
+            {memo[5] / 1000000000000000000}{" "}
+            {chain === "Polygon Mumbai" && "MATIC"}{" "}
+            {chain === "BSC Testnet" && "TBSC"}
+          </p>
+        </div>
+        <div className='text-left text-xs'>
+          <small>{createdAt(memo[2] * 1000).toString()}</small>
+        </div>
+      </li>
+    ));
+
+  const noMemsLis = (
+    <div className="className='mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 '">
+      <h1 className='font-CircularMedium'>
+        {user.user.displayName} has no tips yet on {chain} yet... <br />
+        Buy {user.user.displayName} a slice and make their day!
+      </h1>
+    </div>
+  );
+
+  return (
+    <div className='mt-8'>
+      <h4 className='font-CircularMedium text-left mx-4 mt-4 mb-3 text-gray-500 '>
+        RECENT SUPPORTERS
+      </h4>
+      <div className='flex justify-end mx-2 mb-5'>
+        <button
+          disabled={chain === "BSC Testnet"}
+          className='font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-yellow-300 disabled:ring-2  md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          onClick={() => {
+            changeChains("BSC Testnet");
+          }}
         >
-          <div className=' flex justify-between'>
-            <p>
-              {memo[3]} {memo[4]}
-            </p>
-            <p className='text-xs  font-CircularMedium'>
-              {memo[5] / 1000000000000000000} MATIC
-            </p>
-          </div>
-          <div className='text-left text-xs'>
-            <small>{createdAt(memo[2] * 1000).toString()}</small>
-          </div>
-        </li>
-      ));
+          <span className='text-xs mr-2 align-bottom '>
+            <Image width='20px' height='20px' src={BinanceLogo} />
+          </span>
+          Binance
+        </button>
+        <button
+          disabled={chain === "Polygon Mumbai"}
+          className='font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          onClick={() => {
+            changeChains("Polygon Mumbai");
+          }}
+        >
+          <span className='text-xs mr-2 align-bottom '>
+            <Image width='20px' height='20px' src={PolygonLogo} />
+          </span>
+          Mumbai
+        </button>
 
-    return (
-      <>
-        <h4 className='font-CircularMedium text-left mx-4 mt-4 mb-2 text-gray-500 '>
-          RECENT SUPPORTERS
-        </h4>
-        <div className='flex justify-end mx-2 mb-3'>
-          <button
-            disabled={chain === "BINANCE"}
-            className='font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-            onClick={() => {
-              changeChains("BINANCE");
-            }}
-          >
-            <span className='text-xs mr-2 align-bottom '>
-              <Image width='20px' height='20px' src={BinanceLogo} />
-            </span>
-            Binance
-          </button>
-          <button
-            disabled={chain === "MUMBAI"}
-            className='font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-            onClick={() => {
-              changeChains("MUMBAI");
-            }}
-          >
-            <span className='text-xs mr-2 align-bottom '>
-              <Image width='20px' height='20px' src={PolygonLogo} />
-            </span>
-            Mumbai
-          </button>
+        <button
+          disabled={chain === "Fantom Testnet"}
+          className='font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          onClick={() => {}}
+        >
+          <span className='text-xs mr-2 align-bottom '>
+            <Image width='20px' height='20px' src={FantomLogo} />
+          </span>
+          Fantom
+        </button>
+      </div>
 
-          <button
-            disabled={end}
-            className='font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-            onClick={() => {}}
-          >
-            <span className='text-xs mr-2 align-bottom '>
-              <Image width='20px' height='20px' src={FantomLogo} />
-            </span>
-            Fantom
-          </button>
-        </div>
-        <ul>{memsLis}</ul>
-        <div className='flex justify-center'>
-          <button
-            disabled={start}
-            className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
-            onClick={() => {
-              onPrevPage();
-            }}
-          >
-            Prev...
-          </button>
-          <button
-            disabled={end}
-            className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-            onClick={() => {
-              onNextPage();
-            }}
-          >
-            More...
-          </button>
-        </div>
-      </>
-    );
-  }
+      <div className='h-[310px] flex flex-col justify-between'>
+        <ul>{memsLis.length > 0 ? memsLis : noMemsLis}</ul>
+
+        {memsLis.length > 0 && (
+          <div className=' flex justify-center'>
+            <button
+              disabled={start}
+              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
+              onClick={() => {
+                onPrevPage();
+              }}
+            >
+              Prev...
+            </button>
+            <button
+              disabled={end}
+              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+              onClick={() => {
+                onNextPage();
+              }}
+            >
+              More...
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

@@ -46,7 +46,7 @@ export default function UserProfile({ user, posts }) {
         {page === "HOME" ? (
           <div className='md:flex md:mx-auto justify-center'>
             <BuyPizza className='' user={user} />
-            <div className='md:w-1/2'>
+            <div className='md:w-1/2 '>
               <div className='mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 '>
                 <p>{user.about}</p>
                 <br />

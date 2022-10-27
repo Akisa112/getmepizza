@@ -75,11 +75,15 @@ contract GetMePizza is ERC721, Ownable {
     // Percentage fee platform takes per tip.
     uint256 public feePercantage = 500; // 5%.
     // Total platform fees ever taken in.
-    uint256 public totalPlatformFees;
+    uint256 public PlatformFees;
     // CurrentTokenId.
     uint256 internal currentTokenId;
+    // CurrentAdmin.
+    address public admin;
 
-    constructor() ERC721("PizzaBoxes", "PIZZA") {}
+    constructor(address _admin) ERC721("GetMePizza", "PIZZA") {
+        admin = _admin;
+    }
 
     /**
     * @dev Buy a pizza for the creator and mint the donator a receipt as NFT.
@@ -96,7 +100,7 @@ contract GetMePizza is ERC721, Ownable {
         uint256 fee = msg.value.mul(feePercantage).div(10000);
         uint256 creatorsTipAfterFee = msg.value.sub(fee);
         // Add fee to totalPlatform fees to track total fees ever taken.
-        totalPlatformFees += fee;
+        PlatformFees += fee;
         
         // Add the memo to the array of memo's for that creator.
         memosForAddress[_to].push(Memo(
@@ -157,10 +161,24 @@ contract GetMePizza is ERC721, Ownable {
     }
 
     // change the fee percantage (out of 10000 basis points).
-    function setFee(uint256 _newFeePercentage) external onlyOwner {
+    function setFee(uint256 _newFeePercentage) external {
+        require (msg.sender == admin, "you not the admin");
         feePercantage = _newFeePercentage;
     }
 
+    // Allow the set admin to withdraw.
+    function getPlatformFees() external {
+        require(PlatformFees > 0, "no fees to claim atm");
+        require (msg.sender == admin, "you not the admin");
+        uint256 amount = PlatformFees;
+        PlatformFees = 0;
+        payable(admin).transfer(amount);
+    }
+
+    // Allow deployer to change Admin.
+    function changeAdmin(address _admin) external onlyOwner {
+        admin = _admin;
+    }
     
     /**
     * @dev gets the onchain SVG for a tokenID from the Memo struct from memoForToken mapping.
@@ -178,12 +196,12 @@ contract GetMePizza is ERC721, Ownable {
         // Build the SVG.
         string memory result = string(abi.encodePacked(    
             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290.95 451.518"><defs><filter id="a" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="4.552"/></filter></defs><path style="filter:url(#a);fill:#4d4d4d" d="M297.37 300.94h269.1v429.67h-269.1z" transform="translate(-286.45 -290.01)"/><path style="fill:#fff" d="M299.51 304.75h269.1v429.67h-269.1z" transform="translate(-286.45 -290.01)"/>'
-            '<text style="font-size:30px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-231.45 -300.01)"><tspan x="315.868" style="fill:#707070" y="372.242">GETME.',unicode"🍕",'</tspan></text>'
-            '<text style="font-size:9px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -282.01)"><tspan x="315.868" style="fill:#707070" y="374.242">YOUR FAV DIGITAL PIZZA HOUSE</tspan></text>'
-            '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="375.242">CHK: ',Strings.toString(_tokenId),'</tspan></text>'
-            '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="385.242">',toReadableDate._daysToDate(currentMemo.timestamp),'</tspan></text>'
-            '<text style="font-size:7px;letter-spacing:0;word-spacing:0;line-height:125%;fill:#707070" xml:space="preserve" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" style="fill:#707070" y="395.242">NAME: ',currentMemo.name,'</tspan></text>'
-            '<text style="font-size:13.109px;letter-spacing:0;line-height:125%;word-spacing:0;fill:#707188" xml:space="preserve" y="328.534" x="311.919" transform="translate(-246.45 -288.01)">'
+            '<text style="font-size:30px;fill:#707070"  y="365.242" x="315.868" transform="translate(-231.45 -300.01)">GETME.',unicode"🍕",'</text>'
+            '<text style="font-size:9px;fill:#707070"  y="365.242" x="315.868" transform="translate(-243.45 -282.01)">YOUR FAV DIGITAL PIZZA HOUSE</text>'
+            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="375.242">CHK: ',Strings.toString(_tokenId),'</tspan></text>'
+            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="385.242">',toReadableDate._daysToDate(currentMemo.timestamp),'</tspan></text>'
+            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="395.242">NAME: ',currentMemo.name,'</tspan></text>'
+            '<text style="font-size:13.109px;fill:#707188"  y="328.534" x="311.919" transform="translate(-246.45 -288.01)">'
                 '<tspan x="313.919" y="394.441">--------------------------</tspan>'
                 '<tspan x="311.919" y="454.712">Article</tspan>'
                 '<tspan x="425.919" y="454.712">Amount</tspan>'
