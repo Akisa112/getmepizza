@@ -45,6 +45,12 @@ FANTOM TESTNET
 
 ## HACKATHON NOTES FOR MORALIS JUDGES:
 
+Built with these tracks in mind:
+
+- Polygon: ReFi, Best UX.
+- Binance: Social & Entertainment.
+- Fantom: DeFi++.
+
 Moralis functions have all been placed in /pages/libs/moralis.ts as exports/hooks.
 
 Moralis EVM API is used:
@@ -52,3 +58,9 @@ Moralis EVM API is used:
 1. To upload profile images to IPFS. (/pages/admin.tsx & /pages/enter.tsx)
 2. To get memo structs Array for creator from smart contract. (/pages/components/Supporters.tsx)
 3. To get withdrawable tip balance for creator from smart contract. (/pages/dashboard.tsx)
+
+![getmepizza page](https://i.imgur.com/fqWIdte.png)
+
+![getmepizza dashboard](https://i.imgur.com/qUmxrPh.png)
+
+![getmepizza admin](https://i.imgur.com/jBZSNgT.png)
