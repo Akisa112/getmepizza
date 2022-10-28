@@ -20,7 +20,9 @@ yarn dev
 
 ---
 
-Get Me Pizza is a social tipping full stack application that uses Next, Firebase, Moralis & Tailwind built during the Moralis x Google Defining Defi Hackathon.
+Get Me Pizza is a social tipping full stack application built during the Moralis x Google Defining Defi Hackathon.
+
+![getmepizza homepage screenshot](https://i.imgur.com/PHTDDlq.png)
 
 ## BUILT WITH
 
@@ -45,4 +47,8 @@ FANTOM TESTNET
 
 Moralis functions have all been placed in /pages/libs/moralis.ts as exports/hooks.
 
-Moralis EVM API is used: 1. To upload profile images to IPFS. (/pages/admin.tsx & /pages/enter.tsx) 2. To get memo structs Array for creator from smart contract. (/pages/components/Supporters.tsx) 3. To get withdrawable tip balance for creator from smart contract. (/pages/dashboard.tsx)
+Moralis EVM API is used:
+
+1. To upload profile images to IPFS. (/pages/admin.tsx & /pages/enter.tsx)
+2. To get memo structs Array for creator from smart contract. (/pages/components/Supporters.tsx)
+3. To get withdrawable tip balance for creator from smart contract. (/pages/dashboard.tsx)
