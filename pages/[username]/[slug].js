@@ -92,17 +92,20 @@ export default function Post(props) {
       </Head>
     <main className='flex flex-col min-h-[calc(100vh-163px)] justify-between'>
  
-      <div className='flex-1'>
+      <div className='flex-1 mb-8'>
         <UserCard  user={props.user}/>
         <section className='md:max-w-3xl md:mx-auto'>
           <PostContent post={post} />
           <div className='-mt-20 text-right mr-4'>
           <AuthCheck  fallback={
             <Link href="/enter">
-              <button className='font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'>🍕 Sign Up</button>
+              <button className='mr-6 font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'>🍕 Sign Up</button>
             </Link>
           }>
+            <div className='mx-8' >
             <HeartButton  postRef={postRef}/>
+          </div>
+            
           </AuthCheck>
           </div>
           

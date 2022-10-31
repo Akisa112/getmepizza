@@ -162,14 +162,14 @@ export function Supporters(user) {
   );
 
   return (
-    <div className='mt-8 w-[450px]'>
+    <div className='mt-8 md:w-[450px]'>
       <h4 className='font-CircularMedium text-left mx-4 mt-4 mb-3 text-gray-500 '>
         RECENT SUPPORTERS
       </h4>
-      <div className='flex justify-end mx-2 mb-5 dark:text-black'>
+      <div className='flex justify-end mx-4 mb-5 dark:text-black'>
         <button
           disabled={chain === "BSC Testnet"}
-          className='font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-yellow-300 disabled:ring-2  md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          className='mr-1 font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-yellow-300 disabled:ring-2  md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           onClick={() => {
             changeChains("BSC Testnet");
           }}
@@ -181,7 +181,7 @@ export function Supporters(user) {
         </button>
         <button
           disabled={chain === "Polygon Mumbai"}
-          className='font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          className='mx-1 font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           onClick={() => {
             changeChains("Polygon Mumbai");
           }}
@@ -194,7 +194,7 @@ export function Supporters(user) {
 
         <button
           disabled={chain === "Fantom Testnet"}
-          className='font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+          className='ml-1 font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           onClick={() => {}}
         >
           <span className='text-xs mr-2 align-bottom '>
@@ -204,11 +204,11 @@ export function Supporters(user) {
         </button>
       </div>
 
-      <div className='h-[310px] flex flex-col justify-between'>
+      <div className=' flex flex-col justify-between'>
         <ul>{memsLis.length > 0 ? memsLis : noMemsLis}</ul>
 
         {memsLis.length > 0 && (
-          <div className=' flex justify-center'>
+          <div className=' flex justify-around'>
             <button
               disabled={start}
               className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all dark:text-black'

@@ -72,7 +72,7 @@ export default function UserProfile({ user, posts }) {
           </div>
         ) : (
           <div className='md:flex md:mx-auto justify-center'>
-            <div className='md:w-[24rem]'>
+            <div className='mx-1 mb-8 md:w-[24rem]'>
               <PostFeed posts={posts} admin={false} />
               {posts.length === 0 && noPosts}
             </div>

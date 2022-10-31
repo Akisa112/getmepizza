@@ -14,23 +14,39 @@ import Link from "next/link";
 import { auth } from "../libs/firebase";
 import { useRouter } from "next/router";
 
-export default function MobileNav(username) {
+export default function MobileNav(props) {
   const router = useRouter();
-
+  const username = props.username;
+  const closeNav = props.closenav;
+  console.log(props);
   return (
     <div className='m-8 font-CircularMedium mt-16 dark:text-slate-50'>
       <ul className='items-center justify-center space-y-4  '>
         <li className='text-sm flex'>
           <BiHome className='mr-2 text-lg' />
           <Link className='' href='/dashboard'>
-            <a className=' hover:text-orange-500 transition-all'>Dashboard</a>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              Dashboard
+            </a>
           </Link>
         </li>
 
         <li className='text-sm flex'>
           <AiOutlineLayout className='mr-2 text-lg' />
-          <Link className='' href={`/${username.username}`}>
-            <a className=' hover:text-orange-500 transition-all'>View page</a>
+          <Link className='' href={`/${username}`}>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              View page
+            </a>
           </Link>
           <HiOutlineExternalLink className='ml-2' />
         </li>
@@ -42,7 +58,14 @@ export default function MobileNav(username) {
         <li className='text-sm flex'>
           <RiArticleLine className='mr-2 text-lg' />
           <Link className='' href='/posts'>
-            <a className=' hover:text-orange-500 transition-all'>Posts</a>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              Posts
+            </a>
           </Link>
         </li>
       </ul>
@@ -53,7 +76,14 @@ export default function MobileNav(username) {
         <li className='text-sm flex'>
           <MdPersonOutline className='mr-2 text-lg' />
           <Link className='' href='/admin'>
-            <a className=' hover:text-orange-500 transition-all'>My Account</a>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              My Account
+            </a>
           </Link>
         </li>
       </ul>
@@ -65,7 +95,14 @@ export default function MobileNav(username) {
             className='cursor-pointer'
             onClick={() => router.push(`./`).then(() => auth.signOut())}
           >
-            <a className=' hover:text-orange-500 transition-all'>Logout</a>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              Logout
+            </a>
           </p>
         </li>
       </ul>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../libs/context";
 
 import { FaHamburger } from "react-icons/fa";
@@ -11,11 +11,16 @@ export default function NavBar(props) {
   const { username, userPhoto } = useContext(UserContext);
 
   const [mobileNavOpen, setMovbileNavOpen] = useState(false);
+
+  const closeNav = (arg) => {
+    setMovbileNavOpen(arg);
+  };
+
   const changeMode = props.changeMode;
   const darkMode = props.darkMode;
 
   return (
-    <main className=' bg-slate-50 pt-10 pb-10 font-CircularMedium dark:bg-zinc-900'>
+    <main className=' bg-slate-50  md:pt-10 pb-10 font-CircularMedium dark:bg-zinc-900'>
       <section className='px-3 py-4  md:px-5 md:bg-white md:dark:bg-zinc-800 lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (
@@ -64,6 +69,12 @@ export default function NavBar(props) {
                     />
                   </Link>
                 </li>
+                <button
+                  className='ml-2 p-2 text-gray-700 dark:text-white rounded-md outline-none focus:border-gray-400 hover:scale-105 transition-all'
+                  onClick={() => changeMode(!darkMode)}
+                >
+                  {darkMode ? <FiMoon /> : <FiSun />}
+                </button>
                 <div>
                   <div
                     className={`absolute z-10 top-0 right-0 w-2/3 text-left h-full bg-white dark:bg-zinc-800 md:w-1/4 ${
@@ -77,7 +88,7 @@ export default function NavBar(props) {
                       <AiOutlineClose />
                     </button>
 
-                    <MobileNav username={username} />
+                    <MobileNav closenav={closeNav} username={username} />
                   </div>
                 </div>
               </div>
@@ -87,40 +98,40 @@ export default function NavBar(props) {
               <>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/faq"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer '>
+                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       FAQ
                     </a>
                   </Link>
                 </li>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/explore"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer '>
+                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       Explore
                     </a>
                   </Link>
                 </li>
-                <li className='mx-2 hover:scale-105 transition-all'>
+                <li className='mr-2 hover:scale-105 transition-all md:mx-2'>
                   <Link href={"/enter"}>
                     <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer '>
                       Sign in
                     </a>
                   </Link>
                 </li>
-                <li className='mx-2 hover:scale-105 transition-all'>
+                <li className='hover:scale-105 transition-all md:mx-2'>
                   <Link href={"/enter"}>
                     <a className='bg-yellow-300 rounded-full text-sm px-4  py-2 cursor-pointer dark:text-black'>
                       Sign up
                     </a>
                   </Link>
                 </li>
+                <button
+                  className='ml-2 p-2 text-gray-700 dark:text-white rounded-md outline-none focus:border-gray-400 hover:scale-105 transition-all'
+                  onClick={() => changeMode(!darkMode)}
+                >
+                  {darkMode ? <FiMoon /> : <FiSun />}
+                </button>
               </>
             )}
-            <button
-              className='ml-2 p-2 text-gray-700 dark:text-white rounded-md outline-none focus:border-gray-400 hover:scale-105 transition-all'
-              onClick={() => changeMode(!darkMode)}
-            >
-              {darkMode ? <FiMoon /> : <FiSun />}
-            </button>
           </ul>
         </nav>
       </section>

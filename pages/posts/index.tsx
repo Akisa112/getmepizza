@@ -93,7 +93,7 @@ function CreateNewPost() {
   };
 
   return (
-    <form className='mx-2 text-center mt-24 mb-8' onSubmit={createPost}>
+    <form className='mx-4 text-center md:mt-24 mb-8' onSubmit={createPost}>
       <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800  text-lg border-2 border-black dark:border-zinc-300 lg:max-w-lg lg:mx-auto'>
         <input
           value={title}

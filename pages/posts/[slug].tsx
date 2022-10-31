@@ -31,9 +31,9 @@ function PostManager() {
     <main className='min-h-[calc(100vh-163px)]  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (
         <>
-          <div className='mt-5 ml-4 '>
+          <div className='md:mt-6 ml-4 '>
             <Link href='../posts'>
-              <button className='flex font-CircularMedium bg-gray-200  rounded-full mt-2 py-2 w-32 mx-2 md:max-w-xs hover:scale-105 transition-all dark:text-black'>
+              <button className='flex font-CircularMedium bg-gray-200  rounded-full py-2 w-32 mx-2 md:max-w-xs hover:scale-105 transition-all dark:text-black'>
                 <AiOutlineArrowLeft className='text-lg mt-0.5 mr-5 ml-4' />
                 Posts
               </button>

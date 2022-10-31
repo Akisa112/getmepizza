@@ -4,6 +4,7 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
+  useNetwork,
 } from "wagmi";
 import { useState, useEffect, useContext } from "react";
 import debounce from "lodash.debounce";
@@ -22,6 +23,7 @@ export default function BuyPizza(user) {
   const [finalMemo, setFinalMemo] = useState(
     "...just bought you a pizza frend."
   );
+  const [slices, setSlices] = useState(1);
 
   const { setSuccesfullTx } = useContext(successTxContext);
 
@@ -38,6 +40,17 @@ export default function BuyPizza(user) {
     debouncedDonatorName(donaterName);
     debouncedMemo(memo);
   }, [donaterName, memo]);
+
+  const { chain } = useNetwork();
+  let value = 0;
+  try {
+    console.log(chain.name);
+    if (chain.name === "Polygon Mumbai") {
+      value = 5;
+    } else if (chain.name === "BSC Testnet") {
+      value = 0.015;
+    }
+  } catch (error) {}
 
   const {
     config,
@@ -82,13 +95,13 @@ export default function BuyPizza(user) {
     ],
     functionName: "buyPizza",
     overrides: {
-      value: ethers.utils.parseEther("0.01"),
+      value: ethers.utils.parseEther((value * slices).toString()),
     },
     args: [
       user.user.ethAddress,
       finalDonaterName,
       finalMemo,
-      BigNumber.from(5),
+      BigNumber.from(slices),
       true,
     ],
     enabled: true,
@@ -110,8 +123,13 @@ export default function BuyPizza(user) {
     },
   });
 
+  let preppedError;
+  try {
+    preppedError = `${prepareError.data.message.substring(4, 40)}...`;
+  } catch (error) {}
+
   return (
-    <div className='mt-1  m-4 w-[400px] h-[530px] flex flex-col justify-center  border-2 dark:bg-zinc-800 border-gray-200 rounded-lg '>
+    <div className='mt-1  m-4   md:w-[400px] h-[530px] flex flex-col justify-center  border-2 dark:bg-zinc-800 border-gray-200 rounded-lg '>
       <h4 className='font-CircularMedium text-2xl'>
         Buy <span className='text-gray-500'>{user.user.displayName}</span> a
         pizza
@@ -119,18 +137,42 @@ export default function BuyPizza(user) {
       <div className='mt-6 py-5 m-4  border-2 border-gray-200 rounded-lg bg-orange-50 dark:bg-zinc-800 dark:border-slate-300'>
         <p className='font-Montserrat text-gray-500'>
           <span className='text-5xl align-middle'>🍕</span> x
-          <span className='ml-4 px-4 text-orange-600 py-2 mx-1 border-2 rounded-full'>
+          <button
+            disabled={slices === 1}
+            onClick={() => {
+              setSlices(1);
+            }}
+            className=' px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
+          >
             1
-          </span>
-          <span className='px-4 text-orange-600 py-2 mx-1 border-2 rounded-full'>
+          </button>
+          <button
+            disabled={slices === 2}
+            onClick={() => {
+              setSlices(2);
+            }}
+            className=' px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
+          >
             2
-          </span>
-          <span className='px-4 text-orange-600 py-2 mx-1 border-2 rounded-full'>
+          </button>
+          <button
+            disabled={slices === 5}
+            onClick={() => {
+              setSlices(5);
+            }}
+            className=' px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
+          >
             5
-          </span>
-          <span className='px-3 text-orange-600 py-2 mx-1 border-2 rounded-full'>
+          </button>
+          <button
+            disabled={slices === 10}
+            onClick={() => {
+              setSlices(10);
+            }}
+            className=' px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
+          >
             10
-          </span>
+          </button>
         </p>
       </div>
 
@@ -163,7 +205,7 @@ export default function BuyPizza(user) {
           <button
             disabled={!write || txLoading || isLoading}
             type='submit'
-            className='font-CircularMedium bg-yellow-300 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'
+            className='font-CircularMedium bg-yellow-300 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black disabled:scale-100'
           >
             {isLoading && (
               <>
@@ -212,6 +254,9 @@ export default function BuyPizza(user) {
             {!isLoading && !txLoading && "Support"}
           </button>
         )}
+        <p className='mt-4 uppercase text-xs font-CircularMedium text-red-600'>
+          {preppedError}
+        </p>
       </form>
     </div>
   );

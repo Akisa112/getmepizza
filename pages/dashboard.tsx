@@ -253,12 +253,12 @@ export default function Dashboard({}) {
             </div>
           )}
 
-          <div className='mb-4'>
+          <div className='mb-8'>
             <ConnectButton />
           </div>
 
           <hr />
-          <div className='mt-10 m-5'>
+          {/* <div className='mt-10 m-5'>
             <p className='text-gray-500'>
               getme.pizza is currently invite only...
             </p>
@@ -279,7 +279,7 @@ export default function Dashboard({}) {
                 Send Invite
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       </AuthCheck>
       <PoweredBy />
