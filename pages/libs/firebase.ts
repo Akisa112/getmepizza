@@ -39,7 +39,7 @@ export const increment = firebase.firestore.FieldValue.increment;
     
     return userDoc;
   } else {
-    return (!username);
+    return 
   }
   
 }
