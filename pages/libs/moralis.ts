@@ -84,7 +84,7 @@ export async function getMemos(ethAddress, chosenChain) {
 	},];
 
     const functionName = 'getMemos';
-    const address = '0x01A6D1Daa96318c5E65Fb313337D91B540d4F533';
+    const address = '0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43';
   
     let chain; 
     if (chosenChain === 'Polygon Mumbai') {
@@ -93,22 +93,27 @@ export async function getMemos(ethAddress, chosenChain) {
     if (chosenChain === 'BSC Testnet') {
         chain = EvmChain.BSC_TESTNET
     }
+
     ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
 
     await Moralis.start({
         apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
         // ...and any other configuration
     });
-    console.log(ethAddress);
-    const response = await Moralis.EvmApi.utils.runContractFunction({
-        abi,
-        functionName,
-        address,
-        chain,
-        params: {_creator: ethAddress}
-    });
     
-    return(response.result);
+	if (ethAddress !== null) {
+		const response = await Moralis.EvmApi.utils.runContractFunction({
+			abi,
+			functionName,
+			address,
+			chain,
+			params: {_creator: ethAddress}
+		});
+		
+
+		console.log('Fetched Memos - Moralis');
+		return(response.result);
+	}
 }
 
 export async function getEarnings(ethAddress, chosenChain) {
@@ -134,7 +139,7 @@ export async function getEarnings(ethAddress, chosenChain) {
 	}];
 
     const functionName = 'creatorsPizzaMoney';
-    const address = '0x01A6D1Daa96318c5E65Fb313337D91B540d4F533';
+    const address = '0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43';
   
     let chain; 
     if (chosenChain === 'Polygon Mumbai') {
@@ -149,7 +154,7 @@ export async function getEarnings(ethAddress, chosenChain) {
         apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
         // ...and any other configuration
     });
-    console.log(ethAddress);
+    
 
     if (ethAddress !== null) {
         const response = await Moralis.EvmApi.utils.runContractFunction({
@@ -159,8 +164,9 @@ export async function getEarnings(ethAddress, chosenChain) {
             chain,
             params: {'': ethAddress}
         });
-        
+        console.log('Fetched Earnings - Moralis');
         return(response.result);
+
     }
     
     return console.log('no eth addy')

@@ -21,6 +21,7 @@ function PostItem({ post, admin }) {
             <a>{post.title}</a>
           </Link>
         </h2>
+
         {/* If admin view, show extra controls for user */}
         {admin && (
           <>
@@ -29,7 +30,7 @@ function PostItem({ post, admin }) {
             ) : (
               <p className='font-CircularMedium text-sm text-red-600'>Draft</p>
             )}
-            <button className='px-2 font-CircularMedium bg-gray-200 rounded-full   text-center  hover:scale-105 transition-all'>
+            <button className='px-2 font-CircularMedium bg-gray-200 dark:bg-zinc-800 rounded-full   text-center  hover:scale-105 transition-all'>
               <Link href={`/posts/${post.slug}`}>
                 <a>Edit</a>
               </Link>
@@ -37,14 +38,15 @@ function PostItem({ post, admin }) {
           </>
         )}
       </div>
+      <p className='mt-2 mb-1 h-[72px] line-clamp-3'>{post.context}</p>
 
       <Link href={`/${post.username}`}>
-        <a className='text-gray-600 hover:text-orange-500 transition-all'>
+        <a className='text-gray-600 dark:text-zinc-300 hover:text-orange-500 transition-all'>
           <small>By @{post.username}</small>
         </a>
       </Link>
 
-      <footer className='flex justify-between text-gray-800'>
+      <footer className='flex justify-between text-gray-800 dark:text-zinc-400'>
         <p>
           {wordCount} words. {minutesToRead} min read
         </p>

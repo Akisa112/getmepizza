@@ -1,4 +1,5 @@
 
+import Head from 'next/head';
 import { firestore, getUserWithUsername, postToJSON } from '../libs/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import PostContent from '../components/PostContent';
@@ -68,16 +69,37 @@ export default function Post(props) {
 
   const post = realtimePost || props.post;
   return (
-    <main className='flex flex-col min-h-[calc(100vh-107px)] justify-between'>
+    <>
+    <Head>
+        <title>{post.title} | @{post.username}</title>
+        <meta name='title' content={`${post.title} | @${post.username}`} />
+        <meta name='description' content={post.context.substring(0,159)} />
+
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content={`https://www.getme.pizza/${post.slug}`} />
+        <meta property='og:title' content={`${post.title} | @${post.username}`} />
+        <meta property='og:description' content={post.context.substring(0,159)} />
+        <meta property='og:image' content={`../api/ogpages?name=${post.title}&link=${post.slug}`} />
+        <meta property='twitter:card' content='summary_large_image' />
+        <meta property='twitter:url' content={`https://www.getme.pizza/${post.slug}`} />
+        <meta property='twitter:title' content={`${post.title} | @${post.username}`} />
+        <meta property='twitter:description' content={post.context.substring(0,159)} />
+        <meta
+          property='twitter:image'
+          content={`../api/ogpages?name=${post.title}&link=${post.slug}`}
+        />
+        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' /> 
+      </Head>
+    <main className='flex flex-col min-h-[calc(100vh-163px)] justify-between'>
  
       <div className='flex-1'>
         <UserCard  user={props.user}/>
         <section className='md:max-w-3xl md:mx-auto'>
           <PostContent post={post} />
-          <div className='-mt-10 text-right mr-4'>
+          <div className='-mt-20 text-right mr-4'>
           <AuthCheck  fallback={
             <Link href="/enter">
-              <button>💗 Sign Up</button>
+              <button className='font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'>🍕 Sign Up</button>
             </Link>
           }>
             <HeartButton  postRef={postRef}/>
@@ -90,5 +112,6 @@ export default function Post(props) {
       <PoweredBy/>
 
     </main>
+    </>
   );
 }

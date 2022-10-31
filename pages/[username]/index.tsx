@@ -1,5 +1,6 @@
 import { getUserWithUsername, postToJSON } from "../libs/firebase";
 import UserProfile from "../components/UserProfile";
+import Head from "next/head";
 
 import PoweredBy from "../components/poweredby";
 
@@ -36,10 +37,47 @@ export async function getServerSideProps({ query }) {
 
 export default function UserProfilePage({ user, posts }) {
   return (
-    <main className='h-[calc(100vh-107px)] flex flex-col justify-between'>
-      <UserProfile user={user} posts={posts} />
+    <>
+      <Head>
+        <title>{user.displayName}</title>
+        <meta name='title' content={user.displayName} />
+        <meta name='description' content={user.about.substring(0, 159)} />
 
-      <PoweredBy />
-    </main>
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:url'
+          content={`https://www.getme.pizza/${user.username}}`}
+        />
+        <meta property='og:title' content={user.displayName} />
+        <meta
+          property='og:description'
+          content={user.about.substring(0, 159)}
+        />
+        <meta
+          property='og:image'
+          content={`../api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
+        />
+        <meta property='twitter:card' content='summary_large_image' />
+        <meta
+          property='twitter:url'
+          content={`https://www.getme.pizza/${user.username}}`}
+        />
+        <meta property='twitter:title' content={user.displayName} />
+        <meta
+          property='twitter:description'
+          content={user.about.substring(0, 159)}
+        />
+        <meta
+          property='twitter:image'
+          content={`../api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
+        />
+        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
+      </Head>
+      <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
+        <UserProfile user={user} posts={posts} />
+
+        <PoweredBy />
+      </main>
+    </>
   );
 }

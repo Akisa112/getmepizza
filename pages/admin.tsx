@@ -95,11 +95,11 @@ export default function AdminPage({}) {
       website,
     });
 
-    toast.success("Post updated successfully!");
+    toast.success("Updated successfully!");
   };
 
   return (
-    <main className='h-[calc(100vh-107px)] flex flex-col justify-between'>
+    <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />
@@ -109,23 +109,23 @@ export default function AdminPage({}) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className='mx-4 flex justify-between'>
-            <div className='w-16 mb-6 border-none'>
+            <div className='w-16 mb-6 border-none  cursor-none'>
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
                   <img
-                    className='rounded-full border-dashed border-gray-800 border-2 cursor-pointer'
+                    className='w-[65px] h-[65px] rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
                     src={userPhotoURL}
                   />
                 ) : (
                   <div className='relative'>
                     <img
-                      className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 border-2 cursor-pointer'
+                      className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
                       src={userPhotoURL}
                     />
                     {userEditedPhotoURL && (
                       <img
-                        className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 border-2 cursor-pointer'
+                        className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
                         src={userEditedPhotoURL}
                       />
                     )}
@@ -135,6 +135,7 @@ export default function AdminPage({}) {
                   </div>
                 )}
               </div>
+              <p className='mt-2 text-xs w-[200px]'>Drag 'n drop image.</p>
             </div>
 
             <div>
@@ -145,9 +146,9 @@ export default function AdminPage({}) {
             </div>
           </div>
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>Display Name</h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800  mb-4 text-lg border-2 border-black dark:border-slate-300  lg:mx-auto'>
             <input
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='text'
               placeholder={""}
               ref={register}
@@ -159,9 +160,9 @@ export default function AdminPage({}) {
           </p>
 
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>About</h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black  lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-black dark:border-slate-300  lg:mx-auto'>
             <textarea
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               rows={4}
               placeholder={""}
               {...register("about", {
@@ -178,9 +179,9 @@ export default function AdminPage({}) {
           <h4 className='font-Montserrat mb-3 mx-2 text-left '>
             Website or social link
           </h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black  lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-black dark:border-slate-300  lg:mx-auto'>
             <input
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='url'
               placeholder={""}
               {...register("website", { maxLength: 80 })}
@@ -193,9 +194,9 @@ export default function AdminPage({}) {
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
             EVM Address (ETH, MATIC, BSC, ETC)
           </h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black  lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-black dark:border-slate-300  lg:mx-auto'>
             <input
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='text'
               placeholder={""}
               ref={register}
@@ -211,7 +212,7 @@ export default function AdminPage({}) {
 
           <button
             type='submit'
-            className=' bg-yellow-300 rounded-full mt-6 py-3 h-[50px] min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all '
+            className=' bg-yellow-300 rounded-full mt-6 py-3 h-[50px] min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'
           >
             Save Changes
           </button>

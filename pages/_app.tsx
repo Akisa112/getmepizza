@@ -4,11 +4,21 @@ import { UserContext } from "./libs/context";
 import { useUserData } from "./libs/hooks";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Chain } from "@rainbow-me/rainbowkit";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  DisclaimerComponent,
+} from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import NavBar from "./components/navbar";
+
+import { useState, useEffect } from "react";
+import Router from "next/router";
+import PageLoader from "./components/PageLoader";
+
+import { motion } from "framer-motion";
 
 const binanceChain: Chain = {
   id: 97,
@@ -33,32 +43,28 @@ const binanceChain: Chain = {
 };
 
 const fantomChain: Chain = {
-  id: 250,
-  name: "Fantom Opera",
-  network: "Fantom",
+  id: 4002,
+  name: "Fantom Testnet",
+  network: "Fantom Testnet",
   iconUrl: "https://cryptologos.cc/logos/fantom-ftm-logo.png",
   iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: "Fantom",
+    name: "Fantom Testnet",
     symbol: "FTM",
   },
   rpcUrls: {
-    default: "https://bsc-dataseed.binance.org/",
+    default: "https://rpc.testnet.fantom.network/",
   },
   blockExplorers: {
-    default: { name: "BSCScan", url: "https://bscscan.com" },
-    etherscan: { name: "BSCScan", url: "https://bscscan.com" },
+    default: { name: "FTMScan", url: "https://testnet.ftmscan.com/" },
+    etherscan: { name: "FTMScan", url: "https://testnet.ftmscan.com/" },
   },
-  testnet: false,
+  testnet: true,
 };
 
 const { chains, provider } = configureChains(
-  [
-    chain.polygonMumbai,
-    binanceChain,
-    // chain.mainnet, binanceChain, chain.polygon, fantomChain,
-  ],
+  [chain.polygonMumbai, binanceChain, fantomChain],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     publicProvider(),
@@ -66,30 +72,93 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
+  appName: "GetMe.Pizza",
   chains,
 });
 
 const wagmiClient = createClient({
-  autoConnect: true,
+  autoConnect: false,
   connectors,
   provider,
 });
 
-function MyApp({ Component, pageProps }) {
+const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
+  <Text>
+    By connecting your wallet, you agree to the{" "}
+    <Link href='https://getme.pizza/terms'>Terms of Service</Link> and
+    acknowledge you have read and understand the protocol{" "}
+    <Link href='https://github.com/elonsdev/getmepizza-dapp/blob/main/contract/getmepizza.sol'>
+      Disclaimer
+    </Link>
+  </Text>
+);
+
+function MyApp({ Component, pageProps, router }) {
+  const [darkMode, setDarkMode] = useState(false);
+  const changeMode = (arg) => {
+    setDarkMode(arg);
+  };
+
   const userData = useUserData();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    Router.events.on("routeChangeStart", () => setLoading(true));
+    Router.events.on("routeChangeComplete", () => setLoading(false));
+    Router.events.on("routeChangeError", () => setLoading(false));
+    return () => {
+      Router.events.off("routeChangeStart", () => setLoading(true));
+      Router.events.off("routeChangeComplete", () => setLoading(false));
+      Router.events.off("routeChangeError", () => setLoading(false));
+    };
+  }, [Router.events]);
+
   return (
-    <>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <UserContext.Provider value={userData}>
-            <NavBar />
-            <Component {...pageProps} />
-            <Toaster />
-          </UserContext.Provider>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </>
+    <div className={darkMode ? "dark " : ""}>
+      <div className=' dark:bg-zinc-900 dark:text-slate-50 min-h-screen'>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider
+            coolMode
+            chains={chains}
+            appInfo={{
+              appName: "GetMe.🍕",
+              learnMoreUrl: "https://getme.pizza/faq",
+              disclaimer: Disclaimer,
+            }}
+          >
+            <UserContext.Provider value={userData}>
+              <NavBar changeMode={changeMode} darkMode={darkMode} />
+
+              <motion.div
+                key={router.route}
+                initial='initial'
+                animate='animate'
+                transition={{
+                  duration: 0.6,
+                }}
+                variants={{
+                  initial: {
+                    opacity: 0,
+                  },
+                  animate: {
+                    opacity: 1,
+                  },
+                }}
+              >
+                {loading ? (
+                  <PageLoader />
+                ) : (
+                  <>
+                    <Component {...pageProps} />{" "}
+                  </>
+                )}
+              </motion.div>
+
+              <Toaster />
+            </UserContext.Provider>
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </div>
+    </div>
   );
 }
 

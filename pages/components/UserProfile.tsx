@@ -9,8 +9,21 @@ export const successTxContext = createContext(null);
 
 // UI component for user profile
 export default function UserProfile({ user, posts }) {
+  console.log(posts);
   const [page, setPage] = useState("HOME");
   const [successfullTx, setSuccesfullTx] = useState(false);
+
+  console.log(posts);
+
+  const noPosts = (
+    <div className="className='mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800">
+      <h1 className='font-CircularMedium w-[250px] mx-auto'>
+        {user.displayName} has no posts yet... <br />
+        <br />
+        Buy {user.displayName} a slice to motivate them to post!
+      </h1>
+    </div>
+  );
 
   return (
     <div className='text-center mt-12 md:max-w-4xl md:mx-auto'>
@@ -30,13 +43,13 @@ export default function UserProfile({ user, posts }) {
         <ul className='flex mx-6 justify-center'>
           <li
             onClick={() => setPage("HOME")}
-            className='mx-4 font-CircularMedium text-xl text-gray-500 hover:underline hover:underline-offset-8 active:underline '
+            className='mx-4 font-CircularMedium text-xl text-gray-500 cursor-pointer hover:underline hover:underline-offset-8 active:underline '
           >
             Home
           </li>
           <li
             onClick={() => setPage("POSTS")}
-            className='mx-4 font-CircularMedium text-xl text-gray-500 hover:underline hover:underline-offset-8 active:underline'
+            className='mx-4 font-CircularMedium text-xl text-gray-500 cursor-pointer hover:underline hover:underline-offset-8 active:underline'
           >
             Posts
           </li>
@@ -47,7 +60,7 @@ export default function UserProfile({ user, posts }) {
           <div className='md:flex md:mx-auto justify-center'>
             <BuyPizza className='' user={user} />
             <div className='md:w-1/2 '>
-              <div className='mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 '>
+              <div className='mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
                 <p>{user.about}</p>
                 <br />
                 <Link href={user.website}>
@@ -61,6 +74,7 @@ export default function UserProfile({ user, posts }) {
           <div className='md:flex md:mx-auto justify-center'>
             <div className='md:w-[24rem]'>
               <PostFeed posts={posts} admin={false} />
+              {posts.length === 0 && noPosts}
             </div>
             <BuyPizza className='w-full' user={user} />
           </div>

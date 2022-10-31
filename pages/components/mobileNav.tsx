@@ -18,7 +18,7 @@ export default function MobileNav(username) {
   const router = useRouter();
 
   return (
-    <div className='m-8 font-CircularMedium mt-16'>
+    <div className='m-8 font-CircularMedium mt-16 dark:text-slate-50'>
       <ul className='items-center justify-center space-y-4  '>
         <li className='text-sm flex'>
           <BiHome className='mr-2 text-lg' />
@@ -63,7 +63,7 @@ export default function MobileNav(username) {
           <RiLogoutBoxRLine className='mr-2 text-lg' />
           <p
             className='cursor-pointer'
-            onClick={() => auth.signOut().then(() => router.push(`./`))}
+            onClick={() => router.push(`./`).then(() => auth.signOut())}
           >
             <a className=' hover:text-orange-500 transition-all'>Logout</a>
           </p>

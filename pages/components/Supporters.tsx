@@ -15,7 +15,7 @@ export function Supporters(user) {
   const [memsMumbai, setMemsMumbai] = useState([]);
   const [memsBinance, setMemsBinance] = useState([]);
   const [memsFantom, setMemsFantom] = useState([]);
-  const [chain, setChain] = useState("Polygon Mumbai");
+  const [chain, setChain] = useState("BSC Testnet");
 
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
@@ -50,13 +50,15 @@ export function Supporters(user) {
     if (user.user.ethAddress) {
       memoArrayPoly = await getMemos(user.user.ethAddress, "Polygon Mumbai");
       setMemsMumbai(memoArrayPoly.reverse());
-      setMems(memoArrayPoly);
-      setPages(Math.ceil(memoArrayPoly.length / memePerPage));
+      if (chain === "Polygon Mumbai") {
+        setMems(memoArrayPoly);
+        setPages(Math.ceil(memoArrayPoly.length / memePerPage));
 
-      if (Math.ceil(memoArrayPoly.length / memePerPage) === 1) {
-        setEnd(true);
-      } else {
-        setEnd(false);
+        if (Math.ceil(memoArrayPoly.length / memePerPage) === 1) {
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
       }
     }
   };
@@ -66,22 +68,22 @@ export function Supporters(user) {
     if (user.user.ethAddress) {
       memoArrayBinance = await getMemos(user.user.ethAddress, "BSC Testnet");
       setMemsBinance(memoArrayBinance.reverse());
-      setPages(Math.ceil(memoArrayBinance.length / memePerPage));
-      if (Math.ceil(memoArrayBinance.length / memePerPage) === 1) {
-        setEnd(true);
-      } else {
-        setEnd(false);
+      if (chain === "BSC Testnet") {
+        setMems(memoArrayBinance);
+        setPages(Math.ceil(memoArrayBinance.length / memePerPage));
+        if (Math.ceil(memoArrayBinance.length / memePerPage) === 1) {
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
       }
     }
   };
 
   useEffect(() => {
-    if (memsBinance.length === 0) {
-      memosBinance();
-    }
-    if (memsMumbai.length === 0) {
-      memosPoly();
-    }
+    memosBinance();
+
+    memosPoly();
   }, []);
 
   useEffect(() => {
@@ -131,7 +133,7 @@ export function Supporters(user) {
     .slice((page - 1) * memePerPage, page * memePerPage)
     .map((memo, i) => (
       <li
-        className='mt-1 mx-4 p-2  border-2 border-gray-200 rounded-lg bg-gray-100 '
+        className='mt-1 mx-4 p-2  border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
         key={"memo_" + i}
       >
         <div className=' flex justify-between'>
@@ -151,7 +153,7 @@ export function Supporters(user) {
     ));
 
   const noMemsLis = (
-    <div className="className='mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 '">
+    <div className='className=mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
       <h1 className='font-CircularMedium'>
         {user.user.displayName} has no tips yet on {chain} yet... <br />
         Buy {user.user.displayName} a slice and make their day!
@@ -160,11 +162,11 @@ export function Supporters(user) {
   );
 
   return (
-    <div className='mt-8'>
+    <div className='mt-8 w-[450px]'>
       <h4 className='font-CircularMedium text-left mx-4 mt-4 mb-3 text-gray-500 '>
         RECENT SUPPORTERS
       </h4>
-      <div className='flex justify-end mx-2 mb-5'>
+      <div className='flex justify-end mx-2 mb-5 dark:text-black'>
         <button
           disabled={chain === "BSC Testnet"}
           className='font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-yellow-300 disabled:ring-2  md:max-w-xs md:mx-auto hover:scale-105 transition-all'
@@ -209,7 +211,7 @@ export function Supporters(user) {
           <div className=' flex justify-center'>
             <button
               disabled={start}
-              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all'
+              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105  transition-all dark:text-black'
               onClick={() => {
                 onPrevPage();
               }}
@@ -218,7 +220,7 @@ export function Supporters(user) {
             </button>
             <button
               disabled={end}
-              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+              className='font-CircularMedium bg-yellow-300 rounded-full mt-2 py-2 w-32 text-center disabled:bg-gray-200 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'
               onClick={() => {
                 onNextPage();
               }}

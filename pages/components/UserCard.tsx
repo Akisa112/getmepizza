@@ -17,7 +17,6 @@ export default function UserCard(user) {
           <i>@{user.user.username}</i>
         </Link>
       </p>
-      <p className='text-gray-500 text-sm'>{user.user.supporters} supporters</p>
     </div>
   );
 }

@@ -7,12 +7,17 @@ import { useEffect, useState, useCallback, useContext } from "react";
 import debounce from "lodash.debounce";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { useDropzone } from "react-dropzone";
+import { blobToBase64 } from "./libs/hooks";
+import { upLoadIPFS } from "./libs/moralis";
+import { BiCamera } from "react-icons/bi";
+import Pfp from "../public/defaultprofilepic.png";
 
 export default function Enter() {
   const { user, username } = useContext(UserContext);
 
   // If user exists route to dashboard page
-  if (user) {
+  if (username) {
     const router = useRouter();
     router.push(`/dashboard`);
   }
@@ -21,8 +26,8 @@ export default function Enter() {
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
   return (
-    <main className=' flex flex-col min-h-[calc(100vh-107px)] font-CircularMedium lg:max-w-5xl lg:mx-auto bg-slate-50'>
-      <div className='mx-auto text-center mt-20'>
+    <main className=' flex flex-col min-h-[calc(100vh-163px)] font-CircularMedium  bg-slate-50  dark:bg-zinc-900'>
+      <div className='mx-auto text-center mt-20 lg:max-w-5xl lg:mx-auto'>
         {user ? (
           !username ? (
             <UsernameForm />
@@ -30,7 +35,7 @@ export default function Enter() {
             <SignOutButton />
           )
         ) : (
-          <SignInButton />
+          <SignInButton username />
         )}
       </div>
       <div className='mt-auto'>
@@ -41,16 +46,23 @@ export default function Enter() {
 }
 
 // Sign in with Google button
-function SignInButton() {
+function SignInButton(username) {
   const router = useRouter();
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
-    router.push(`/dashboard`);
+    if (username) {
+      try {
+        const router = useRouter();
+        router.push(`/dashboard`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
     <button
-      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all'
+      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all dark:text-black'
       onClick={signInWithGoogle}
     >
       Sign in with <Image width={"18px"} height={"18px"} src={"/google.png"} />
@@ -81,12 +93,26 @@ function UsernameMessage({ username, isValid, loading, userNameIsEmpty }) {
 
 // Username form and logic to handle checking if username is available, submit and onchange events
 function UsernameForm() {
+  const { user, username } = useContext(UserContext);
   const [formValueUserName, setFormValueUserName] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userNameIsEmpty, setUserNameIsEmpty] = useState(false);
 
-  const { user, username } = useContext(UserContext);
+  const [userPhotoURL, setUserPhotoURL] = useState(Pfp);
+  const [userEditedPhotoURL, setUserEditedPhotoURL] = useState("");
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    try {
+      const data = await acceptedFiles[0];
+      const content = await blobToBase64(data);
+      const ipfsObject = await upLoadIPFS(content);
+      setUserEditedPhotoURL(ipfsObject);
+    } catch (error) {
+      alert(error);
+    }
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const {
     handleSubmit,
@@ -100,6 +126,7 @@ function UsernameForm() {
       setUserNameIsEmpty(true);
     } else {
       // Create refs for both documents
+
       const userDoc = firestore.doc(`users/${user.uid}`);
       const usernameDoc = firestore.doc(`usernames/${formValueUserName}`);
 
@@ -107,7 +134,7 @@ function UsernameForm() {
       const batch = firestore.batch();
       batch.set(userDoc, {
         username: formValueUserName,
-        photoURL: user.photoURL,
+        photoURL: userEditedPhotoURL ? userEditedPhotoURL : userPhotoURL.src,
         displayName: values.name,
         about: values.about,
         website: values.website,
@@ -161,14 +188,40 @@ function UsernameForm() {
 
   return (
     !username && (
-      <section>
+      <section className='w-[450px]'>
         <h1 className='text-3xl mb-16'>Complete your page</h1>
-
+        <div className='w-16 mb-6 border-none mx-auto cursor-none'>
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <Image
+                className='w-[65px] h-[65px] rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
+                src={userPhotoURL}
+              />
+            ) : (
+              <div className='relative'>
+                <Image
+                  className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                  src={userPhotoURL}
+                />
+                {userEditedPhotoURL && (
+                  <Image
+                    className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                    src={userEditedPhotoURL}
+                  />
+                )}
+                <div className='absolute top-5 left-5 p-1 bg-neutral-400 bg-opacity-80 rounded-full'>
+                  <BiCamera />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
         <form className='mx-4' onSubmit={handleSubmit(onSubmit)}>
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>Name</h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
-              className='w-full px-4'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='text'
               placeholder='name'
               {...register("name", { required: true, maxLength: 80 })}
@@ -181,10 +234,10 @@ function UsernameForm() {
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
             GetMe.Pizza link
           </h4>
-          <div className='mx-2 text-center py-2 px-4 rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+          <div className='mx-2 text-left py-2 px-4 rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <span>getme.pizza/</span>
             <input
-              className='border-none focus:ring-0'
+              className='border-none focus:ring-0  dark:bg-zinc-800'
               name='username'
               placeholder='yourname'
               value={formValueUserName}
@@ -199,9 +252,9 @@ function UsernameForm() {
           />
 
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>About</h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300  lg:max-w-lg lg:mx-auto'>
             <textarea
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               rows={4}
               placeholder='Hey, I just created a page here. You can now buy me a pizza with any crypto!'
               {...register("about", {
@@ -219,9 +272,9 @@ function UsernameForm() {
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
             Website or social link
           </h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='url'
               placeholder='https://'
               {...register("website", { required: true, maxLength: 80 })}
@@ -234,9 +287,9 @@ function UsernameForm() {
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
             EVM Address (ETH, MATIC, BSC, ETC)
           </h4>
-          <div className='mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
-              className='w-full px-4 border-none focus:ring-0'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
               type='text'
               placeholder='0x...'
               {...register("ethAddress", {
@@ -252,7 +305,7 @@ function UsernameForm() {
 
           <button
             type='submit'
-            className=' bg-yellow-300 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto'
+            className=' bg-yellow-300 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto dark:text-black hover:scale-105 transition-all'
           >
             Continue
           </button>

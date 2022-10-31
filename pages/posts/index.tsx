@@ -15,7 +15,7 @@ export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
 
   return (
-    <main className='h-[calc(100vh-107px)] flex flex-col justify-between md:max-w-4xl md:mx-auto'>
+    <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between md:max-w-4xl md:mx-auto '>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />
@@ -93,13 +93,13 @@ function CreateNewPost() {
   };
 
   return (
-    <form className='mx-2 text-center mt-8 mb-8' onSubmit={createPost}>
-      <div className='mx-2 text-center py-2  rounded-lg bg-white text-lg border-2 border-black lg:max-w-lg lg:mx-auto'>
+    <form className='mx-2 text-center mt-24 mb-8' onSubmit={createPost}>
+      <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800  text-lg border-2 border-black dark:border-zinc-300 lg:max-w-lg lg:mx-auto'>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder='My Awesome Post!'
-          className='w-full px-4 outline-none'
+          className='w-full px-4 outline-none dark:bg-zinc-800'
         />
       </div>
       <p className='text-xs mt-1'>
@@ -109,7 +109,7 @@ function CreateNewPost() {
       <button
         type='submit'
         disabled={!isValid}
-        className='className="m-auto font-CircularMedium bg-yellow-300 disabled:bg-gray-200 rounded-full mt-2 py-3 w-72 text-center md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
+        className='className="m-auto font-CircularMedium bg-yellow-300 disabled:bg-gray-200 rounded-full mt-2 py-3 w-72 text-center md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all dark:text-black'
       >
         Create a post
       </button>

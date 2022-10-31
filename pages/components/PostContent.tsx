@@ -11,7 +11,7 @@ export default function PostContent({ post }) {
       : post.createdAt.toDate();
 
   return (
-    <div className='mt-4 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 md:max-w-3xl md:mx-auto'>
+    <div className='mt-4 mx-4 p-2 text-left border-2 border-gray-200 dark:border-zinc-700 rounded-lg bg-gray-100 dark:bg-zinc-800 md:max-w-3xl md:mx-auto'>
       <h1 className='mt-6 mb-4 mx-4  text-3xl font-extrabold font-CircularMedium'>
         {post?.title}
       </h1>

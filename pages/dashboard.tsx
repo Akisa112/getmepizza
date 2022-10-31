@@ -30,7 +30,6 @@ export default function Dashboard({}) {
   const { username, userETH } = useContext(UserContext);
   const [earningsPoly, setEarningsPoly] = useState(0);
   const [earningsBinance, setEarningsBinance] = useState(0);
-  const [earningsFantom, setEarningsFantom] = useState(0);
 
   const [currentChainEarnings, setCurrentChainEarnings] = useState(0);
 
@@ -78,7 +77,7 @@ export default function Dashboard({}) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x01A6D1Daa96318c5E65Fb313337D91B540d4F533",
+    address: "0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43",
     abi: [
       {
         inputs: [],
@@ -107,7 +106,7 @@ export default function Dashboard({}) {
   });
 
   return (
-    <main className='h-[calc(100vh-107px)] flex flex-col justify-between '>
+    <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
           <MobileNav username={username} />
@@ -132,7 +131,7 @@ export default function Dashboard({}) {
                   );
                   callShare();
                 }}
-                className='m-auto flex font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+                className='m-auto flex font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'
               >
                 <MdIosShare className='text-xl ml-5 mr-2' />{" "}
                 {share ? "Copied!" : "Share"}
@@ -187,7 +186,7 @@ export default function Dashboard({}) {
                 disabled={
                   !write || isLoading || txLoading || currentChainEarnings === 0
                 }
-                className=' font-CircularMedium bg-yellow-300 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all'
+                className=' font-CircularMedium bg-yellow-300 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all dark:text-black'
               >
                 {isLoading && (
                   <>
@@ -267,7 +266,7 @@ export default function Dashboard({}) {
             <form className='mt-4'>
               <div className=''>
                 <input
-                  className='w-full px-4 mx-2 text-center py-2  rounded-lg bg-white mb-4 text-lg border-2 border-black active:border-slate-50 active:border-black focus:ring-0 md:mx-auto'
+                  className='w-full px-4 mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-black dark:border-zinc-300  active:border-black focus:ring-0 md:mx-auto'
                   type='text'
                   placeholder='yourfriendsgmailaddy@gmail.com'
                 />
@@ -275,7 +274,7 @@ export default function Dashboard({}) {
 
               <button
                 type='submit'
-                className=' bg-yellow-300 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all'
+                className=' bg-yellow-300 rounded-full mt-2 py-3 min-w-full text-center font-CircularMedium md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'
               >
                 Send Invite
               </button>
