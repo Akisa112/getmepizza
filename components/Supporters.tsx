@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from "react";
 
 import { successTxContext } from "./UserProfile";
 
-import PolygonLogo from "../../public/polygon.png";
-import BinanceLogo from "../../public/binance.png";
-import FantomLogo from "../../public/fantom.png";
+import PolygonLogo from "../public/polygon.png";
+import BinanceLogo from "../public/binance.png";
+import FantomLogo from "../public/fantom.png";
 
 import Image from "next/image";
 
