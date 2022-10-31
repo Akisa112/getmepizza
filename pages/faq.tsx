@@ -42,8 +42,8 @@ export default function FAQ() {
               Frequently Asked Questions
             </h1>
             <p className='pt-8 px-2 py-8 max-w-sm mx-auto text-center text-gray-800 dark:text-slate-300 font-Montserrat font-bold leading-7 text-lg md:text-xl md:max-w-md lg:max-w-4xl lg:text-2xl lg:px-40'>
-              If you can't find an answer that you're looking for, hit me up on
-              twitter @elonsdev
+              If you can&apos;t find an answer that you&apos;re looking for, hit
+              me up on twitter @elonsdev
             </p>
 
             <div className=' mx-2 font-CircularMedium bg-yellow-300 rounded-full text-lg  py-3  cursor-pointer dark:text-black'>
@@ -68,8 +68,8 @@ export default function FAQ() {
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Why 🍕?</h1>
             <p className=''>
-              Short answer: Who doesn't like Pizza? Without pizza we would have
-              no Bitcorns...
+              Short answer: Who doesn&apos;t like Pizza? Without pizza we would
+              have no Bitcorns...
               <br />
               <br /> Longer answer: I thought it would be fun to allow
               supporters to tip in pizza slice value instead of dollars and
@@ -85,9 +85,9 @@ export default function FAQ() {
               Every time a supporter tips you a slice they get an NFT proving
               their support and the crypto goes into a smart contract mapped to
               your ETH address. You can withdraw these funds anytime from your
-              dashboard or directly from the smart contract. You don't actually
-              get pizza, but you could buy yourself one, or anything else, once
-              you withdraw your funds.
+              dashboard or directly from the smart contract. You don&apos;t
+              actually get pizza, but you could buy yourself one, or anything
+              else, once you withdraw your funds.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               How can my fans pay?
@@ -115,7 +115,7 @@ export default function FAQ() {
               What about my data?
             </h1>
             <p className=''>
-              This website doesn't track ad data or serve ads and tips are
+              This website doesn&apos;t track ad data or serve ads and tips are
               clearly visible on the blockchain. Your posts are stored in a
               secure Firebase storage which can be retrieved on request.
             </p>
@@ -128,7 +128,7 @@ export default function FAQ() {
               creators specific value and solve some of web3 pain points.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
-              Who's running this?
+              Who&apos;s running this?
             </h1>
             <p className=''>
               Just me at the moment,{" "}

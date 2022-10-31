@@ -61,12 +61,12 @@ export default function Custom404() {
               non-personally-identifying information of the sort that web
               browsers and servers typically make available, such as the browser
               type, language preference, referring site, and the date and time
-              of each visitor request. Get Me Pizza's purpose in collecting
+              of each visitor request. Get Me Pizza&apos;s purpose in collecting
               non-personally identifying information is to better understand how
-              Get Me Pizza's visitors use its website. From time to time, Get Me
-              Pizza may release non-personally-identifying information in the
-              aggregate, e.g., by publishing a report on trends in the usage of
-              its website. Get Me Pizza also collects potentially
+              Get Me Pizza&apos;s visitors use its website. From time to time,
+              Get Me Pizza may release non-personally-identifying information in
+              the aggregate, e.g., by publishing a report on trends in the usage
+              of its website. Get Me Pizza also collects potentially
               personally-identifying information like Internet Protocol (IP)
               addresses, email, and EVM addresses for logged in users and for
               users making payments on GetMe.Pizza. Get Me Pizza only discloses
@@ -91,9 +91,9 @@ export default function Custom404() {
               Gathering of Personally-Identifying Information
             </h1>
             <p className=''>
-              Certain visitors to Get Me Pizza's websites choose to interact
-              with Get Me Pizza in ways that require Get Me Pizza to gather
-              personally-identifying information. The amount and type of
+              Certain visitors to Get Me Pizza&apos;s websites choose to
+              interact with Get Me Pizza in ways that require Get Me Pizza to
+              gather personally-identifying information. The amount and type of
               information that Get Me Pizza gathers depends on the nature of the
               interaction. For example, we ask visitors who sign up at Get Me
               Pizza with Google Auth and Twitter Auth which provides us with the
@@ -102,11 +102,12 @@ export default function Custom404() {
               information, including as necessary the wallet required to process
               those transactions. In each case, Get Me Pizza collects such
               information only insofar as is necessary or appropriate to fulfill
-              the purpose of the visitor's interaction with Get Me Pizza. Get Me
-              Pizza does not disclose personally-identifying information other
-              than as described below. And visitors can always refuse to supply
-              personally-identifying information, with the caveat that it may
-              prevent them from engaging in certain website-related activities.
+              the purpose of the visitor&apos;s interaction with Get Me Pizza.
+              Get Me Pizza does not disclose personally-identifying information
+              other than as described below. And visitors can always refuse to
+              supply personally-identifying information, with the caveat that it
+              may prevent them from engaging in certain website-related
+              activities.
               <br />
               <br />
               You can request to delete your personal data by emailing
@@ -129,32 +130,33 @@ export default function Custom404() {
               Get Me Pizza discloses potentially personally-identifying and
               personally-identifying information only to those of its employees,
               contractors and affiliated organizations that (i) need to know
-              that information in order to process it on Get Me Pizza's behalf
-              or to provide services available at Get Me Pizza's websites, and
-              (ii) that have agreed not to disclose it to others. Some of those
-              employees, contractors and affiliated organizations may be located
-              outside of your home country; by using Get Me Pizza's websites,
-              you consent to the transfer of such information to them. Get Me
-              Pizza will not rent or sell potentially personally-identifying and
-              personally-identifying information to anyone. Other than to its
-              employees, contractors and affiliated organizations, as described
-              above, Get Me Pizza discloses potentially personally-identifying
-              and personally-identifying information only in response to a
-              subpoena, court order or other governmental request, or when Get
-              Me Pizza believes in good faith that disclosure is reasonably
-              necessary to protect the property or rights of Get Me Pizza, third
-              parties or the public at large. If you are a registered user of an
-              Get Me Pizza website and have supplied your email address, Get Me
-              Pizza may occasionally send you an email to tell you about new
-              features, solicit your feedback, or just keep you up to date with
-              what's going on with Get Me Pizza and our products. If you send us
-              a request (for example via email or via one of our feedback
-              mechanisms), we reserve the right to publish it in order to help
-              us clarify or respond to your request or to help us support other
-              users. Get Me Pizza takes all measures reasonably necessary to
-              protect against the unauthorized access, use, alteration or
-              destruction of potentially personally-identifying and
-              personally-identifying information.
+              that information in order to process it on Get Me Pizza&apos;s
+              behalf or to provide services available at Get Me Pizza&apos;s
+              websites, and (ii) that have agreed not to disclose it to others.
+              Some of those employees, contractors and affiliated organizations
+              may be located outside of your home country; by using Get Me
+              Pizza&apos;s websites, you consent to the transfer of such
+              information to them. Get Me Pizza will not rent or sell
+              potentially personally-identifying and personally-identifying
+              information to anyone. Other than to its employees, contractors
+              and affiliated organizations, as described above, Get Me Pizza
+              discloses potentially personally-identifying and
+              personally-identifying information only in response to a subpoena,
+              court order or other governmental request, or when Get Me Pizza
+              believes in good faith that disclosure is reasonably necessary to
+              protect the property or rights of Get Me Pizza, third parties or
+              the public at large. If you are a registered user of an Get Me
+              Pizza website and have supplied your email address, Get Me Pizza
+              may occasionally send you an email to tell you about new features,
+              solicit your feedback, or just keep you up to date with
+              what&apos;s going on with Get Me Pizza and our products. If you
+              send us a request (for example via email or via one of our
+              feedback mechanisms), we reserve the right to publish it in order
+              to help us clarify or respond to your request or to help us
+              support other users. Get Me Pizza takes all measures reasonably
+              necessary to protect against the unauthorized access, use,
+              alteration or destruction of potentially personally-identifying
+              and personally-identifying information.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Account deletion</h1>
             <p className=''>
@@ -163,35 +165,36 @@ export default function Custom404() {
               retain certain information as required by law or as necessary for
               our legitimate business purposes. All provisions of this agreement
               survive termination of an account, including our rights regarding
-              any content you’ve already submitted to the Site. (For instance,
-              if you’ve launched a page, deleting your account will not
-              automatically remove the page from the Site.) You can request to
-              delete your personal data by emailing us at
+              any content you&apos;ve already submitted to the Site. (For
+              instance, if you&apos;ve launched a page, deleting your account
+              will not automatically remove the page from the Site.) You can
+              request to delete your personal data by emailing us at
               elonsdev@protonmail.me.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Cookies</h1>
             <p className=''>
               A cookie is a string of information that a website stores on a
-              visitor's computer, and that the visitor's browser provides to the
-              website each time the visitor returns. Get Me Pizza uses cookies
-              to help Get Me Pizza identify and track visitors, their usage of
-              Get Me Pizza website, and their website access preferences. Some
-              cookies expire after a certain amount of time, or upon logging out
-              (session cookies), others remain on your computer or terminal
-              device for a longer period (persistent cookies). Our Site uses
-              first party cookies (cookies set directly by Anchor) as well as
-              third party cookies, as described below: - Strictly Necessary
-              Cookies: Used to provide Users with the Services available through
-              our Site and to use some of their features, such as the ability to
-              log-in and access to secure areas. These cookies are served by
-              Anchor and are essential for using and navigating the Site.
-              Without these cookies, basic functions of our Site would not work.
-              Because these cookies are strictly necessary to deliver the Site
-              and the Services, you cannot refuse them. - Analytics/Performance:
-              Used to better understand the behavior of the Users on our Site
-              and improve our Site accordingly, for example by making sure Users
-              are finding what they need easily. The Site uses Google Analytics,
-              a web analytics service provided by Google Inc. (“Google”). The
+              visitor&apos;s computer, and that the visitor&apos;s browser
+              provides to the website each time the visitor returns. Get Me
+              Pizza uses cookies to help Get Me Pizza identify and track
+              visitors, their usage of Get Me Pizza website, and their website
+              access preferences. Some cookies expire after a certain amount of
+              time, or upon logging out (session cookies), others remain on your
+              computer or terminal device for a longer period (persistent
+              cookies). Our Site uses first party cookies (cookies set directly
+              by Anchor) as well as third party cookies, as described below: -
+              Strictly Necessary Cookies: Used to provide Users with the
+              Services available through our Site and to use some of their
+              features, such as the ability to log-in and access to secure
+              areas. These cookies are served by Anchor and are essential for
+              using and navigating the Site. Without these cookies, basic
+              functions of our Site would not work. Because these cookies are
+              strictly necessary to deliver the Site and the Services, you
+              cannot refuse them. - Analytics/Performance: Used to better
+              understand the behavior of the Users on our Site and improve our
+              Site accordingly, for example by making sure Users are finding
+              what they need easily. The Site uses Google Analytics, a web
+              analytics service provided by Google Inc. (“Google”). The
               information collected by Google (including your IP address) will
               be transmitted to and stored by Google on servers in the United
               States (Google is certified to the Privacy Shield for data
@@ -203,10 +206,10 @@ export default function Custom404() {
               Site by downloading and installing the Google Analytics Opt-out
               Browser Add-on for your current web browser. Get Me Pizza visitors
               who do not wish to have cookies placed on their computers should
-              set their browsers to refuse cookies before using Get Me Pizza's
-              websites, with the drawback that certain features of Get Me
-              Pizza's websites may not function properly without the aid of
-              cookies.
+              set their browsers to refuse cookies before using Get Me
+              Pizza&apos;s websites, with the drawback that certain features of
+              Get Me Pizza&apos;s websites may not function properly without the
+              aid of cookies.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Business Transfers</h1>
             <p className=''>
@@ -251,13 +254,13 @@ export default function Custom404() {
             </h1>
             <p className=''>
               Although most changes are likely to be minor, Get Me Pizza may
-              change its Privacy Policy from time to time, and in Get Me Pizza's
-              sole discretion. Get Me Pizza encourages visitors to frequently
-              check this page for any changes to its Privacy Policy. If you have
-              a GetMe.pizza account, you might also receive an alert informing
-              you of these changes. Your continued use of this site after any
-              change in this Privacy Policy will constitute your acceptance of
-              such change.
+              change its Privacy Policy from time to time, and in Get Me
+              Pizza&apos;s sole discretion. Get Me Pizza encourages visitors to
+              frequently check this page for any changes to its Privacy Policy.
+              If you have a GetMe.pizza account, you might also receive an alert
+              informing you of these changes. Your continued use of this site
+              after any change in this Privacy Policy will constitute your
+              acceptance of such change.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               Other Terms and Conditions
@@ -266,17 +269,18 @@ export default function Custom404() {
               Your access to and use of the Get Me Pizza is subject to any
               additional terms applicable to such Services that may be posted on
               the Terms from time to time, including without limitation, Get Me
-              Pizza’s Terms of Use available at https://www.GetMe.pizza/terms.
-              By agreeing to our privacy policy you are also agreeing to the
-              Google's privacy policy for the services which we use like Google
-              Firebase, Auth Sign In, Recaptcha, Analytics, etc. which can be
-              found here: https://policies.google.com/privacy?hl=en-US
+              Pizza&apos;s Terms of Use available at
+              https://www.GetMe.pizza/terms. By agreeing to our privacy policy
+              you are also agreeing to the Google&apos;s privacy policy for the
+              services which we use like Google Firebase, Auth Sign In,
+              Recaptcha, Analytics, etc. which can be found here:
+              https://policies.google.com/privacy?hl=en-US
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Contact Us</h1>
             <p className=''>
               Please feel free to contact us if you have any questions about Get
-              Me Pizza’s Privacy Policy or the information practices. You may
-              contact us as follows: You may send an email to
+              Me Pizza&apos;s Privacy Policy or the information practices. You
+              may contact us as follows: You may send an email to
               elonsdev@protonmail.me.
             </p>
           </div>

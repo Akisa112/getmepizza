@@ -135,7 +135,7 @@ export default function AdminPage({}) {
                   </div>
                 )}
               </div>
-              <p className='mt-2 text-xs w-[200px]'>Drag 'n drop image.</p>
+              <p className='mt-2 text-xs w-[200px]'>Drag n drop image.</p>
             </div>
 
             <div>

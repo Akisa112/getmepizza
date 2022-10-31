@@ -97,7 +97,7 @@ export default function Home(props) {
               </div>
             </Link>
             <p className=' px-2 py-4 text-center text-gray-800 font-Montserrat font-bold leading-7 text-sm dark:text-slate-100'>
-              *It's free and takes only a minute.
+              *It&apos;s free and takes only a minute.
             </p>
           </div>
         </section>
@@ -171,7 +171,7 @@ export default function Home(props) {
           <div className='pt-8 pb-10'>
             <GiCrossedChains className='mb-4 mx-auto text-center text-4xl text-orange-500' />
             <p className=' mx-auto text-center max-w-[250px] font-Montserrat text-sm'>
-              Tips and memo's are{" "}
+              Tips and memo&apos;s are{" "}
               <span className='font-CircularMedium  '>transparent</span> and{" "}
               <span className='font-CircularMedium  '>securely stored</span>{" "}
               on-chain.
@@ -186,7 +186,7 @@ export default function Home(props) {
           </div>
 
           <p className=' px-2 py-2 text-center text-gray-800 font-Montserrat font-bold leading-7 text-xs dark:text-slate-100'>
-            *It's free and takes only a minute.
+            *It&apos;s free and takes only a minute.
           </p>
         </section>
 

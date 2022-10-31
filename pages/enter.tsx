@@ -15,10 +15,9 @@ import Pfp from "../public/defaultprofilepic.png";
 
 export default function Enter() {
   const { user, username } = useContext(UserContext);
-
+  const router = useRouter();
   // If user exists route to dashboard page
   if (username) {
-    const router = useRouter();
     router.push(`/dashboard`);
   }
 
@@ -52,7 +51,6 @@ function SignInButton(username) {
     await auth.signInWithPopup(googleAuthProvider);
     if (username) {
       try {
-        const router = useRouter();
         router.push(`/dashboard`);
       } catch (error) {
         console.log(error);

@@ -46,31 +46,31 @@ export default function Custom404() {
           <div className='mx-6 mt-8'>
             <p className=''>
               Welcome to Get Me Pizza, this page explains our terms of use. When
-              you use Get Me Pizza, you’re agreeing to all the rules on this
-              page. Some of them need to be expressed in legal jargon, but we’ve
-              done our best to offer you clear and simple explanations of what
-              everything means.
+              you use Get Me Pizza, you&apos;re agreeing to all the rules on
+              this page. Some of them need to be expressed in legal jargon, but
+              we&apos;ve done our best to offer you clear and simple
+              explanations of what everything means.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               About Creating an Account
             </h1>
             <p className=''>
               To sign up for a Get Me Pizza account, you need to be 18 or over.
-              You’re responsible for your account and all the activity on it.
-              You can browse Get Me Pizza without registering for an account.
-              But to use some of our features, you’ll need to register, choose a
-              username, and set a password. When you do that, the information
-              you give us has to be accurate and complete. Don’t impersonate
-              anyone else or choose names that are offensive or that violate
-              anyone’s rights. If you don’t follow these rules, we may cancel
-              your account. You’re responsible for all the activity on your
-              account, and for keeping your password confidential. If you find
-              out that someone has used your account without your permission,
-              you should report it to elonsdev@protonmail.me and reset your
-              google and or twitter accounts. To sign up for an account, you
-              need to be at least 18 years old, or old enough to form a binding
-              contract where you live. If necessary, we may ask you for proof of
-              age.
+              You&apos;re responsible for your account and all the activity on
+              it. You can browse Get Me Pizza without registering for an
+              account. But to use some of our features, you&apos;ll need to
+              register, choose a username, and set a password. When you do that,
+              the information you give us has to be accurate and complete.
+              Don&apos;t impersonate anyone else or choose names that are
+              offensive or that violate anyone&apos;s rights. If you don&apos;t
+              follow these rules, we may cancel your account. You&apos;re
+              responsible for all the activity on your account, and for keeping
+              your password confidential. If you find out that someone has used
+              your account without your permission, you should report it to
+              elonsdev@protonmail.me and reset your google and or twitter
+              accounts. To sign up for an account, you need to be at least 18
+              years old, or old enough to form a binding contract where you
+              live. If necessary, we may ask you for proof of age.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               Things that are sh*tty
@@ -78,13 +78,13 @@ export default function Custom404() {
             <p className=''>
               We want thousands of people to enjoy using Get Me Pizza. We expect
               all of you to behave responsibly and help keep this a nice place.
-              If you want be a part of this don’t do any of these things on our
-              site:
+              If you want be a part of this don&apos;t do any of these things on
+              our site:
             </p>
             <ul>
               <li className='ml-4 mt-4'>
-                - Don’t break the law. Don’t take any action that infringes or
-                violates other people’s rights, violates the law, or breaches
+                - Don’t break the law. Don&apos;t take any action that infringes
+                or violates other people’s rights, violates the law, or breaches
                 any contract or legal duty you have toward anyone.
               </li>
               <li className='ml-4 mt-4'>
@@ -94,7 +94,7 @@ export default function Custom404() {
               </li>
               <li className='ml-4 mt-4'>
                 - Don’t offer prohibited items. Don’t offer any rewards that are
-                illegal, violate any of Get Me Pizza's policies, rules, or
+                illegal, violate any of Get Me Pizza&apos;s policies, rules, or
                 guidelines, or violate any applicable law, statute, ordinance,
                 or regulation.
               </li>
@@ -125,7 +125,7 @@ export default function Custom404() {
                 other purposes, and don’t abuse it.
               </li>
               <li className='ml-4 mt-4'>
-                - Don't post anything that is - is unlawful, threatening,
+                - Don&apos;t post anything that is - is unlawful, threatening,
                 abusive, harassing, defamatory, libelous, deceptive, fraudulent,
                 invasive of another’s privacy, tortious, obscene, vulgar,
                 pornographic, offensive, profane, contains or depicts nudity,
@@ -255,7 +255,7 @@ export default function Custom404() {
               agents, and third party providers from and against any and all
               claims, causes of action, damages, obligations, losses,
               liabilities, costs or debt, and expenses (including reasonable
-              attorneys' fees and costs) and all amounts paid in settlement
+              attorneys&apos; fees and costs) and all amounts paid in settlement
               arising from or relating to, breach of these Terms or violation of
               any applicable laws. We reserve the right, in Our sole discretion
               and at Our own expense, to assume the exclusive defense and
@@ -300,8 +300,8 @@ export default function Custom404() {
               Terms are deemed invalid by a court of competent jurisdiction, the
               invalidity of such provision shall not affect the validity of the
               remaining provisions of this Agreement, which shall remain in full
-              force and effect. Get Me Pizza's failure to assert any right or
-              provision under this Agreement shall not constitute a waiver of
+              force and effect. Get Me Pizza&apos;s failure to assert any right
+              or provision under this Agreement shall not constitute a waiver of
               such right or provision.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Miscellaneous</h1>
