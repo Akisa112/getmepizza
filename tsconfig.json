@@ -22,8 +22,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/lib/context.js", "pages/_app.tsx", pages/lib/firebase.jss, "pages/posts/[slug].jsx", "pages/api/ogpages.js""  ],
+    "**/*.tsx", 
+    "pages/lib/context.js", 
+    "pages/_app.tsx", 
+    "pages/[username]/[slug].js"  ],
   "exclude": [
     "node_modules"
   ]
