@@ -8,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { useState } from "react";
-import MobileNav from "./components/mobileNav";
+import SideNav from "./components/sideNav";
 import { getEarnings } from "./libs/moralis";
 
 import PolygonLogo from "../public/polygon.png";
@@ -109,7 +109,7 @@ export default function Dashboard({}) {
     <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
-          <MobileNav username={username} />
+          <SideNav username={username} />
         </div>
 
         <div className='md:w-[600px] md:mx-auto '>

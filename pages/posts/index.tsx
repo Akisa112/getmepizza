@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import kebabCase from "lodash.kebabcase";
 import toast from "react-hot-toast";
-import MobileNav from "../components/mobileNav";
+import SideNav from "../components/sideNav";
 
 export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);
@@ -18,7 +18,7 @@ export default function Dashboard({}) {
     <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between md:max-w-4xl md:mx-auto '>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
-          <MobileNav username={username} />
+          <SideNav username={username} />
         </div>
         <CreateNewPost />
 

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import AuthCheck from "./components/AuthCheck";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import toast from "react-hot-toast";
-import MobileNav from "./components/mobileNav";
+import SideNav from "./components/sideNav";
 import { useDropzone } from "react-dropzone";
 import { getUserWithUsername } from "./libs/firebase";
 import { BiCamera } from "react-icons/bi";
@@ -102,7 +102,7 @@ export default function AdminPage({}) {
     <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
       <AuthCheck>
         <div className='left-[5%] top-24 hidden lg:block lg:absolute'>
-          <MobileNav username={username} />
+          <SideNav username={username} />
         </div>
         <form
           className='mx-4 mt-6 md:w-[600px] md:mx-auto'
