@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import PostFeed from "./PostFeed";
 import BuyPizza from "./BuyPizza";
 
-import { Supporters } from "./Supporters";
+import Supporters from "./Supporters";
 
 export const successTxContext = createContext(null);
 
