@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../libs/context";
+import { UserContext } from "../lib/context";
 
 import { FaHamburger } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import AuthCheck from "../components/AuthCheck";
-import { firestore, auth, serverTimestamp } from "../libs/firebase";
+import { firestore, auth, serverTimestamp } from "../lib/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";

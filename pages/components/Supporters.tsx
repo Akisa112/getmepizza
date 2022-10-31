@@ -1,4 +1,4 @@
-import { getMemos } from "../libs/moralis";
+import { getMemos } from "../lib/moralis";
 import { useContext, useEffect, useState } from "react";
 
 import { successTxContext } from "./UserProfile";
@@ -9,7 +9,7 @@ import FantomLogo from "../../public/fantom.png";
 
 import Image from "next/image";
 
-export function Supporters(user) {
+export default function Supporters(user) {
   const [mems, setMems] = useState([]);
 
   const [memsMumbai, setMemsMumbai] = useState([]);

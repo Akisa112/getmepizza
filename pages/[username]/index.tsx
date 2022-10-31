@@ -1,4 +1,4 @@
-import { getUserWithUsername, postToJSON } from "../libs/firebase";
+import { getUserWithUsername, postToJSON } from "../lib/firebase";
 import UserProfile from "../components/UserProfile";
 import Head from "next/head";
 

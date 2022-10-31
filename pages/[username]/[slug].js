@@ -1,6 +1,6 @@
 
 import Head from 'next/head';
-import { firestore, getUserWithUsername, postToJSON } from '../libs/firebase';
+import { firestore, getUserWithUsername, postToJSON } from '../lib/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import PostContent from '../components/PostContent';
 

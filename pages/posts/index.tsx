@@ -3,8 +3,8 @@ import PostFeed from "../components/PostFeed";
 
 import PoweredBy from "../components/poweredby";
 import { useContext, useState } from "react";
-import { UserContext } from "../libs/context";
-import { firestore, auth, serverTimestamp } from "../libs/firebase";
+import { UserContext } from "../lib/context";
+import { firestore, auth, serverTimestamp } from "../lib/firebase";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import kebabCase from "lodash.kebabcase";

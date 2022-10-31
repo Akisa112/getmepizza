@@ -11,7 +11,7 @@ import { MdPersonOutline } from "react-icons/md";
 import { BsLightning } from "react-icons/bs";
 import { ImEmbed2 } from "react-icons/im";
 import Link from "next/link";
-import { auth } from "../libs/firebase";
+import { auth } from "../lib/firebase";
 import { useRouter } from "next/router";
 
 export default function MobileNav(props) {
