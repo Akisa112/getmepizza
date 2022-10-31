@@ -41,7 +41,7 @@ export default function handler(req: NextRequest) {
             height='600'
             xmlns='http://www.w3.org/2000/svg'
             version='1.1'
-            tw='absolute'
+            style={{ display: "absolute" }}
           >
             <rect width='900' height='450' fill='#fd7438'></rect>
             <g>
