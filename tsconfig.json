@@ -23,9 +23,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx", 
-    "pages/lib/context.js", 
-    "pages/_app.tsx", 
-    "pages/[username]/[slug].js"  ],
+    "**/*.js",
+    "**/**/*.js",
+    "pages/_app.tsx",  ],
   "exclude": [
     "node_modules"
   ]
