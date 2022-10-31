@@ -1,18 +1,18 @@
-import { auth, firestore } from "./lib/firebase";
+import { auth, firestore } from "../lib/firebase";
 
-import PoweredBy from "./components/poweredby";
-import { UserContext } from "./lib/context";
+import PoweredBy from "../components/poweredby";
+import { UserContext } from "../lib/context";
 import { useEffect, useContext, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import AuthCheck from "./components/AuthCheck";
+import AuthCheck from "../components/AuthCheck";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import toast from "react-hot-toast";
-import SideNav from "./components/sideNav";
+import SideNav from "../components/sideNav";
 import { useDropzone } from "react-dropzone";
-import { getUserWithUsername } from "./lib/firebase";
+import { getUserWithUsername } from "../lib/firebase";
 import { BiCamera } from "react-icons/bi";
-import { blobToBase64 } from "./lib/hooks";
-import { upLoadIPFS } from "./lib/moralis";
+import { blobToBase64 } from "../lib/hooks";
+import { upLoadIPFS } from "../lib/moralis";
 
 export default function AdminPage({}) {
   const { username } = useContext(UserContext);

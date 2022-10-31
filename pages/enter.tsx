@@ -1,15 +1,15 @@
-import { auth, firestore, googleAuthProvider } from "./lib/firebase";
+import { auth, firestore, googleAuthProvider } from "../lib/firebase";
 
 import Image from "next/image";
-import Footer from "./components/footer";
-import { UserContext } from "./lib/context";
+import Footer from "../components/footer";
+import { UserContext } from "../lib/context";
 import { useEffect, useState, useCallback, useContext } from "react";
 import debounce from "lodash.debounce";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
-import { blobToBase64 } from "./lib/hooks";
-import { upLoadIPFS } from "./lib/moralis";
+import { blobToBase64 } from "../lib/hooks";
+import { upLoadIPFS } from "../lib/moralis";
 import { BiCamera } from "react-icons/bi";
 import Pfp from "../public/defaultprofilepic.png";
 

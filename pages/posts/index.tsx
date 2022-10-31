@@ -1,15 +1,15 @@
-import AuthCheck from "../components/AuthCheck";
-import PostFeed from "../components/PostFeed";
+import AuthCheck from "../../components/AuthCheck";
+import PostFeed from "../../components/PostFeed";
 
-import PoweredBy from "../components/poweredby";
+import PoweredBy from "../../components/poweredby";
 import { useContext, useState } from "react";
-import { UserContext } from "../lib/context";
+import { UserContext } from "../../lib/context";
 import { firestore, auth, serverTimestamp } from "../lib/firebase";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import kebabCase from "lodash.kebabcase";
 import toast from "react-hot-toast";
-import SideNav from "../components/sideNav";
+import SideNav from "../../components/sideNav";
 
 export default function Dashboard({}) {
   const { user, username } = useContext(UserContext);

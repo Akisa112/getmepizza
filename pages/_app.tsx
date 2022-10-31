@@ -12,11 +12,11 @@ import {
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import NavBar from "./components/navbar";
+import NavBar from "../components/navbar";
 
 import { useState, useEffect } from "react";
 import Router from "next/router";
-import PageLoader from "./components/PageLoader";
+import PageLoader from "../components/PageLoader";
 
 import { motion } from "framer-motion";
 

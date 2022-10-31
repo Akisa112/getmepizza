@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import Footer from "./components/footer";
-import { firestore, userToJson } from "./lib/firebase";
-import UsersFeed from "./components/UsersList";
+import Footer from "../components/footer";
+import { firestore, userToJson } from "../lib/firebase";
+import UsersFeed from "../components/UsersList";
 import { TbHandClick } from "react-icons/tb";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { GiCrossedChains } from "react-icons/gi";

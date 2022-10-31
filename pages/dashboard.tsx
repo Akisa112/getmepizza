@@ -1,15 +1,15 @@
-import AuthCheck from "./components/AuthCheck";
+import AuthCheck from "../components/AuthCheck";
 
-import PoweredBy from "./components/poweredby";
+import PoweredBy from "../components/poweredby";
 import { useContext, useEffect } from "react";
-import { UserContext } from "./lib/context";
+import { UserContext } from "../lib/context";
 import { MdIosShare } from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image";
 
 import { useState } from "react";
-import SideNav from "./components/sideNav";
-import { getEarnings } from "./lib/moralis";
+import SideNav from "../components/sideNav";
+import { getEarnings } from "../lib/moralis";
 
 import PolygonLogo from "../public/polygon.png";
 import BinanceLogo from "../public/binance.png";

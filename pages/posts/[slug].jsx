@@ -1,12 +1,12 @@
 import AuthCheck from "../components/AuthCheck";
-import { firestore, auth, serverTimestamp } from "../lib/firebase";
+import { firestore, auth, serverTimestamp } from "../../lib/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import PoweredBy from "../components/poweredby";
+import PoweredBy from "../../components/poweredby";
 
 export default function AdminPostEdit(props) {
   return (
