@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
-import { UserContext } from "./lib/context";
-import { useUserData } from "./lib/hooks";
+import { UserContext } from "../lib/context";
+import { useUserData } from "../lib/hooks";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Chain } from "@rainbow-me/rainbowkit";
 import {
