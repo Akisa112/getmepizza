@@ -125,7 +125,7 @@ export default function BuyPizza(user) {
 
   let preppedError;
   try {
-    preppedError = `${prepareError.data.message.substring(4, 40)}...`;
+    // preppedError = `${prepareError.data.message.substring(4, 40)}...`;
   } catch (error) {}
 
   return (
