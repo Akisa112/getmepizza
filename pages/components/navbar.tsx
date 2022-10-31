@@ -99,14 +99,14 @@ export default function NavBar(props) {
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/faq"}>
                     <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
-                      FAQ
+                      F.A.Q.
                     </a>
                   </Link>
                 </li>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
-                  <Link href={"/explore"}>
+                  <Link href={"/about"}>
                     <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
-                      Explore
+                      About
                     </a>
                   </Link>
                 </li>
