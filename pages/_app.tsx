@@ -93,6 +93,15 @@ const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
   </Text>
 );
 
+const Alpha = () => (
+  <div className='py-2 font-CircularMedium bg-red-200 w-full text-center'>
+    <p>
+      THIS IS AN <span className='font-extrabold text-lg'>ALPHA 0.1</span>{" "}
+      CURRENTLY RUNNING ON BSC & POLY TESTNETS. MAINNETS COMING SOON.
+    </p>
+  </div>
+);
+
 function MyApp({ Component, pageProps, router }) {
   const [darkMode, setDarkMode] = useState(false);
   const changeMode = (arg) => {
@@ -126,6 +135,7 @@ function MyApp({ Component, pageProps, router }) {
             }}
           >
             <UserContext.Provider value={userData}>
+              <Alpha />
               <NavBar changeMode={changeMode} darkMode={darkMode} />
 
               <motion.div

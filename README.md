@@ -28,6 +28,25 @@ Get Me Pizza is a social tipping full stack application built during the Moralis
 
 Next.js, Firebase, Moralis, Tailwindcss, Wagmi, Rainbowkit
 
+## FEATURES
+
+#### PUBLIC:
+
+- Home page
+- About, FAQ, Privacy, Terms
+- Profile pages
+- Public posts
+- Tip creators with crypto
+- Like posts (if logged in)
+
+#### ADMIN:
+
+- Create profile
+- Dashboard (withdraw & view tip balance)
+- Edit profile
+- Create posts
+- Edit posts
+
 ## DEPLOYED CONTRACTS:
 
 Contract can be found at /contract/getmepizza.sol. The contract takes in tips and assigns them to the creator to later withdraw. It also issues an on-chain NFT as receipt to the tipper and stores the tip detail (to, from, memo, date, amount, slices) in a struct so we can display them on our front-end.

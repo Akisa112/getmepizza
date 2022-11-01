@@ -20,7 +20,7 @@ export default function NavBar(props) {
   const darkMode = props.darkMode;
 
   return (
-    <main className=' bg-slate-50  md:pt-10 pb-10 font-CircularMedium dark:bg-zinc-900'>
+    <main className=' bg-slate-50  md:pt-5 pb-10 font-CircularMedium dark:bg-zinc-900'>
       <section className='px-3 py-4  md:px-5 md:bg-white md:dark:bg-zinc-800 lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (

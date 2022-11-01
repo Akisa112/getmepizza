@@ -11,7 +11,6 @@ import { useDropzone } from "react-dropzone";
 import { blobToBase64 } from "../lib/hooks";
 import { upLoadIPFS } from "../lib/moralis";
 import { BiCamera } from "react-icons/bi";
-import Pfp from "../public/defaultprofilepic.png";
 
 export default function Enter() {
   const { user, username } = useContext(UserContext);
@@ -49,13 +48,13 @@ function SignInButton(username) {
   const router = useRouter();
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
-    if (username) {
+    /* if (username !== "name") {
       try {
         router.push(`/dashboard`);
       } catch (error) {
         console.log(error);
       }
-    }
+    } */
   };
 
   return (
@@ -96,8 +95,8 @@ function UsernameForm() {
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userNameIsEmpty, setUserNameIsEmpty] = useState(false);
-
-  const [userPhotoURL, setUserPhotoURL] = useState(Pfp);
+  const randomProfilePic = `https://avatars.dicebear.com/api/micah/:${user.uid}.svg`;
+  const [userPhotoURL, setUserPhotoURL] = useState(randomProfilePic);
   const [userEditedPhotoURL, setUserEditedPhotoURL] = useState("");
 
   const onDrop = useCallback(async (acceptedFiles) => {
@@ -132,7 +131,7 @@ function UsernameForm() {
       const batch = firestore.batch();
       batch.set(userDoc, {
         username: formValueUserName,
-        photoURL: userEditedPhotoURL ? userEditedPhotoURL : userPhotoURL.src,
+        photoURL: userEditedPhotoURL ? userEditedPhotoURL : userPhotoURL,
         displayName: values.name,
         about: values.about,
         website: values.website,
@@ -188,23 +187,29 @@ function UsernameForm() {
     !username && (
       <section className='w-[450px]'>
         <h1 className='text-3xl mb-16'>Complete your page</h1>
-        <div className='w-16 mb-6 border-none mx-auto cursor-none'>
+        <div className='w-16 mb-2 border-none mx-auto cursor-none'>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
               <Image
-                className='w-[65px] h-[65px] rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
+                width={"65px"}
+                height={"65px"}
+                className=' rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
                 src={userPhotoURL}
               />
             ) : (
               <div className='relative'>
                 <Image
-                  className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                  width={"65px"}
+                  height={"65px"}
+                  className=' rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
                   src={userPhotoURL}
                 />
                 {userEditedPhotoURL && (
                   <Image
-                    className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                    width={"65px"}
+                    height={"65px"}
+                    className='absolute top-0  bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
                     src={userEditedPhotoURL}
                   />
                 )}
@@ -215,6 +220,7 @@ function UsernameForm() {
             )}
           </div>
         </div>
+        <p className=' text-xs mb-4'>Drag n drop image.</p>
         <form className='mx-4' onSubmit={handleSubmit(onSubmit)}>
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>Name</h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
