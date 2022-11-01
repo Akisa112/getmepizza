@@ -46,7 +46,7 @@ export default function BuyPizza(user) {
   try {
     console.log(chain.name);
     if (chain.name === "Polygon Mumbai") {
-      value = 5;
+      value = 0.005; // 5 for mainnet
     } else if (chain.name === "BSC Testnet") {
       value = 0.015;
     }
