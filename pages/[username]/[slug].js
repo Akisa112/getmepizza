@@ -79,14 +79,14 @@ export default function Post(props) {
         <meta property='og:url' content={`https://www.getme.pizza/${post.slug}`} />
         <meta property='og:title' content={`${post.title} | @${post.username}`} />
         <meta property='og:description' content={post.context.substring(0,159)} />
-        <meta property='og:image' content={`../api/ogpages?name=${post.title}&link=${post.slug}`} />
+        <meta property='og:image' content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${post.title}&link=${post.slug}`} />
         <meta property='twitter:card' content='summary_large_image' />
         <meta property='twitter:url' content={`https://www.getme.pizza/${post.slug}`} />
         <meta property='twitter:title' content={`${post.title} | @${post.username}`} />
         <meta property='twitter:description' content={post.context.substring(0,159)} />
         <meta
           property='twitter:image'
-          content={`../api/ogpages?name=${post.title}&link=${post.slug}`}
+          content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${post.title}&link=${post.slug}`}
         />
         <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' /> 
       </Head>

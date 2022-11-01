@@ -55,7 +55,7 @@ export default function UserProfilePage({ user, posts }) {
         />
         <meta
           property='og:image'
-          content={`../api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
+          content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
         />
         <meta property='twitter:card' content='summary_large_image' />
         <meta
@@ -69,7 +69,7 @@ export default function UserProfilePage({ user, posts }) {
         />
         <meta
           property='twitter:image'
-          content={`../api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
+          content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
         />
         <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
