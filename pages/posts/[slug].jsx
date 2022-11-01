@@ -26,7 +26,7 @@ function PostManager() {
     .collection("posts")
     .doc(slug);
   const [post] = useDocumentDataOnce(postRef);
-  console.log(post);
+
   return (
     <main className='min-h-[calc(100vh-163px)]  md:w-[800px] md:mx-auto flex flex-col justify-between'>
       {post && (

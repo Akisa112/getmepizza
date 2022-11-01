@@ -31,8 +31,8 @@ function AdminManager() {
   const [userPhotoURL, setUserPhotoURL] = useState(userPhoto);
   const [userEditedPhotoURL, setUserEditedPhotoURL] = useState("");
 
-  let postRef = firestore.collection("users").doc(auth.currentUser.uid);
-  let [user] = useDocumentDataOnce(postRef);
+  const postRef = firestore.collection("users").doc(auth.currentUser.uid);
+  const [user] = useDocumentDataOnce(postRef);
 
   const onDrop = useCallback(async (acceptedFiles) => {
     try {
