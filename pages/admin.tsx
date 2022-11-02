@@ -63,7 +63,6 @@ function AdminManager() {
 
     const displayName = values.displayName;
     const photoURL = userEditedPhotoURL ? userEditedPhotoURL : user.photoURL;
-    const supporters = user.supporters;
     const username = user.username;
     const about = values.about;
     const website = values.website;
@@ -77,7 +76,6 @@ function AdminManager() {
       displayName,
       ethAddress,
       photoURL,
-      supporters,
       username,
       website,
       creatorType,
@@ -88,7 +86,6 @@ function AdminManager() {
       displayName,
       ethAddress,
       photoURL,
-      supporters,
       username,
       website,
       creatorType,

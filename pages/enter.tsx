@@ -141,8 +141,7 @@ function UsernameForm() {
         about: values.about,
         website: values.website,
         ethAddress: values.ethAddress,
-        supporters: 0,
-        createdAt: serverTimestamp(),
+        createdUserAt: Date.now(),
         creatorType: values.creatorType,
       });
       batch.set(usernameDoc, { uid: user.uid });
