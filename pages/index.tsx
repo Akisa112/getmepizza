@@ -15,7 +15,10 @@ const LIMIT = 10;
 
 // Returns a users array as props from firestore based on the limit above.
 export async function getServerSideProps() {
-  const usersQuery = firestore.collection("users").limit(LIMIT);
+  const usersQuery = firestore
+    .collection("users")
+    .orderBy("createdUserAt", "desc")
+    .limit(LIMIT);
   const users = (await usersQuery.get()).docs.map(userToJson);
   return {
     props: { users },
@@ -107,7 +110,7 @@ export default function Home(props) {
           <h1>LATEST CREATORS</h1>
 
           <nav className='pt-1 mb-5'>
-            <ul className='flex items-center overflow-x-auto scrollbar-hide snap-x scroll-auto'>
+            <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
               <UsersFeed users={props} />
             </ul>
           </nav>
@@ -140,7 +143,7 @@ export default function Home(props) {
           </div>
 
           <div className='px-3 md:px-20'>
-            <p className='pt-8 px-2 py-4 text-sm text-center text-gray-800 font-Montserrat font-bold leading-7 text-lg'>
+            <p className='pt-8 px-2 py-4 text-center text-gray-800 font-Montserrat font-bold leading-7 text-lg'>
               Membership tools, tip-gating posts, and ways to sell your digital
               items easily are coming soon...
             </p>

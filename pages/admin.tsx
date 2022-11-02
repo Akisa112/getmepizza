@@ -192,9 +192,7 @@ function AdminManager() {
           {errors.website && "Please enter a valid link"}
         </p>
 
-        <h4 className='font-Montserrat mb-3 mx-2 text-left'>
-          Type of creator *
-        </h4>
+        <h4 className='font-Montserrat mb-3 mx-2 text-left'>Type of creator</h4>
         <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:mx-auto'>
           <select
             {...register("creatorType")}

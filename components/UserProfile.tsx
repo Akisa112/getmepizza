@@ -26,7 +26,7 @@ export default function UserProfile({ user, posts }) {
   );
 
   return (
-    <div className='text-center mt-12 md:max-w-4xl md:mx-auto'>
+    <div className='text-center mt-4 md:max-w-4xl md:mx-auto'>
       <img
         referrerPolicy='no-referrer'
         src={user.photoURL || "/hacker.png"}
@@ -35,6 +35,7 @@ export default function UserProfile({ user, posts }) {
       <h1 className='text-4xl mt-3 font-bold'>
         {user.displayName || "Anonymous User"}
       </h1>
+      <h4 className='font-CircularMedium text-lg'>{user.creatorType}</h4>
       <p className='text-xs'>
         <i>@{user.username}</i>
       </p>
