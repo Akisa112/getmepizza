@@ -13,6 +13,7 @@ import { useDropzone } from "react-dropzone";
 import { BiCamera } from "react-icons/bi";
 import { blobToBase64 } from "../lib/hooks";
 import { upLoadIPFS } from "../lib/moralis";
+import Image from "next/image";
 
 export default function AdminPage({}) {
   return (
@@ -67,6 +68,7 @@ function AdminManager() {
     const about = values.about;
     const website = values.website;
     const ethAddress = values.ethAddress;
+    const creatorType = values.creatorType;
 
     console.log(photoURL);
 
@@ -78,6 +80,7 @@ function AdminManager() {
       supporters,
       username,
       website,
+      creatorType,
     });
 
     reset({
@@ -88,6 +91,7 @@ function AdminManager() {
       supporters,
       username,
       website,
+      creatorType,
     });
 
     toast.success("Updated successfully!");
@@ -102,24 +106,31 @@ function AdminManager() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className='mx-4 flex justify-between'>
-          <div className='w-16 mb-6 border-none  cursor-none'>
+          <div className='w-16 mb-6 border-none  cursor-pointer'>
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               {isDragActive ? (
-                <img
-                  className='w-[65px] h-[65px] rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
+                <Image
+                  width={"65px"}
+                  height={"65px"}
+                  className=' rounded-full border-dashed border-gray-800 dark:border-slate-300 border-2 '
                   src={userPhotoURL}
                 />
               ) : (
                 <div className='relative'>
-                  <img
-                    className='w-[65px] h-[65px] rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
-                    src={userPhotoURL}
-                  />
-                  {userEditedPhotoURL && (
-                    <img
-                      className='absolute top-0 w-[65px] h-[65px] bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                  {userEditedPhotoURL ? (
+                    <Image
+                      width={"65px"}
+                      height={"65px"}
+                      className=' rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
                       src={userEditedPhotoURL}
+                    />
+                  ) : (
+                    <Image
+                      width={"65px"}
+                      height={"65px"}
+                      className='absolute top-0  bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                      src={userPhotoURL}
                     />
                   )}
                   <div className='absolute top-5 left-5 p-1 bg-neutral-400 bg-opacity-80 rounded-full'>
@@ -183,6 +194,25 @@ function AdminManager() {
         <p className='text-red-500 mx-3 text-left mb-4'>
           {errors.website && "Please enter a valid link"}
         </p>
+
+        <h4 className='font-Montserrat mb-3 mx-2 text-left'>
+          Type of creator *
+        </h4>
+        <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:mx-auto'>
+          <select
+            {...register("creatorType")}
+            className='border-none focus:ring-0 w-full'
+          >
+            <option value='Content Creator'>Content Creator</option>
+            <option value='Artist'>Artist</option>
+            <option value='Writer'>Writer</option>
+            <option value='Musician'>Musician</option>
+            <option value='Gamer'>Gamer</option>
+            <option value='Developer'>Developer</option>
+            <option value='Community'>Community</option>
+            <option value='Other'>Other</option>
+          </select>
+        </div>
 
         <h4 className='font-Montserrat mb-3 mx-2 text-left'>
           EVM Address (ETH, MATIC, BSC, ETC)

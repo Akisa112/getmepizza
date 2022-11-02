@@ -22,11 +22,23 @@ yarn dev
 
 Get Me Pizza is a social tipping full stack application built during the Moralis x Google Defining Defi Hackathon.
 
+- Creatos can create a profile, post blogs & withdraw tips.
+- Fans can tip creators in crypto & leave a memo. (The dapp takes 5% of each tip)
+- Fans receive a NFT receipt of each tip as an NFT.
+
 ![getmepizza homepage screenshot](https://i.imgur.com/PHTDDlq.png)
 
 ## BUILT WITH
 
-Next.js, Firebase, Moralis, Tailwindcss, Wagmi, Rainbowkit
+React - Form, Hooks, Drop Image, Hot-Toast, Markdown
+Next.js - Frontend & OG Images API
+Firebase - Database storage
+Moralis - EVM API, IPFS Upload
+Tailwindcss - CSS
+Wagmi - Web3 Interactions
+Rainbowkit - Wallet UI
+DiceBear - Default Profile Image Generator
+Current Blockchains - Polygon, Binance Smart Chain, Fantom
 
 ## FEATURES
 
@@ -38,6 +50,7 @@ Next.js, Firebase, Moralis, Tailwindcss, Wagmi, Rainbowkit
 - Public posts
 - Tip creators with crypto
 - Like posts (if logged in)
+- Custom generated meta tag images for profile and blog pages via next13 OG Image Generator for social sharing.
 
 #### ADMIN:
 
@@ -49,7 +62,7 @@ Next.js, Firebase, Moralis, Tailwindcss, Wagmi, Rainbowkit
 
 ## DEPLOYED CONTRACTS:
 
-Contract can be found at /contract/getmepizza.sol. The contract takes in tips and assigns them to the creator to later withdraw. It also issues an on-chain NFT as receipt to the tipper and stores the tip detail (to, from, memo, date, amount, slices) in a struct so we can display them on our front-end.
+Contract can be found at /contract/getmepizza.sol. The contract takes in tips and assigns them to the creator to later withdraw from the users dashboard. It also issues an on-chain NFT as receipt to the tipper and stores the tip detail (to, from, memo, date, amount, slices) in a struct so we can display them on our front-end in the users profile page.
 
 ### TESTNETS:
 

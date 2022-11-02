@@ -1,4 +1,9 @@
-import { auth, firestore, googleAuthProvider } from "../lib/firebase";
+import {
+  auth,
+  firestore,
+  googleAuthProvider,
+  serverTimestamp,
+} from "../lib/firebase";
 
 import Image from "next/image";
 import Footer from "../components/footer";
@@ -137,6 +142,8 @@ function UsernameForm() {
         website: values.website,
         ethAddress: values.ethAddress,
         supporters: 0,
+        createdAt: serverTimestamp(),
+        creatorType: values.creatorType,
       });
       batch.set(usernameDoc, { uid: user.uid });
 
@@ -187,7 +194,7 @@ function UsernameForm() {
     !username && (
       <section className='w-[450px]'>
         <h1 className='text-3xl mb-16'>Complete your page</h1>
-        <div className='w-16 mb-2 border-none mx-auto cursor-none'>
+        <div className='w-16 mb-2 border-none mx-auto cursor-pointer'>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
@@ -199,18 +206,19 @@ function UsernameForm() {
               />
             ) : (
               <div className='relative'>
-                <Image
-                  width={"65px"}
-                  height={"65px"}
-                  className=' rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
-                  src={userPhotoURL}
-                />
-                {userEditedPhotoURL && (
+                {userEditedPhotoURL ? (
+                  <Image
+                    width={"65px"}
+                    height={"65px"}
+                    className=' rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
+                    src={userEditedPhotoURL}
+                  />
+                ) : (
                   <Image
                     width={"65px"}
                     height={"65px"}
                     className='absolute top-0  bg-white rounded-full border-solid border-gray-800 dark:border-slate-300 border-2 '
-                    src={userEditedPhotoURL}
+                    src={userPhotoURL}
                   />
                 )}
                 <div className='absolute top-5 left-5 p-1 bg-neutral-400 bg-opacity-80 rounded-full'>
@@ -222,7 +230,7 @@ function UsernameForm() {
         </div>
         <p className=' text-xs mb-4'>Drag n drop image.</p>
         <form className='mx-4' onSubmit={handleSubmit(onSubmit)}>
-          <h4 className='font-Montserrat mb-3 mx-2 text-left'>Name</h4>
+          <h4 className='font-Montserrat mb-3 mx-2 text-left'>Name *</h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
               className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
@@ -255,7 +263,7 @@ function UsernameForm() {
             userNameIsEmpty={userNameIsEmpty}
           />
 
-          <h4 className='font-Montserrat mb-3 mx-2 text-left'>About</h4>
+          <h4 className='font-Montserrat mb-3 mx-2 text-left'>About *</h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300  lg:max-w-lg lg:mx-auto'>
             <textarea
               className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
@@ -274,7 +282,7 @@ function UsernameForm() {
           </p>
 
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
-            Website or social link
+            Website or social link *
           </h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
@@ -289,7 +297,27 @@ function UsernameForm() {
           </p>
 
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
-            EVM Address (ETH, MATIC, BSC, ETC)
+            Type of creator
+          </h4>
+
+          <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300  lg:mx-auto'>
+            <select
+              {...register("creatorType")}
+              className='border-none focus:ring-0 w-full'
+            >
+              <option value='Content Creator'>Content Creator</option>
+              <option value='Artist'>Artist</option>
+              <option value='Writer'>Writer</option>
+              <option value='Musician'>Musician</option>
+              <option value='Gamer'>Gamer</option>
+              <option value='Developer'>Developer</option>
+              <option value='Community'>Community</option>
+              <option value='Other'>Other</option>
+            </select>
+          </div>
+
+          <h4 className='font-Montserrat mb-3 mx-2 text-left'>
+            EVM Address (ETH, MATIC, BSC, ETC) *
           </h4>
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <input
