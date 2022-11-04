@@ -97,6 +97,20 @@ export default function NavBar(props) {
             {!username && (
               <>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
+                  <Link href={"/feed"}>
+                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                      Latest Posts
+                    </a>
+                  </Link>
+                </li>
+                <li className='mx-2  text-sm hover:scale-105 transition-all'>
+                  <Link href={"/explore"}>
+                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                      Explore
+                    </a>
+                  </Link>
+                </li>
+                <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/faq"}>
                     <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       F.A.Q.

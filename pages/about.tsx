@@ -47,8 +47,8 @@ export default function Custom404() {
           <div className='mx-6'>
             <p className='text-gray-800 dark:text-slate-300 text-lg'>
               Get me pizza is built out of a personal need to allow my followers
-              to support me with small amounts of crypto in a more meaninful way
-              then just asking to gib money.
+              to support me with small amounts of crypto in a more meaningful
+              way than just asking to gib money.
               <br />
               <br />
               Then I thought... Hey, maybe artists, influencers, and other
@@ -56,8 +56,8 @@ export default function Custom404() {
               <br />
               <br />
               So I spent 1 month throughout the Moralis x Google Defining Defi
-              Hackathon building the basic features of GetMe.🍕 using next,
-              firebase, moralis and tailwindcss.
+              Hackathon building the basic features of GetMe.🍕 using Next,
+              Firebase, Moralis, Wagmi, RainbowKit, and Tailwindcss.
               <br />
               <br />
               That said, I intend to build upon this mvp by adding more features

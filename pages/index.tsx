@@ -30,6 +30,7 @@ export async function getServerSideProps() {
  * @param  {Array} props
  */
 export default function Home(props) {
+  const users = props.users;
   return (
     <div className=''>
       <Head>
@@ -111,7 +112,7 @@ export default function Home(props) {
 
           <nav className='pt-1 mb-5'>
             <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
-              <UsersFeed users={props} />
+              <UsersFeed users={users} />
             </ul>
           </nav>
         </section>
@@ -168,16 +169,18 @@ export default function Home(props) {
             <p className='mx-auto text-center max-w-[250px] font-Montserrat text-sm'>
               You can withdraw your crypto tips{" "}
               <span className='font-CircularMedium  '>anytime you want</span>,
-              while your supporter will get an NFT as a momento.
+              while your supporter will get{" "}
+              <span className='font-CircularMedium  '>$PIZZA coupons</span> as a
+              memento and to use on future features.
             </p>
           </div>
           <div className='pt-8 pb-10'>
             <GiCrossedChains className='mb-4 mx-auto text-center text-4xl text-orange-500' />
             <p className=' mx-auto text-center max-w-[250px] font-Montserrat text-sm'>
-              Tips and memo&apos;s are{" "}
+              Tips and memos are{" "}
               <span className='font-CircularMedium  '>transparent</span> and{" "}
               <span className='font-CircularMedium  '>securely stored</span>{" "}
-              on-chain.
+              on-chain in our smart contracts.
             </p>
           </div>
           <div className='text-center h-[50px] hover:scale-105 transition-all'>

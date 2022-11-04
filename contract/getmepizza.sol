@@ -1,46 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
-import './Base64.sol';
 
-// Create a small library to convert timestamp to readable date for the NFT.
-library toReadableDate {
-    uint constant SECONDS_PER_DAY = 24 * 60 * 60;
-    int constant OFFSET19700101 = 2440588;
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20FlashMint.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-    function _daysToDate(uint timestamp) internal pure returns (string memory) {
-        uint _days = timestamp / SECONDS_PER_DAY;
-        int __days = int(_days);
-
-        int L = __days + 68569 + OFFSET19700101;
-        int N = 4 * L / 146097;
-        L = L - (146097 * N + 3) / 4;
-        int _year = 4000 * (L + 1) / 1461001;
-        L = L - 1461 * _year / 4 + 31;
-        int _month = 80 * L / 2447;
-        int _day = L - 2447 * _month / 80;
-        L = _month / 11;
-        _month = _month + 2 - 12 * L;
-        _year = 100 * (N - 49) + _year + L;
-
-        string memory year = Strings.toString(uint(_year));
-        string memory month = Strings.toString(uint(_month));
-        string memory day = Strings.toString(uint(_day));
-
-        string memory result = string(abi.encodePacked(
-            day, '/', month, '/', year
-        ));
-
-        return result;
-    } 
-    
-}
-
-contract GetMePizza is ERC721, Ownable {
+contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
     using SafeMath for uint256;
     // Event to emit when a Memo is created.
     event NewMemo(
@@ -80,9 +49,28 @@ contract GetMePizza is ERC721, Ownable {
     uint256 internal currentTokenId;
     // CurrentAdmin.
     address public admin;
+    // Base Tip Dollar Amount
+    uint256 baseDollars = 1;
 
-    constructor(address _admin) ERC721("GetMePizza", "PIZZA") {
+    AggregatorV3Interface internal priceFeedUsd;
+
+    constructor(address _admin) ERC20("GetMePizza", "PIZZA") {
+        _mint(msg.sender, 1000000 * 10 ** decimals());
         admin = _admin;
+    }
+
+    /**
+     * Returns the latest amount of token for $0.1
+     */
+    function getLatestPrice() public view returns (uint256) {
+        (
+            /*uint80 roundID*/,
+            int price,
+            /*uint startedAt*/,
+            /*uint timeStamp*/,
+            /*uint80 answeredInRound*/
+        ) = priceFeedUsd.latestRoundData();
+        return 1000000000000000 / uint256(price);// add 0 to make it correct again
     }
 
     /**
@@ -91,11 +79,12 @@ contract GetMePizza is ERC721, Ownable {
     * @param _name name left by the tipper.
     * @param _message name left by the tipper.
     * @param _slices name of the message left by the buyer to the creator.
-    * @param _receipt bool as minting the receipt NFT is optional.
     */
-    function buyPizza(address _to, string memory _name, string memory _message, uint256 _slices, bool _receipt) public payable {
-        // Make sure value is more than 0.
-        require(msg.value > 0, "Can't eat for free. :(");
+    function buyPizza(address _to, string memory _name, string memory _message, uint256 _slices) public payable {
+        // Make sure value is $1 per slice using chainlink.  
+        require(msg.value == (getLatestPrice() * 10000000000 * _slices * baseDollars), "Costs a $1 per slice...");
+        // Memo must be less than 34 characters. 
+        require(bytes(_message).length < 34, "Your memo is too long");
         // Work out fee and creator tip based on amount tipped and current set feePercentage.
         uint256 fee = msg.value.mul(feePercantage).div(10000);
         uint256 creatorsTipAfterFee = msg.value.sub(fee);
@@ -117,13 +106,7 @@ contract GetMePizza is ERC721, Ownable {
 
         // Get current Token ID.
         currentTokenId++;
-
-        // mint receipt as onchain NFT (optional for tipper). 
-        if (_receipt) {
-            _safeMint(msg.sender, currentTokenId);
-        }
         
-
         // Add the memo to the tokenId mapping for the NFT.
         memoForToken[currentTokenId] = Memo(
             msg.sender,
@@ -145,8 +128,13 @@ contract GetMePizza is ERC721, Ownable {
             msg.value,
             _slices
         );
+
+        // mints 1 $pizza coin per slice. 
+        _mint(msg.sender, 1000000000000000000 * _slices);
     }
 
+    // CREATORS FUNCTION **
+     
     // Allows creators to withdraw tips.
     function withdrawTips() public  {
         require(creatorsPizzaMoney[msg.sender] > 0, "must have tips");
@@ -155,10 +143,15 @@ contract GetMePizza is ERC721, Ownable {
         payable(msg.sender).transfer(amount);
     }
 
+    // VIEW FUNCTION
+
     // Get an array of memos for a creator.
     function getMemos(address _creator) public view returns(Memo[] memory) {
         return memosForAddress[_creator];
     }
+
+
+    // ADMIN FUNCTIONS **
 
     // change the fee percantage (out of 10000 basis points).
     function setFee(uint256 _newFeePercentage) external {
@@ -166,8 +159,8 @@ contract GetMePizza is ERC721, Ownable {
         feePercantage = _newFeePercentage;
     }
 
-    // Allow the set admin to withdraw.
-    function getPlatformFees() external {
+    // Allow the admin to withdraw.
+    function withdrawPlatformFees() external {
         require(PlatformFees > 0, "no fees to claim atm");
         require (msg.sender == admin, "you not the admin");
         uint256 amount = PlatformFees;
@@ -175,103 +168,49 @@ contract GetMePizza is ERC721, Ownable {
         payable(admin).transfer(amount);
     }
 
+    // Allow admin to change the Base dollar amount for a pizza slice.
+    function setBaseDollars(uint256 _baseDollars) external {
+        require (msg.sender == admin, "you not the admin");
+        baseDollars = _baseDollars;
+    }
+
+    // Allow Adming to change PriceFeed.
+    function setPriceFeed(AggregatorV3Interface _priceFeedUsd) external  {
+        require (msg.sender == admin, "you not the admin");
+        priceFeedUsd = _priceFeedUsd;
+    }
+
+    // DEPLOYER FUNCTIONS **
+
     // Allow deployer to change Admin.
-    function changeAdmin(address _admin) external onlyOwner {
+    function setAdmin(address _admin) external onlyOwner {
         admin = _admin;
     }
-    
-    /**
-    * @dev gets the onchain SVG for a tokenID from the Memo struct from memoForToken mapping.
-    * @param _tokenId the token ID being requested.
-    */
-    function getReceiptSvg(uint256 _tokenId) public view returns(string memory) {
-        // get the Memo struct for _tokenId.
-        Memo memory currentMemo = memoForToken[_tokenId];
-        
-        // format the amounts to Strings.
-        string memory totalAmount = Strings.toString(currentMemo.amount);
-        string memory fee = Strings.toString(currentMemo.amount.mul(feePercantage).div(10000));
-        string memory creatorsTipAfterFee = Strings.toString(currentMemo.amount.sub(currentMemo.amount.mul(feePercantage).div(10000)));
-        
-        // Build the SVG.
-        string memory result = string(abi.encodePacked(    
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290.95 451.518"><defs><filter id="a" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="4.552"/></filter></defs><path style="filter:url(#a);fill:#4d4d4d" d="M297.37 300.94h269.1v429.67h-269.1z" transform="translate(-286.45 -290.01)"/><path style="fill:#fff" d="M299.51 304.75h269.1v429.67h-269.1z" transform="translate(-286.45 -290.01)"/>'
-            '<text style="font-size:30px;fill:#707070"  y="365.242" x="315.868" transform="translate(-231.45 -300.01)">GETME.',unicode"🍕",'</text>'
-            '<text style="font-size:9px;fill:#707070"  y="365.242" x="315.868" transform="translate(-243.45 -282.01)">YOUR FAV DIGITAL PIZZA HOUSE</text>'
-            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="375.242">CHK: ',Strings.toString(_tokenId),'</tspan></text>'
-            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="385.242">',toReadableDate._daysToDate(currentMemo.timestamp),'</tspan></text>'
-            '<text style="font-size:7px" y="365.242" x="315.868" transform="translate(-243.45 -258.01)"><tspan x="315.868" y="395.242">NAME: ',currentMemo.name,'</tspan></text>'
-            '<text style="font-size:13.109px;fill:#707188"  y="328.534" x="311.919" transform="translate(-246.45 -288.01)">'
-                '<tspan x="313.919" y="394.441">--------------------------</tspan>'
-                '<tspan x="311.919" y="454.712">Article</tspan>'
-                '<tspan x="425.919" y="454.712">Amount</tspan>'
-                '<tspan x="311.919" y="458.348">______</tspan>'
-                '<tspan x="425.919" y="458.348">_______</tspan>'
-                '<tspan x="311.919" y="488.619">Pizza Slices</tspan>'
-                '<tspan x="423.09" y="488.619">x ',Strings.toString(currentMemo.slices),'</tspan>'
-                '<tspan x="310.4" y="510.891">---------------------------</tspan>'
-                '<tspan x="311.919" y="538.526">GROSS</tspan>'
-                '<tspan x="421.919" y="538.526" style="font-size:4px">',creatorsTipAfterFee,'</tspan>'
-                '<tspan x="311.919" y="560.162">TAX (',Strings.toString(feePercantage / 100),'%)</tspan>'
-                '<tspan x="421.919" y="560.162" style="font-size:4px">',fee,'</tspan>'
-                '<tspan x="310.4" y="580.891">---------------------------</tspan>'
-                '<tspan x="311.919" y="603.797">TOTAL</tspan>'
-                '<tspan x="421.919" y="603.797" style="font-size:4px">',totalAmount,'</tspan>'
-                '<tspan x="320.6" y="625.619" style="font-size:5px">TO: ',toAsciiString(currentMemo.to),'</tspan>'
-                '<tspan x="312.6" y="635.619" style="font-size:5px">FROM: ',toAsciiString(currentMemo.from),'</tspan>'
-                '<tspan x="312.6" style="font-size:5px" y="665.619">YOUR MEMO: ',currentMemo.message,'</tspan>'
-            '</text></svg>'
-            ));
 
-        return result;
+
+
+    // MULTICHAIN FUNCTIONS ** 
+    address multichainaddy;
+
+    // Allow admin to set multichain address.
+    function setMultichainAddy(address _multichainaddy) external {
+        require (msg.sender == admin, "you not the admin");
+        multichainaddy = _multichainaddy;
     }
 
-   
-        
-    /**
-    * @dev Overrides the tokenURI function to return the onchain URI for a tokenId.
-    * @param tokenId the token ID being requested.
-    */
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(_exists(tokenId));
-        return
-            string(
-                abi.encodePacked(
-                    'data:application/json;base64,',
-                    Base64.encode(
-                        bytes(
-                            string(
-                                abi.encodePacked(
-                                    '{"name": "GetMe.Pizza Receipt", "description": "This is a GetMe.Pizza receipt", "image": "data:image/svg+xml;base64,',
-                                    Base64.encode(bytes(getReceiptSvg(tokenId))),
-                                    '"}'
-                                )
-                            )
-                        )
-                    )
-                )
-            );
+    function mint(address to, uint256 amount) external returns (bool) {
+        require (msg.sender == multichainaddy, "this is for multichain only");
+        _mint(to, amount);
+        return true;
     }
 
-    /**
-    * @dev Takes in an address and returns the address as a string.
-    * @param x the address you want to convert.
-    */
-    function toAsciiString(address x) internal pure returns (string memory) {
-    bytes memory s = new bytes(40);
-    for (uint i = 0; i < 20; i++) {
-        bytes1 b = bytes1(uint8(uint(uint160(x)) / (2**(8*(19 - i)))));
-        bytes1 hi = bytes1(uint8(b) / 16);
-        bytes1 lo = bytes1(uint8(b) - 16 * uint8(hi));
-        s[2*i] = char(hi);
-        s[2*i+1] = char(lo);            
+    function burn(address from, uint256 amount) external returns (bool) {
+        require (msg.sender == multichainaddy, "this is for multichain only");
+        require(from != address(0), "AnyswapV3ERC20: address(0x0)");
+        _burn(from, amount);
+        return true;
     }
-    return string(s);
-}
-    // Being used above to convert Bytes.
-    function char(bytes1 b) internal pure returns (bytes1 c) {
-    if (uint8(b) < 10) return bytes1(uint8(b) + 0x30);
-    else return bytes1(uint8(b) + 0x57);
-}
-    
+
+    address public immutable underlying = address(0);
+
 }

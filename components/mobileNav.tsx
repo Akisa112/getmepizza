@@ -7,8 +7,9 @@ import {
   RiFileLockFill,
   RiGalleryLine,
 } from "react-icons/ri";
-import { MdPersonOutline } from "react-icons/md";
-import { BsLightning } from "react-icons/bs";
+import { MdPersonOutline, MdPeopleOutline } from "react-icons/md";
+import { BsLightning, BsQuestionDiamond } from "react-icons/bs";
+import { GrArticle } from "react-icons/gr";
 import { ImEmbed2 } from "react-icons/im";
 import Link from "next/link";
 import { auth } from "../lib/firebase";
@@ -68,6 +69,19 @@ export default function MobileNav(props) {
             </a>
           </Link>
         </li>
+        <li className='text-sm flex'>
+          <GrArticle className='mr-2 text-lg' />
+          <Link className='' href='/feed'>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              Feed
+            </a>
+          </Link>
+        </li>
       </ul>
       <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>
         SETTINGS
@@ -89,6 +103,32 @@ export default function MobileNav(props) {
       </ul>
       <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>MORE</h4>
       <ul className='items-center justify-center space-y-4 '>
+        <li className='text-sm flex'>
+          <MdPeopleOutline className='mr-2 text-lg' />
+          <Link className='' href='/explore'>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              Explore
+            </a>
+          </Link>
+        </li>
+        <li className='text-sm flex'>
+          <BsQuestionDiamond className='mr-2 text-lg' />
+          <Link className='' href='/faq'>
+            <a
+              onClick={() => {
+                closeNav(false);
+              }}
+              className=' hover:text-orange-500 transition-all'
+            >
+              F.A.Q.
+            </a>
+          </Link>
+        </li>
         <li className='text-sm flex'>
           <RiLogoutBoxRLine className='mr-2 text-lg' />
           <p

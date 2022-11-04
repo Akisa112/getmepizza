@@ -77,7 +77,7 @@ export default function Dashboard({}) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43",
+    address: "0x8f9AeAd37C002d2FF07B6951b79D48E3Ae1aC38b",
     abi: [
       {
         inputs: [],
@@ -151,7 +151,7 @@ export default function Dashboard({}) {
                 TBNB{" "}
               </h4>
               <p className='mt-2 font-CircularMedium text-4xl'>
-                {earningsBinance}
+                {earningsBinance.toFixed(5)}...
               </p>
             </div>
             <div className='  m-5'>
@@ -162,7 +162,7 @@ export default function Dashboard({}) {
                 MATIC{" "}
               </h4>
               <p className='mt-2 font-CircularMedium text-4xl'>
-                {earningsPoly}{" "}
+                {earningsPoly.toFixed(5)}...
               </p>
             </div>
             <div className='  m-5'>
@@ -184,7 +184,11 @@ export default function Dashboard({}) {
             <div className='text-center mb-4'>
               <button
                 disabled={
-                  !write || isLoading || txLoading || currentChainEarnings === 0
+                  !write ||
+                  isLoading ||
+                  txLoading ||
+                  currentChainEarnings === 0 ||
+                  address !== userETH
                 }
                 className=' font-CircularMedium bg-yellow-300 rounded-full mt-3 py-3 h-[50px]  w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto disabled:hover:scale-100 hover:scale-105 transition-all dark:text-black'
               >
@@ -258,6 +262,7 @@ export default function Dashboard({}) {
           </div>
 
           <hr />
+
           {/* <div className='mt-10 m-5'>
             <p className='text-gray-500'>
               getme.pizza is currently invite only...

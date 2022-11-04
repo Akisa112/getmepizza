@@ -39,6 +39,7 @@ Wagmi - Web3 Interactions
 Rainbowkit - Wallet UI
 DiceBear - Default Profile Image Generator
 Current Blockchains - Polygon, Binance Smart Chain, Fantom
+Chainlink - Gets prices of native tokens and makes sure a slice costs $1 no matter what chain.
 
 ## FEATURES
 

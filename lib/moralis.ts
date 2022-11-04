@@ -84,7 +84,7 @@ export async function getMemos(ethAddress, chosenChain) {
 	},];
 
     const functionName = 'getMemos';
-    const address = '0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43';
+    const address = process.env.NEXT_PUBLIC_POLY_CONTRACT;
   
     let chain; 
     if (chosenChain === 'Polygon Mumbai') {
@@ -92,6 +92,7 @@ export async function getMemos(ethAddress, chosenChain) {
     }
     if (chosenChain === 'BSC Testnet') {
         chain = EvmChain.BSC_TESTNET
+		// chain = EvmChain.MUMBAI // FOR TESTING ON ONE CHAIN ONLY
     }
 
     ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
@@ -139,14 +140,14 @@ export async function getEarnings(ethAddress, chosenChain) {
 	}];
 
     const functionName = 'creatorsPizzaMoney';
-    const address = '0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43';
+    const address = process.env.NEXT_PUBLIC_POLY_CONTRACT;
   
     let chain; 
     if (chosenChain === 'Polygon Mumbai') {
         chain = EvmChain.MUMBAI
     }
     if (chosenChain === 'BSC Testnet') {
-        chain = EvmChain.BSC_TESTNET
+         chain = EvmChain.BSC_TESTNET
     }
     ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
 

@@ -61,11 +61,18 @@ export default function UserProfile({ user, posts }) {
           <div className='md:flex md:mx-auto justify-center'>
             <BuyPizza className='' user={user} />
             <div className='md:w-1/2 '>
-              <div className='mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
-                <p>{user.about}</p>
+              <div className=' mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
+                <p className='mx-2'>{user.about}</p>
                 <br />
-                <Link href={user.website}>
-                  <p className='text-orange-600'>{user.website}</p>
+                <Link target='_blank' href={user.website}>
+                  <a
+                    target='_blank'
+                    className='mx-2 text-orange-600 cursor-pointer'
+                  >
+                    {user.website.length > 46 &&
+                      `${user.website.substring(0, 47)}...`}
+                    {user.website.length < 47 && user.website}
+                  </a>
                 </Link>
               </div>
               <Supporters user={user} />

@@ -80,9 +80,9 @@ export default function Custom404() {
             <h1 className='mt-8 mb-2  font-bold text-xl'>Payments</h1>
             <p className=''>
               To make a payment to a creator on Get Me Pizza, you have to
-              connect your wallet. We use Moralis Auth SDK which provides us
-              with a token that represents your wallet, and allows us to suggest
-              a transaction to your wallet. Processing information about the
+              connect your wallet. We use Wagmi SDK which provides us with a
+              token that represents your wallet, and allows us to suggest a
+              transaction to your wallet. Processing information about the
               creators you support, the level at which you support them, what
               rewards you receive and how often you support them are all
               publicly available on the blockchain.

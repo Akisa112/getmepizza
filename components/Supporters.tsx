@@ -137,18 +137,28 @@ export default function Supporters(user) {
         key={"memo_" + i}
       >
         <div className=' flex justify-between'>
-          <p>
-            {memo[3]} {memo[4]}
-          </p>
-          <p className='text-xs  font-CircularMedium'>
-            {memo[5] / 1000000000000000000}{" "}
+          <p className=' '>{memo[4]}</p>
+          <p className='text-xs font-CircularMedium'>
+            {(memo[5] / 1000000000000000000).toFixed(5)}
+            {"... "}
             {chain === "Polygon Mumbai" && "MATIC"}{" "}
             {chain === "BSC Testnet" && "TBSC"}
           </p>
         </div>
-        <div className='text-left text-xs'>
-          <small>{createdAt(memo[2] * 1000).toString()}</small>
+        <div className='mt-2 flex justify-between text-xs'>
+          <small>
+            {createdAt(memo[2] * 1000)
+              .toString()
+              .slice(0, 34)}
+          </small>
+          <small>
+            {memo[3].length > 11
+              ? `${memo[3].slice(0, 10)}... bought ${memo[6]} 🍕`
+              : `${memo[3]} bought ${memo[6]} 🍕`}
+          </small>
         </div>
+
+        <small></small>
       </li>
     ));
 

@@ -7,6 +7,12 @@ export default function Footer() {
       <nav className='pt-10  pb-2 flex justify-center'>
         <ul className='flex items-center'>
           <li className='mx-2  text-sm hover:text-orange-500'>
+            <Link href={"/feed"}>FEED</Link>
+          </li>
+          <li className='mx-2  text-sm hover:text-orange-500'>
+            <Link href={"/explore"}>EXPLORE</Link>
+          </li>
+          <li className='mx-2  text-sm hover:text-orange-500'>
             <Link href={"/faq"}>FAQ</Link>
           </li>
           <li className='mx-2  text-sm  hover:text-orange-500'>
@@ -20,7 +26,7 @@ export default function Footer() {
           </li>
         </ul>
       </nav>
-      <div className='mt-2 w-2 mx-auto'>
+      <div className='mt-2 w-10 text-center mx-auto'>
         <Link href={"https://twitter.com/getme_pizza"}>
           <a className='text-2xl hover:text-orange-500 cursor-pointer'>
             <FiTwitter className='mx-auto' />

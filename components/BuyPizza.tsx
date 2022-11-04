@@ -1,28 +1,29 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton, connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {
   useAccount,
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
   useNetwork,
+  useContractRead,
 } from "wagmi";
 import { useState, useEffect, useContext } from "react";
 import debounce from "lodash.debounce";
 import { ethers, BigNumber } from "ethers";
-
+import Link from "next/link";
 import { toast } from "react-hot-toast";
 
 import { successTxContext } from "./UserProfile";
+import Image from "next/image";
+import MetaMaskIcon from "../public/metamaskicon.webp";
 
 export default function BuyPizza(user) {
   let isConnected = null;
   isConnected = useAccount();
   const [donaterName, setDonaterName] = useState("@someone");
-  const [memo, setMemo] = useState("...just bought you a pizza frend.");
+  const [memo, setMemo] = useState("...just bought you a pizza.");
   const [finalDonaterName, setFinalDonaterName] = useState("@someone");
-  const [finalMemo, setFinalMemo] = useState(
-    "...just bought you a pizza frend."
-  );
+  const [finalMemo, setFinalMemo] = useState("...just bought you a pizza.");
   const [slices, setSlices] = useState(1);
 
   const { setSuccesfullTx } = useContext(successTxContext);
@@ -42,14 +43,43 @@ export default function BuyPizza(user) {
   }, [donaterName, memo]);
 
   const { chain } = useNetwork();
+  const [chainSymbol, setChainSybol] = useState("");
+
+  useEffect(() => {
+    try {
+      setChainSybol(chain.nativeCurrency.symbol);
+    } catch (error) {}
+  }, [chain]);
+
+  const {
+    data: ReadDataPrice,
+    isError: isErrorPrice,
+    isLoading: isLoadingPrice,
+  } = useContractRead({
+    address: process.env.NEXT_PUBLIC_POLY_CONTRACT,
+    abi: [
+      {
+        inputs: [],
+        name: "getLatestPrice",
+        outputs: [
+          {
+            internalType: "int256",
+            name: "",
+            type: "int256",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+    functionName: "getLatestPrice",
+    watch: true,
+  });
   let value = 0;
   try {
-    console.log(chain.name);
-    if (chain.name === "Polygon Mumbai") {
-      value = 0.005; // 5 for mainnet
-    } else if (chain.name === "BSC Testnet") {
-      value = 0.015;
-    }
+    value = ReadDataPrice.toNumber() * 10000000000;
+
+    console.log(BigNumber.from((value * slices).toString()));
   } catch (error) {}
 
   const {
@@ -57,7 +87,7 @@ export default function BuyPizza(user) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43",
+    address: process.env.NEXT_PUBLIC_POLY_CONTRACT,
     abi: [
       {
         inputs: [
@@ -81,11 +111,6 @@ export default function BuyPizza(user) {
             name: "_slices",
             type: "uint256",
           },
-          {
-            internalType: "bool",
-            name: "_receipt",
-            type: "bool",
-          },
         ],
         name: "buyPizza",
         outputs: [],
@@ -95,14 +120,13 @@ export default function BuyPizza(user) {
     ],
     functionName: "buyPizza",
     overrides: {
-      value: ethers.utils.parseEther((value * slices).toString()),
+      value: BigNumber.from((value * slices).toString()),
     },
     args: [
       user.user.ethAddress,
       finalDonaterName,
       finalMemo,
       BigNumber.from(slices),
-      true,
     ],
     enabled: true,
   });
@@ -113,7 +137,7 @@ export default function BuyPizza(user) {
     hash: data?.hash,
     onSuccess(data) {
       toast.success(
-        `You have tipped ${user.user.displayName}! \n We have sent you an NFT as receipt...`,
+        `You have tipped ${user.user.displayName}! \n We have sent you ${slices} $pizza points!`,
         { duration: 3000 }
       );
       setSuccesfullTx(true);
@@ -123,13 +147,33 @@ export default function BuyPizza(user) {
     },
   });
 
-  let preppedError;
-  try {
-    // preppedError = `${prepareError.data.message.substring(4, 40)}...`;
-  } catch (error) {}
+  const addTokenToMM = async () => {
+    try {
+      const { ethereum } = window;
+      await ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: "0x8f9AeAd37C002d2FF07B6951b79D48E3Ae1aC38b", // ERC20 token address
+            symbol: `PIZZA`,
+            decimals: 18,
+            image:
+              "https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f355.png",
+          },
+        },
+      });
+    } catch (ex) {
+      // We don't handle that error for now
+      // Might be a different wallet than Metmask
+      // or user declined
+      console.error(ex);
+    }
+  };
 
+  console.log(prepareError);
   return (
-    <div className='mt-1  m-4   md:w-[400px] h-[530px] flex flex-col justify-center  border-2 dark:bg-zinc-800 border-gray-200 rounded-lg '>
+    <div className='mt-1  mx-4   md:w-[400px] h-[550px] flex flex-col justify-center  border-2 dark:bg-zinc-800 border-gray-200 rounded-lg '>
       <h4 className='font-CircularMedium text-2xl'>
         Buy <span className='text-gray-500'>{user.user.displayName}</span> a
         pizza
@@ -188,24 +232,28 @@ export default function BuyPizza(user) {
             placeholder={donaterName}
             onChange={(e) => setDonaterName(e.target.value)}
             value={donaterName}
+            maxLength={33}
           />
         </div>
         <div className='mx-4'>
-          <textarea
-            className='min-w-full mt-3 border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
+          <input
+            className='min-w-full mt-3 p-2 border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
             placeholder={memo}
             onChange={(e) => setMemo(e.target.value)}
             value={memo}
+            {...{
+              maxLength: 33,
+            }}
           />
         </div>
-        <div id='buypizzaconnecter' className='mt-3 mx-4'>
+        <div id='buypizzaconnecter' className='mt-4 mx-4'>
           <ConnectButton />
         </div>
         {isConnected && (
           <button
             disabled={!write || txLoading || isLoading}
             type='submit'
-            className='font-CircularMedium bg-yellow-300 rounded-full mt-5 py-3 w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black disabled:scale-100'
+            className='font-CircularMedium bg-yellow-300 rounded-full mt-3 py-3 w-72 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black disabled:scale-100'
           >
             {isLoading && (
               <>
@@ -251,13 +299,44 @@ export default function BuyPizza(user) {
                 </div>
               </>
             )}
-            {!isLoading && !txLoading && "Support"}
+            {!chainSymbol && `Support $${slices}`}
+            {!isLoading &&
+              !txLoading &&
+              chainSymbol &&
+              `Support $${slices} 
+                
+                (${((value * slices) / 1000000000000000000).toFixed(
+                  5
+                )}..) ${chainSymbol}`}
           </button>
         )}
-        <p className='mt-4 uppercase text-xs font-CircularMedium text-red-600'>
-          {preppedError}
-        </p>
+        <div className='relative inline-block tooltip'>
+          <p className='mt-4 uppercase text-xs font-CircularMedium text-green-600 cursor-help'>
+            Tip {user.user.displayName} ${slices} & receive {slices} $Pizza
+            Points*
+          </p>
+          <div className='flex flex-col p-4 top-8 bg-black bg-opacity-90 text-white w-60 h-30 rounded-md z-20 absolute right-3 invisible tooltip-item transition-all '>
+            <p className='font-CircularMedium text-sm'>
+              Pizza points can be collected, traded and used in our ecosystem.{" "}
+              <Link href='./faq'>
+                <a className='text-orange-600 cursor-pointer'>Learn More</a>
+              </Link>
+            </p>
+          </div>
+        </div>
       </form>
+      {isConnected && (
+        <button
+          className='w-[160px] flex items-center justify-center mx-auto mt-2 p-1 text-xs font-CircularMedium bg-yellow-200 rounded-full hover:scale-105 transition-all'
+          onClick={() => addTokenToMM()}
+        >
+          {" "}
+          <span className='mt-[3px]'>
+            <Image width={15} height={15} src={MetaMaskIcon} />
+          </span>
+          <span className='ml-2 '>Add $PIZZA Points</span>
+        </button>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function UsersFeed({ users }) {
   return users
-    ? users.users.map((user) => <UserItem key={user.username} user={user} />)
+    ? users.map((user) => <UserItem key={user.username} user={user} />)
     : null;
 }
 

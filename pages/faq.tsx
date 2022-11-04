@@ -42,8 +42,8 @@ export default function FAQ() {
               Frequently Asked Questions
             </h1>
             <p className='pt-8 px-2 py-8 max-w-sm mx-auto text-center text-gray-800 dark:text-slate-300 font-Montserrat font-bold leading-7 text-lg md:text-xl md:max-w-md lg:max-w-4xl lg:text-2xl lg:px-40'>
-              If you can&apos;t find an answer that you&apos;re looking for, hit
-              me up on twitter @elonsdev
+              If you can&apos;t find the answer that you&apos;re looking for,
+              hit me up on twitter @elonsdev
             </p>
 
             <div className=' mx-2 font-CircularMedium bg-yellow-300 rounded-full text-lg  py-3  cursor-pointer dark:text-black'>
@@ -62,46 +62,53 @@ export default function FAQ() {
             <h1 className='mt-8 mb-2  font-bold text-xl'>When 🍕?</h1>
             <p className=' '>
               Get me pizza is built out of a personal need to allow my followers
-              to support me with small amounts of crypto in a more meaninful way
-              then just asking to gib moneys. Then I thought... Hey, maybe
+              to support me with small amounts of crypto in a more meaningful
+              way than just asking to gib moneys. Then I thought... Hey, maybe
               artists, influencers, and other creators could use this too.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Why 🍕?</h1>
             <p className=''>
-              Short answer: Who doesn&apos;t like Pizza? Without pizza we would
+              Short answer: Who doesn&apos;t like Pizza? Without pizza, we would
               have no Bitcorns...
               <br />
               <br /> Longer answer: I thought it would be fun to allow
-              supporters to tip in pizza slice value instead of dollars and
-              mints the supporter an NFT that shows their support for the
-              creator. I want to expand the idea into token gating posts and
-              content and allow web3 creators to untap their full value
-              creation.
+              supporters to tip in pizza slice value instead of dollars and mint
+              the supporter a $PIZZA coupons that shows their support for the
+              creator. I want to expand the idea into token-gating posts and
+              content, creating an economy around $PIZZA coupons, and allow web3
+              creators to un-tap their full value creation.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               How do I get paid in 🍕?
             </h1>
             <p className=''>
-              Every time a supporter tips you a slice they get an NFT proving
-              their support and the crypto goes into a smart contract mapped to
-              your ETH address. You can withdraw these funds anytime from your
-              dashboard or directly from the smart contract. You don&apos;t
-              actually get pizza, but you could buy yourself one, or anything
-              else, once you withdraw your funds.
+              Every time a supporter tips you a $1 slice they get 1 $PIZZA
+              coupon proving their support and the crypto goes into a smart
+              contract mapped to your ETH address. You can withdraw these funds
+              anytime from your dashboard or directly from the smart contract.
+              You don&apos;t actually get pizza, but you could buy yourself one,
+              or anything else, once you withdraw your funds.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               How can my fans pay?
             </h1>
             <p className=''>
               Currently support is available to a wide range of blockchains
-              thanks to Axelar, the multichain messaging protocol, namely: ETH,
-              BSC, POLYGON, SOL, AVAX... more coming soon.
+              namely: BSC, POLYGON & FANTOM... more coming soon.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>Is there a fee?</h1>
             <p className=''>
               It is completely free to sign up and create posts. The smart
-              contract takes 5% on every tip to pay for developement and
-              servers.
+              contract takes 5% on every tip to pay for development and servers.
+            </p>
+            <h1 className='mt-8 mb-2  font-bold text-xl'>
+              What are $PIZZA coupons?
+            </h1>
+            <p className=''>
+              Pizza coupons are token that supporters receive when tipping a
+              creator. They are cross-chain and can be swapped between chains on
+              multichain.app. $PIZZA will be used on future features such as
+              buying digital items from creators and minting getme.pizza NFTs.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               Is it safe to connect a wallet to this site?
@@ -116,8 +123,8 @@ export default function FAQ() {
             </h1>
             <p className=''>
               This website doesn&apos;t track ad data or serve ads and tips are
-              clearly visible on the blockchain. Your posts are stored in a
-              secure Firebase storage which can be retrieved on request.
+              clearly visible on the blockchain. Your posts are stored in secure
+              Firebase storage which can be retrieved on request.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               Hows this site different?
@@ -137,7 +144,7 @@ export default function FAQ() {
               </Link>
               . Wanna help out or fork the project? Get hold of me on
               <Link href='https://twitter.com/elonsdev'>
-                <a className='hover:text-orange-600'> twitter </a>
+                <a className='hover:text-orange-600'> Twitter </a>
               </Link>
               or grab the code on
               <Link href='https://github.com/elonsdev/getmepizza-dapp'>
