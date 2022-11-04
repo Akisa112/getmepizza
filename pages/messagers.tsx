@@ -1,11 +1,10 @@
 import PoweredBy from "../components/poweredby";
 import { UserContext } from "../lib/context";
-import { useEffect, useContext, useCallback, useState } from "react";
-import { Wallet } from "@rainbow-me/rainbowkit";
+import { useContext } from "react";
+
 import AuthCheck from "../components/AuthCheck";
 
 import SideNav from "../components/sideNav";
-import { Launcher, Window } from "@relaycc/receiver";
 
 export default function MessagePage({}) {
   const { username } = useContext(UserContext);
