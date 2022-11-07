@@ -94,7 +94,7 @@ const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
 );
 
 const Alpha = () => (
-  <div className='py-2  font-CircularMedium bg-red-200 w-full text-center'>
+  <div className='py-2  font-CircularMedium bg-red-200 w-full text-center dark:text-black'>
     <p className='mx-2'>
       THIS IS AN <span className='font-extrabold text-lg'>ALPHA 0.2</span>{" "}
       CURRENTLY RUNNING ON BSC & POLY TESTNETS. MAINNETS COMING SOON.
@@ -135,6 +135,7 @@ function MyApp({ Component, pageProps, router }) {
             }}
           >
             <UserContext.Provider value={userData}>
+              <Alpha />
               <NavBar changeMode={changeMode} darkMode={darkMode} />
 
               <motion.div
