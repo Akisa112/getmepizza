@@ -2,6 +2,7 @@ import {
   auth,
   firestore,
   googleAuthProvider,
+  twitterAuthProvider,
   serverTimestamp,
 } from "../lib/firebase";
 
@@ -50,7 +51,6 @@ export default function Enter() {
 
 // Sign in with Google button
 function SignInButton(username) {
-  const router = useRouter();
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
     /* if (username !== "name") {
@@ -62,14 +62,36 @@ function SignInButton(username) {
     } */
   };
 
+  const signInWithTwitter = async () => {
+    await auth.signInWithPopup(twitterAuthProvider);
+    /* if (username !== "name") {
+      try {
+        router.push(`/dashboard`);
+      } catch (error) {
+        console.log(error);
+      }
+    } */
+  };
+
   return (
-    <button
-      className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all dark:text-black'
-      onClick={signInWithGoogle}
-    >
-      Sign in with <Image width={"18px"} height={"18px"} src={"/google.png"} />
-      oogle
-    </button>
+    <>
+      <button
+        className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all dark:text-black'
+        onClick={signInWithGoogle}
+      >
+        Sign in with{" "}
+        <Image width={"18px"} height={"18px"} src={"/google.png"} />
+        oogle
+      </button>
+      <br />
+      <br />
+      <button
+        className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all dark:text-black'
+        onClick={signInWithTwitter}
+      >
+        Sign in with Twitter
+      </button>
+    </>
   );
 }
 
@@ -191,7 +213,7 @@ function UsernameForm() {
 
   return (
     !username && (
-      <section className='w-[450px]'>
+      <section className='lg:w-[450px]'>
         <h1 className='text-3xl mb-16'>Complete your page</h1>
         <div className='w-16 mb-2 border-none mx-auto cursor-pointer'>
           <div {...getRootProps()}>
@@ -243,12 +265,12 @@ function UsernameForm() {
           </p>
 
           <h4 className='font-Montserrat mb-3 mx-2 text-left'>
-            GetMe.Pizza link
+            GetMe.Pizza link *
           </h4>
           <div className='mx-2 text-left py-2 px-4 rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300 lg:max-w-lg lg:mx-auto'>
             <span>getme.pizza/</span>
             <input
-              className='border-none focus:ring-0  dark:bg-zinc-800'
+              className='w-[180px] border-none focus:ring-0  dark:bg-zinc-800'
               name='username'
               placeholder='yourname'
               value={formValueUserName}
