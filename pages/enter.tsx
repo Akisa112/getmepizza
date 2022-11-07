@@ -62,17 +62,6 @@ function SignInButton(username) {
     } */
   };
 
-  const signInWithTwitter = async () => {
-    await auth.signInWithPopup(twitterAuthProvider);
-    /* if (username !== "name") {
-      try {
-        router.push(`/dashboard`);
-      } catch (error) {
-        console.log(error);
-      }
-    } */
-  };
-
   return (
     <>
       <button
@@ -82,14 +71,6 @@ function SignInButton(username) {
         Sign in with{" "}
         <Image width={"18px"} height={"18px"} src={"/google.png"} />
         oogle
-      </button>
-      <br />
-      <br />
-      <button
-        className=' bg-white rounded-full text-lg  py-2 px-8 text-center lg:inline hover:text-xl hover:scale-105 transition-all dark:text-black'
-        onClick={signInWithTwitter}
-      >
-        Sign in with Twitter
       </button>
     </>
   );
