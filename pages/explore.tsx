@@ -55,7 +55,7 @@ export default function Explore(props) {
 
         <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
-      <main className='min-h-[calc(100vh-163px)] max-w-[1100px] mx-auto flex flex-col justify-between'>
+      <main className='min-h-[calc(100vh-163px)] max-w-[1100px] mx-auto mt-12 flex flex-col justify-between'>
         <section className='px-3 md:px-20  dark:text-slate-50 '>
           <h1 className='font-CircularMedium'>LATEST CREATORS</h1>
           <nav className='pt-1 mb-5'>

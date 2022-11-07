@@ -20,7 +20,7 @@ export default function NavBar(props) {
   const darkMode = props.darkMode;
 
   return (
-    <main className='bg-none   md:pt-5 font-CircularMedium '>
+    <main className='bg-none   md:pt-5 font-CircularMedium tracking-wide'>
       <section className='px-3 py-4 md:bg-white md:dark:bg-zinc-800   md:px-5  lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (

@@ -14,7 +14,7 @@ function UserItem({ user, SelectedFeed }) {
       <li className='mx-2 px-1 py-4  snap-center min-w-fit hover:scale-105 transition-all'>
         <Link href={`/${user.username}`}>
           <img
-            className='cursor-pointer h-[150px] w-[150px]'
+            className='rounded-full cursor-pointer h-[150px] w-[150px]'
             referrerPolicy='no-referrer'
             width={"150px"}
             height={"150px"}

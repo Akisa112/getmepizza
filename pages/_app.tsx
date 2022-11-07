@@ -135,7 +135,6 @@ function MyApp({ Component, pageProps, router }) {
             }}
           >
             <UserContext.Provider value={userData}>
-              <Alpha />
               <NavBar changeMode={changeMode} darkMode={darkMode} />
 
               <motion.div

@@ -7,7 +7,9 @@ import { TbHandClick } from "react-icons/tb";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { GiCrossedChains } from "react-icons/gi";
 import buymepizza from "../public/buymepizzacomponent.png";
+import buymepizzadark from "../public/buymepizzacomponentdark.png";
 import pizzasupporters from "../public/pizzasupporters.png";
+import pizzasupportersdark from "../public/pizzasupportersdark.png";
 import Image from "next/image";
 
 // Set a limit for getting users to display to 10 for now.
@@ -72,10 +74,10 @@ export default function Home(props) {
       <main className='-mt-8 font-CircularMedium lg:max-w-5xl lg:mx-auto'>
         <section className='px-3 md:px-20'>
           <div>
-            <h1 className='text-3xl font-bold text-center px-2 py-2 mt-8 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 '>
+            <h1 className='text-3xl font-bold text-center px-2 py-2 mt-8 leading-10 md:text-4xl md:max-w-lg mx-auto lg:max-w-4xl lg:text-6xl lg:pt-14 tracking-wide'>
               We can all use a slice of 🍕 sometimes...
             </h1>
-            <p className='pt-8 px-2 py-8 max-w-sm mx-auto text-center text-gray-800 font-Montserrat font-bold leading-7 text-lg md:text-xl md:max-w-md lg:max-w-4xl lg:text-2xl lg:px-40 dark:text-slate-100'>
+            <p className='pt-8 px-2 py-8 max-w-sm mx-auto text-center text-gray-800 font-Montserrat font-bold leading-9 text-lg md:text-xl md:max-w-md lg:max-w-4xl lg:text-2xl lg:px-40 dark:text-slate-100 tracking-wide'>
               It all started with the pizza, so get tipped the crypto way...
               with pizza of course.
             </p>
@@ -100,15 +102,15 @@ export default function Home(props) {
                 Start my page
               </div>
             </Link>
-            <p className=' px-2 py-4 text-center text-gray-800 font-Montserrat font-bold leading-7 text-sm dark:text-slate-100'>
+            <p className=' px-2 py-4 text-center text-gray-800 font-Montserrat font-bold leading-7 text-sm dark:text-slate-100 tracking-wide'>
               *It&apos;s free and takes only a minute.
             </p>
           </div>
         </section>
 
         {/* Creators Section */}
-        <section className='px-3 md:px-20 dark:text-slate-50'>
-          <h1>LATEST CREATORS</h1>
+        <section className='px-3 md:px-20 dark:text-slate-50 '>
+          <h1 className='tracking-wider'>LATEST CREATORS</h1>
 
           <nav className='pt-1 mb-5'>
             <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
@@ -118,7 +120,7 @@ export default function Home(props) {
         </section>
 
         {/* Info Section */}
-        <section className='bg-yellow-50 pb-10 rounded-3xl dark:bg-yellow-200'>
+        <section className='bg-yellow-50 pb-10 rounded-3xl dark:bg-yellow-300'>
           <div className='px-3 md:px-20'>
             <h4 className='text-center pt-10 text-gray-500 pb-5 tracking-wide'>
               TIP
@@ -133,12 +135,17 @@ export default function Home(props) {
               account.
             </p>
             <div className='flex mt-8'>
-              <div className='-rotate-2'>
+              <div className='-rotate-2 dark:hidden'>
                 <Image src={buymepizza} />
               </div>
-
-              <div className='display flex flex-col justify-center rotate-3'>
+              <div className='-rotate-2 hidden dark:block'>
+                <Image src={buymepizzadark} />
+              </div>
+              <div className='display flex flex-col justify-center rotate-3 dark:hidden'>
                 <Image src={pizzasupporters} />
+              </div>
+              <div className='display flex-col justify-center rotate-3 hidden dark:flex'>
+                <Image src={pizzasupportersdark} />
               </div>
             </div>
           </div>
@@ -153,7 +160,7 @@ export default function Home(props) {
 
         {/* Action Section */}
         <section className='pt-10 mb-5 dark:text-slate-50'>
-          <h2 className='text-3xl font-bold text-center px-2 leading-10 py-5'>
+          <h2 className='text-3xl font-bold text-center px-2 leading-10 py-5 tracking-wide'>
             Made for web3 creators
           </h2>
           <div className='pt-8 '>

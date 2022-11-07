@@ -3,7 +3,7 @@ import { FiTwitter } from "react-icons/fi";
 
 export default function Footer() {
   return (
-    <section className='font-CircularMedium px-3 pb-8 md:px-20 dark:text-slate-50'>
+    <section className='font-CircularMedium px-3 pb-8 md:px-20 dark:text-slate-50 tracking-wider'>
       <nav className='pt-10  pb-2 flex justify-center'>
         <ul className='flex items-center'>
           <li className='mx-2  text-sm hover:text-orange-500'>

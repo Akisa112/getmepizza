@@ -20,7 +20,7 @@ export default function SideNav(props) {
   const username = props.username;
 
   return (
-    <div className='m-8 font-CircularMedium mt-16 dark:text-slate-50'>
+    <div className='m-8 font-CircularMedium mt-16 dark:text-slate-50 tracking-wide'>
       <ul className='items-center justify-center space-y-4  '>
         <li className='text-sm flex'>
           <BiHome className='mr-2 text-lg' />
