@@ -2,7 +2,7 @@ export default function PageLoader() {
   return (
     <main className='h-[calc(100vh-163px)] flex flex-col  '>
       <div className='text-center'>
-        <div className='loading' aria-label='Loading'>
+        <div className='loading animate-pulse' aria-label='Loading'>
           <div className=''></div>
           <div className='pizza' aria-hidden='true'>
             <div className='pizza_piece'>
