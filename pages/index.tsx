@@ -67,8 +67,6 @@ export default function Home(props) {
           property='twitter:image'
           content='https://i.imgur.com/nFZLBWm.png'
         />
-
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
 
       <main className='-mt-8 font-CircularMedium lg:max-w-5xl lg:mx-auto'>

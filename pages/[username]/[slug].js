@@ -88,7 +88,7 @@ export default function Post(props) {
           property='twitter:image'
           content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${post.title}&link=${post.slug}`}
         />
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' /> 
+        
       </Head>
     <main className='flex flex-col min-h-[calc(100vh-163px)] justify-between'>
  

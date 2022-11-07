@@ -82,8 +82,6 @@ export default function Feed(props) {
           property='twitter:image'
           content='https://i.imgur.com/nFZLBWm.png'
         />
-
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
       <main className='min-h-[calc(100vh-163px)] max-w-2xl mx-auto flex flex-col justify-between'>
         <PostFeed posts={posts} admin={false} />

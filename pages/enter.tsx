@@ -305,7 +305,7 @@ function UsernameForm() {
           <div className='mx-2 text-center py-2  rounded-lg bg-white dark:bg-zinc-800 mb-4 text-lg border-2 border-gray-800 dark:border-slate-300  lg:mx-auto'>
             <select
               {...register("creatorType")}
-              className='border-none focus:ring-0 w-full'
+              className='w-full px-4 border-none focus:ring-0 dark:bg-zinc-800'
             >
               <option value='Content Creator'>Content Creator</option>
               <option value='Artist'>Artist</option>

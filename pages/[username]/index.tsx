@@ -71,7 +71,6 @@ export default function UserProfilePage({ user, posts }) {
           property='twitter:image'
           content={`https://getmepizza-dapp.vercel.app/api/ogpages?name=${user.displayName}&link=${user.username}&photo=${user.photoURL}`}
         />
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
       <main className='min-h-[calc(100vh-163px)] flex flex-col justify-between'>
         <UserProfile user={user} posts={posts} />

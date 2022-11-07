@@ -52,8 +52,6 @@ export default function Explore(props) {
           property='twitter:image'
           content='https://i.imgur.com/MoVLaGP.png'
         />
-
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
       <main className='min-h-[calc(100vh-163px)] max-w-[1100px] mx-auto mt-12 flex flex-col justify-between'>
         <section className='px-3 md:px-20  dark:text-slate-50 '>

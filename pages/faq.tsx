@@ -32,8 +32,6 @@ export default function FAQ() {
           property='twitter:image'
           content='https://i.imgur.com/nFZLBWm.png'
         />
-
-        <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
       <main className=' flex flex-col justify-between '>
         <section className='px-3 py-6 mb-6 md:px-20 lg:max-w-5xl lg:mx-auto '>
