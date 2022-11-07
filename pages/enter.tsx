@@ -29,7 +29,7 @@ export default function Enter() {
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
   return (
-    <main className=' flex flex-col min-h-[calc(100vh-163px)] font-CircularMedium  bg-slate-50  dark:bg-zinc-900'>
+    <main className=' flex flex-col min-h-[calc(100vh-163px)] font-CircularMedium '>
       <div className='mx-auto text-center mt-20 lg:max-w-5xl lg:mx-auto'>
         {user ? (
           !username ? (

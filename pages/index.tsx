@@ -96,7 +96,7 @@ export default function Home(props) {
             </div>
 
             <Link href='/enter'>
-              <div className='mx-2 bg-yellow-300 rounded-full text-lg  py-3 text-center lg:hidden'>
+              <div className='mx-2 bg-yellow-300 rounded-full text-lg  py-3 text-center lg:hidden dark:text-black'>
                 Start my page
               </div>
             </Link>

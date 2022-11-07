@@ -133,7 +133,7 @@ export default function Supporters(user) {
     .slice((page - 1) * memePerPage, page * memePerPage)
     .map((memo, i) => (
       <li
-        className='mt-1 mx-4 p-2  border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
+        className='mt-1 mx-4 p-2  ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-lg'
         key={"memo_" + i}
       >
         <div className=' flex justify-between'>
@@ -163,7 +163,7 @@ export default function Supporters(user) {
     ));
 
   const noMemsLis = (
-    <div className='className=mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
+    <div className='className=mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-2xl'>
       <h1 className='font-CircularMedium'>
         {user.user.displayName} has no tips yet on {chain} yet... <br />
         Buy {user.user.displayName} a slice and make their day!

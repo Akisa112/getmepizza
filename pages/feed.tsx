@@ -86,12 +86,11 @@ export default function Feed(props) {
         <link rel='icon' href='https://i.imgur.com/FO1GnPi.jpg' />
       </Head>
       <main className='min-h-[calc(100vh-163px)] max-w-2xl mx-auto flex flex-col justify-between'>
-        <div className='text-center'>
-          <PostFeed posts={posts} admin={false} />
-
+        <PostFeed posts={posts} admin={false} />
+        <div className='text-center mx-auto w-[250px]'>
           <button
             disabled={postsEnd || loading}
-            className='font-CircularMedium bg-yellow-300 disabled:bg-gray-300 disabled:hover:scale-100 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto dark:text-black hover:scale-105 transition-all'
+            className=' font-CircularMedium bg-yellow-300 disabled:bg-gray-300 disabled:hover:scale-100 rounded-full mt-6 py-3 min-w-full text-center md:max-w-xs md:mx-auto dark:text-black hover:scale-105 transition-all'
             onClick={getMorePosts}
           >
             {postsEnd ? (

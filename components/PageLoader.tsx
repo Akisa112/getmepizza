@@ -1,6 +1,6 @@
 export default function PageLoader() {
   return (
-    <main className='h-[calc(100vh-163px)] flex flex-col  dark:bg-zinc-900'>
+    <main className='h-[calc(100vh-163px)] flex flex-col  '>
       <div className='text-center'>
         <h1 className='mt-32 font-Montserrat text-gray-500 font-bold text-center text-xl'>
           <svg

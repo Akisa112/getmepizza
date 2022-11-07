@@ -139,40 +139,40 @@ export default function Dashboard({}) {
             </div>
           </div>
           <hr />
-          <h4 className='mt-8 mx-4 font-CircularMedium text-xl'>
+          <h4 className='mt-8 mx-4 font-CircularMedium text-xl text-center lg:text-left'>
             Available to withdraw:
           </h4>
-          <div className='flex justify-between '>
-            <div className='  m-5'>
+          <div className='lg:flex  lg:justify-between '>
+            <div className='text-center lg:text-left m-5'>
               <h4 className='font-CircularMedium '>
                 <span className='text-xs mr-2 align-bottom '>
                   <Image width='20px' height='20px' src={BinanceLogo} />
                 </span>
                 TBNB{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-4xl'>
+              <p className='mt-2 font-CircularMedium text-2xl'>
                 {earningsBinance.toFixed(5)}...
               </p>
             </div>
-            <div className='  m-5'>
+            <div className='text-center lg:text-left m-5'>
               <h4 className='font-CircularMedium '>
                 <span className='text-xs mr-2 align-bottom '>
                   <Image width='20px' height='20px' src={PolygonLogo} />
                 </span>
                 MATIC{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-4xl'>
+              <p className='mt-2 font-CircularMedium text-2xl'>
                 {earningsPoly.toFixed(5)}...
               </p>
             </div>
-            <div className='  m-5'>
+            <div className='text-center lg:text-left m-5'>
               <h4 className='font-CircularMedium '>
                 <span className='text-xs mr-2 align-bottom '>
                   <Image width='20px' height='20px' src={FantomLogo} />
                 </span>
                 FTM{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-4xl'>0</p>
+              <p className='mt-2 font-CircularMedium text-2xl'>0</p>
             </div>
           </div>
           <form

@@ -14,7 +14,7 @@ function PostItem({ post, admin }) {
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
   return (
-    <div className='mt-6 mx-3 text-left px-3 py-2 border-2  border-gray-200 rounded-lg'>
+    <div className='mt-6 mx-2 text-left px-4 py-3 ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-2xl'>
       <div className='flex justify-between'>
         <h2 className='font-bold text-xl cursor-pointer hover:scale-105 transition-all'>
           <Link href={`/${post.username}/${post.slug}`}>

@@ -96,10 +96,10 @@ export default function Post(props) {
         <UserCard  user={props.user}/>
         <section className='md:max-w-3xl md:mx-auto'>
           <PostContent post={post} />
-          <div className='-mt-20 text-right mr-4'>
+          <div className='-mt-10 text-right mr-4'>
           <AuthCheck  fallback={
             <Link href="/enter">
-              <button className='mr-6 font-CircularMedium bg-yellow-300 rounded-full py-3 w-32 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'>🍕 Sign Up</button>
+              <button className='mr-6 text-sm font-CircularMedium bg-yellow-300 rounded-full py-1 w-24 text-center disabled:bg-gray-200 md:max-w-xs md:mx-auto hover:scale-105 transition-all dark:text-black'>🍕 Sign Up</button>
             </Link>
           }>
             <div className='mx-8' >

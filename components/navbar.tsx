@@ -20,8 +20,8 @@ export default function NavBar(props) {
   const darkMode = props.darkMode;
 
   return (
-    <main className=' bg-slate-50  md:pt-5 pb-10 font-CircularMedium dark:bg-zinc-900'>
-      <section className='px-3 py-4  md:px-5 md:bg-white md:dark:bg-zinc-800 lg:max-w-4xl lg:mx-auto rounded-full '>
+    <main className='bg-none   md:pt-5 font-CircularMedium '>
+      <section className='px-3 py-4 md:bg-white md:dark:bg-zinc-800   md:px-5  lg:max-w-4xl lg:mx-auto rounded-full '>
         <nav className='flex justify-between   '>
           {username ? (
             <div className='pt-2'>
@@ -34,7 +34,13 @@ export default function NavBar(props) {
           ) : (
             <div>
               <Link href={"/"}>
-                <a className='text-2xl md:pl-4 cursor-pointer dark:text-white'>
+                <a className='text-2xl md:pl-4 cursor-pointer dark:text-white lg:hidden'>
+                  🍕
+                </a>
+              </Link>
+
+              <Link href={"/"}>
+                <a className='text-2xl md:pl-4 cursor-pointer dark:text-white hidden lg:block'>
                   getme.🍕
                 </a>
               </Link>
@@ -43,7 +49,7 @@ export default function NavBar(props) {
 
           <ul className='flex items-center '>
             {username && (
-              <div className='bg-white flex rounded-full p-2 dark:bg-zinc-800'>
+              <div className='bg-white  flex rounded-full p-2 dark:bg-zinc-800'>
                 <div
                   className='p-2 text-gray-700 rounded-md outline-none dark:text-slate-50'
                   onClick={() => setMovbileNavOpen(!mobileNavOpen)}
@@ -98,35 +104,35 @@ export default function NavBar(props) {
               <>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/feed"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                    <a className=' dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       Latest Posts
                     </a>
                   </Link>
                 </li>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/explore"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                    <a className=' dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       Explore
                     </a>
                   </Link>
                 </li>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/faq"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                    <a className=' dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       F.A.Q.
                     </a>
                   </Link>
                 </li>
                 <li className='mx-2  text-sm hover:scale-105 transition-all'>
                   <Link href={"/about"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
+                    <a className=' dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer hidden md:block'>
                       About
                     </a>
                   </Link>
                 </li>
                 <li className='mr-2 hover:scale-105 transition-all md:mx-2'>
                   <Link href={"/enter"}>
-                    <a className='bg-white dark:bg-zinc-800 dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer '>
+                    <a className=' dark:text-white rounded-full text-sm px-4  py-2 cursor-pointer '>
                       Sign in
                     </a>
                   </Link>

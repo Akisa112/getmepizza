@@ -10,7 +10,7 @@ import {
 import { MdPersonOutline, MdPeopleOutline } from "react-icons/md";
 import { BsLightning, BsQuestionDiamond } from "react-icons/bs";
 import { ImEmbed2 } from "react-icons/im";
-import { GrArticle } from "react-icons/gr";
+import { FaRegNewspaper } from "react-icons/fa";
 import Link from "next/link";
 import { auth } from "../lib/firebase";
 import { useRouter } from "next/router";
@@ -48,7 +48,7 @@ export default function SideNav(props) {
           </Link>
         </li>
         <li className='text-sm flex'>
-          <GrArticle className='mr-2 text-lg' />
+          <FaRegNewspaper className='mr-2 text-lg' />
           <Link className='' href='/feed'>
             <a className=' hover:text-orange-500 transition-all'>Feed</a>
           </Link>

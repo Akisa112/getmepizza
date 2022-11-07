@@ -21,10 +21,10 @@ export default function MobileNav(props) {
   const closeNav = props.closenav;
   console.log(props);
   return (
-    <div className='m-8 font-CircularMedium mt-16 dark:text-slate-50'>
+    <div className='m-8 font-CircularMedium mt-12 dark:text-slate-50'>
       <ul className='items-center justify-center space-y-4  '>
-        <li className='text-sm flex'>
-          <BiHome className='mr-2 text-lg' />
+        <li className='text-xs flex'>
+          <BiHome className='mr-2 text-sm' />
           <Link className='' href='/dashboard'>
             <a
               onClick={() => {
@@ -37,7 +37,7 @@ export default function MobileNav(props) {
           </Link>
         </li>
 
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <AiOutlineLayout className='mr-2 text-lg' />
           <Link className='' href={`/${username}`}>
             <a
@@ -52,11 +52,11 @@ export default function MobileNav(props) {
           <HiOutlineExternalLink className='ml-2' />
         </li>
       </ul>
-      <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>
+      <h4 className='mt-6 mb-4 text-gray-400 font-Montserrat text-xs'>
         PUBLISH
       </h4>
       <ul className='items-center justify-center space-y-4 '>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <RiArticleLine className='mr-2 text-lg' />
           <Link className='' href='/posts'>
             <a
@@ -69,7 +69,7 @@ export default function MobileNav(props) {
             </a>
           </Link>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <GrArticle className='mr-2 text-lg' />
           <Link className='' href='/feed'>
             <a
@@ -83,11 +83,11 @@ export default function MobileNav(props) {
           </Link>
         </li>
       </ul>
-      <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>
+      <h4 className='mt-6 mb-4 text-gray-400 font-Montserrat text-xs'>
         SETTINGS
       </h4>
       <ul className='items-center justify-center space-y-4 '>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <MdPersonOutline className='mr-2 text-lg' />
           <Link className='' href='/admin'>
             <a
@@ -101,9 +101,9 @@ export default function MobileNav(props) {
           </Link>
         </li>
       </ul>
-      <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>MORE</h4>
+      <h4 className='mt-6 mb-4 text-gray-400 font-Montserrat text-xs'>MORE</h4>
       <ul className='items-center justify-center space-y-4 '>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <MdPeopleOutline className='mr-2 text-lg' />
           <Link className='' href='/explore'>
             <a
@@ -116,7 +116,7 @@ export default function MobileNav(props) {
             </a>
           </Link>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <BsQuestionDiamond className='mr-2 text-lg' />
           <Link className='' href='/faq'>
             <a
@@ -129,7 +129,7 @@ export default function MobileNav(props) {
             </a>
           </Link>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <RiLogoutBoxRLine className='mr-2 text-lg' />
           <p
             className='cursor-pointer'
@@ -146,27 +146,27 @@ export default function MobileNav(props) {
           </p>
         </li>
       </ul>
-      <h4 className='mt-10 mb-4 text-gray-400 font-Montserrat text-xs'>
+      <h4 className='mt-6 mb-4 text-gray-400 font-Montserrat text-xs'>
         COMING SOON
       </h4>
       <ul className='items-center justify-center space-y-4 '>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <RiFileLockFill className='mr-2 text-lg' />
           <p className=''>Memberships</p>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <AiOutlineMail className='mr-2 text-lg' />
           <p className=''>Messages</p>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <RiGalleryLine className='mr-2 text-lg' />
           <p className=''>NFT Gallery</p>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <BsLightning className='mr-2 text-lg' />
           <p className=''>Integrations</p>
         </li>
-        <li className='text-sm flex'>
+        <li className='text-xs flex'>
           <ImEmbed2 className='mr-2 text-lg' />
           <p className=''>Buttons & Graphics</p>
         </li>

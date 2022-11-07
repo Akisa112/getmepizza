@@ -23,7 +23,7 @@ export default function BuyPizza(user) {
   const [donaterName, setDonaterName] = useState("@someone");
   const [memo, setMemo] = useState("...just bought you a pizza.");
   const [finalDonaterName, setFinalDonaterName] = useState("@someone");
-  const [finalMemo, setFinalMemo] = useState("...just bought you a pizza.");
+  const [finalMemo, setFinalMemo] = useState("...just bought you a slice");
   const [slices, setSlices] = useState(1);
 
   const { setSuccesfullTx } = useContext(successTxContext);
@@ -173,20 +173,20 @@ export default function BuyPizza(user) {
 
   console.log(prepareError);
   return (
-    <div className='mt-1  mx-4   md:w-[400px] h-[550px] flex flex-col justify-center  border-2 dark:bg-zinc-800 border-gray-200 rounded-lg '>
+    <div className='mt-1  mx-4   md:w-[400px] h-[550px] flex flex-col justify-center  ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-3xl '>
       <h4 className='font-CircularMedium text-2xl'>
         Buy <span className='text-gray-500'>{user.user.displayName}</span> a
         pizza
       </h4>
-      <div className='mt-6 py-5 m-4  border-2 border-gray-200 rounded-lg bg-orange-50 dark:bg-zinc-800 dark:border-slate-300'>
+      <div className='mt-4 py-4 m-4'>
         <p className='font-Montserrat text-gray-500'>
-          <span className='text-5xl align-middle'>🍕</span> x
+          <span className='text-5xl -mr-1 align-middle'>🍕</span> x
           <button
             disabled={slices === 1}
             onClick={() => {
               setSlices(1);
             }}
-            className=' px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
+            className='ml-2 px-4 text-black bg-white disabled:ring-2 disabled:ring-yellow-400 py-2 mx-1 border-2 border-zinc-500 rounded-full hover:scale-105 transition-all'
           >
             1
           </button>
@@ -226,18 +226,18 @@ export default function BuyPizza(user) {
           write?.();
         }}
       >
-        <div className='mx-4'>
+        <div className='mx-10'>
           <input
-            className='min-w-full mt-1 p-2 border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
+            className='min-w-full mt-1 p-2 ring-1 ring-zinc-400 text-zinc-500 dark:bg-zinc-800 rounded-lg'
             placeholder={donaterName}
             onChange={(e) => setDonaterName(e.target.value)}
             value={donaterName}
             maxLength={33}
           />
         </div>
-        <div className='mx-4'>
+        <div className='mx-10'>
           <input
-            className='min-w-full mt-3 p-2 border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'
+            className='min-w-full mt-3 p-2 ring-1 ring-zinc-400 text-zinc-500 dark:bg-zinc-800 rounded-lg'
             placeholder={memo}
             onChange={(e) => setMemo(e.target.value)}
             value={memo}
@@ -334,7 +334,7 @@ export default function BuyPizza(user) {
           <span className='mt-[3px]'>
             <Image width={15} height={15} src={MetaMaskIcon} />
           </span>
-          <span className='ml-2 '>Add $PIZZA Points</span>
+          <span className='ml-2 dark:text-black'>Add $PIZZA Points</span>
         </button>
       )}
     </div>

@@ -16,7 +16,7 @@ export default function UserProfile({ user, posts }) {
   console.log(posts);
 
   const noPosts = (
-    <div className="className='mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800">
+    <div className="className='mt-1 mx-4 p-2  h-[250px] flex flex-col justify-center ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-2xl">
       <h1 className='font-CircularMedium w-[250px] mx-auto'>
         {user.displayName} has no posts yet... <br />
         <br />
@@ -33,7 +33,9 @@ export default function UserProfile({ user, posts }) {
         className='m-auto rounded-full h-[150px] w-[150px] '
       />
       <h1 className='text-4xl mt-3 font-bold'>
-        {user.displayName || "Anonymous User"}
+        {user.displayName.length > 16 &&
+          `${user.displayName.substring(0, 17)}...`}
+        {user.displayName.length < 17 && user.displayName}
       </h1>
       <h4 className='font-CircularMedium text-lg'>{user.creatorType}</h4>
       <p className='text-xs'>
@@ -61,7 +63,7 @@ export default function UserProfile({ user, posts }) {
           <div className='md:flex md:mx-auto justify-center'>
             <BuyPizza className='' user={user} />
             <div className='md:w-1/2 '>
-              <div className=' mt-1 mx-4 p-2 text-left border-2 border-gray-200 rounded-lg bg-gray-100 dark:bg-zinc-800 dark:border-slate-300'>
+              <div className=' mt-1 mx-4 p-4 text-left ring-1 ring-slate-50 dark:ring-zinc-900 bg-white dark:bg-zinc-800 rounded-2xl '>
                 <p className='mx-2'>{user.about}</p>
                 <br />
                 <Link target='_blank' href={user.website}>
@@ -69,9 +71,9 @@ export default function UserProfile({ user, posts }) {
                     target='_blank'
                     className='mx-2 text-orange-600 cursor-pointer'
                   >
-                    {user.website.length > 46 &&
-                      `${user.website.substring(0, 47)}...`}
-                    {user.website.length < 47 && user.website}
+                    {user.website.length > 39 &&
+                      `${user.website.substring(0, 40)}...`}
+                    {user.website.length < 40 && user.website}
                   </a>
                 </Link>
               </div>

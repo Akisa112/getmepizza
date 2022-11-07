@@ -123,7 +123,7 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <div className={darkMode ? "dark " : ""}>
-      <div className=' dark:bg-zinc-900 dark:text-slate-50 min-h-screen'>
+      <div className='bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-50 via-red-50 to-yellow-50 dark:bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] dark:from-zinc-700 dark:via-zinc-900 dark:to-black dark:text-slate-50 min-h-screen'>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider
             coolMode
