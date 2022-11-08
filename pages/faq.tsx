@@ -110,7 +110,7 @@ export default function FAQ() {
                 href='https://app.multichain.org/#/router/🍕'
                 target='_blank'
               >
-                <a className='text-orange-500'>multichain app.</a>{" "}
+                <a className='text-orange-500'>multichain app.</a>
               </Link>
               🍕 points will be used on future features such as buying digital
               items from creators and getme.pizza.
