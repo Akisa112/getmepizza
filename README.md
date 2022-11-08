@@ -14,16 +14,45 @@ Core Features:
 
 ## BUILT WITH
 
-React - Form, Hooks, Drop Image, Hot-Toast, Markdown
-Next.js - Frontend & OG Images API
-Firebase - Database storage
-Moralis - EVM API, IPFS Upload
-Tailwindcss - CSS
-Wagmi - Web3 Interactions
-Rainbowkit - Wallet UI
-Current Blockchains - Polygon, Binance Smart Chain, Fantom
-Chainlink - Gets prices of native tokens and makes sure a slice costs $1 no matter what chain.
-DiceBear - Default Profile Image Generator
+React
+
+- Form, Hooks, Drop Image, Hot-Toast, Markdown
+
+Next.js
+
+- Frontend & OG Images API
+
+Firebase
+
+- Database storage
+
+Moralis
+
+- EVM API, IPFS Upload
+
+Tailwindcss
+
+- CSS
+
+Wagmi
+
+- Web3 Interactions
+
+Rainbowkit
+
+- Wallet UI
+
+Current Blockchains
+
+- Polygon, Binance Smart Chain, Fantom
+
+Chainlink
+
+- Gets prices of native tokens and makes sure a slice costs $1 no matter what chain.
+
+DiceBear
+
+- Default Profile Image Generator
 
 ## LIVE FEATURES
 
