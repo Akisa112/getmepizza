@@ -174,7 +174,7 @@ export default function Supporters(user) {
           <p className='text-xs font-CircularMedium'>
             {(memo[5] / 1000000000000000000).toFixed(5)}
             {"... "}
-            {chain === "Polygon" && "MATIC"} {chain === "Smart Chain" && "BSC"}{" "}
+            {chain === "Polygon" && "MATIC"} {chain === "Smart Chain" && "BNB"}{" "}
             {chain === "Fantom" && "FTM"}
           </p>
         </div>

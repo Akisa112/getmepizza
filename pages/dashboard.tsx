@@ -156,7 +156,7 @@ export default function Dashboard({}) {
                 <span className='text-xs mr-2 align-bottom '>
                   <Image width='20px' height='20px' src={BinanceLogo} />
                 </span>
-                TBNB{" "}
+                BNB{" "}
               </h4>
               <p className='mt-2 font-CircularMedium text-2xl'>
                 {earningsBinance.toFixed(5)}...
