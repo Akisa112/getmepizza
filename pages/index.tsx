@@ -175,7 +175,7 @@ export default function Home(props) {
               You can withdraw your crypto tips{" "}
               <span className='font-CircularMedium  '>anytime you want</span>,
               while your supporter will get{" "}
-              <span className='font-CircularMedium  '>$PIZZA coupons</span> as a
+              <span className='font-CircularMedium  '>🍕 coupons</span> as a
               memento and to use on future features.
             </p>
           </div>
