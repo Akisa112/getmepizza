@@ -67,7 +67,7 @@ Contract can be found at /contract/getmepizza.sol. The contract takes in tips an
 
 ### TESTNETS:
 
-POLYGON MUMBAI:
+Polygon:
 
 - 0x46cB023CD13Fab6315E0d6d4C87566ABA4A18b43
 

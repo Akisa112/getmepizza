@@ -54,13 +54,13 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
 
     AggregatorV3Interface internal priceFeedUsd;
 
-    constructor(address _admin) ERC20("GetMePizza", "PIZZA") {
+    constructor(address _admin) ERC20("GetMePizza", unicode"🍕") {
         _mint(msg.sender, 1000000 * 10 ** decimals());
         admin = _admin;
     }
 
     /**
-     * Returns the latest amount of token for $0.1
+     * Returns the latest amount of token for $1
      */
     function getLatestPrice() public view returns (uint256) {
         (
@@ -70,19 +70,20 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
             /*uint timeStamp*/,
             /*uint80 answeredInRound*/
         ) = priceFeedUsd.latestRoundData();
-        return 1000000000000000 / uint256(price);// add 0 to make it correct again
+        return 10000000000000000 / uint256(price);
     }
 
     /**
-    * @dev Buy a pizza for the creator and mint the donator a receipt as NFT.
+    * @dev Buy a pizza for the creator and mint the donator a coupon.
     * @param _to wallet address of the creator.
     * @param _name name left by the tipper.
     * @param _message name left by the tipper.
     * @param _slices name of the message left by the buyer to the creator.
     */
-    function buyPizza(address _to, string memory _name, string memory _message, uint256 _slices) public payable {
+    function tipPizza(address _to, string memory _name, string memory _message, uint256 _slices) public payable {
+        uint256 exactPrice = (getLatestPrice() * 10000000000 * _slices * baseDollars);
         // Make sure value is $1 per slice using chainlink.  
-        require(msg.value == (getLatestPrice() * 10000000000 * _slices * baseDollars), "Costs a $1 per slice...");
+        require(msg.value > exactPrice - exactPrice.mul(2).div(100), "Costs a $1 per slice..."); // We give 2% leeway cos chainlink price updates quite fast.
         // Memo must be less than 34 characters. 
         require(bytes(_message).length < 34, "Your memo is too long");
         // Work out fee and creator tip based on amount tipped and current set feePercentage.
@@ -107,7 +108,7 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
         // Get current Token ID.
         currentTokenId++;
         
-        // Add the memo to the tokenId mapping for the NFT.
+        // Add the memo to the tokenId mapping so we can call the memo's from FE.
         memoForToken[currentTokenId] = Memo(
             msg.sender,
             _to,
@@ -129,7 +130,7 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
             _slices
         );
 
-        // mints 1 $pizza coin per slice. 
+        // mints 1 🍕 token per slice. 
         _mint(msg.sender, 1000000000000000000 * _slices);
     }
 
@@ -174,7 +175,7 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
         baseDollars = _baseDollars;
     }
 
-    // Allow Adming to change PriceFeed.
+    // Allow Adming to change PriceFeed address from chainlink.
     function setPriceFeed(AggregatorV3Interface _priceFeedUsd) external  {
         require (msg.sender == admin, "you not the admin");
         priceFeedUsd = _priceFeedUsd;
@@ -190,7 +191,7 @@ contract GetMePizza is ERC20, ERC20Burnable, Ownable, ERC20FlashMint {
 
 
     // MULTICHAIN FUNCTIONS ** 
-    address multichainaddy;
+    address public multichainaddy;
 
     // Allow admin to set multichain address.
     function setMultichainAddy(address _multichainaddy) external {

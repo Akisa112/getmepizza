@@ -67,7 +67,7 @@ export default function FAQ() {
             <h1 className='mt-8 mb-2  font-bold text-xl'>Why 🍕?</h1>
             <p className=''>
               Short answer: Who doesn&apos;t like Pizza? Without pizza, we would
-              have no Bitcorns...
+              have no Bitcoins...
               <br />
               <br /> Longer answer: I thought it would be fun to allow
               supporters to tip in pizza slice value instead of dollars and mint
@@ -99,14 +99,31 @@ export default function FAQ() {
               It is completely free to sign up and create posts. The smart
               contract takes 5% on every tip to pay for development and servers.
             </p>
-            <h1 className='mt-8 mb-2  font-bold text-xl'>
-              What are $PIZZA coupons?
+            <h1 id='coupons' className='mt-8 mb-2  font-bold text-xl'>
+              What are 🍕 points?
             </h1>
             <p className=''>
-              Pizza coupons are token that supporters receive when tipping a
-              creator. They are cross-chain and can be swapped between chains on
-              multichain.app. $PIZZA will be used on future features such as
-              buying digital items from creators and minting getme.pizza NFTs.
+              🍕 points are blockchain tokens that supporters receive when
+              tipping a creator. They are cross-chain and can be swapped between
+              chains on{" "}
+              <a
+                className='text-orange-500'
+                href='https://app.multichain.org/#/router/🍕'
+                target='_blank'
+              >
+                multichain app.
+              </a>{" "}
+              🍕 points will be used on future features such as buying digital
+              items from creators and getme.pizza.
+            </p>
+            <h1 className='mt-8 mb-2  font-bold text-xl'>
+              What is this profile pic most people have?
+            </h1>
+            <p className=''>
+              Instead of giving everyone a blank blue egg or some such nonsense,
+              we thought it would be fun to generate a random profile picture
+              for you, using Dicebear.com (micah) API, seeded with your user UID
+              we generate when you sign up.
             </p>
             <h1 className='mt-8 mb-2  font-bold text-xl'>
               Is it safe to connect a wallet to this site?

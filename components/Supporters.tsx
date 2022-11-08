@@ -15,7 +15,7 @@ export default function Supporters(user) {
   const [memsMumbai, setMemsMumbai] = useState([]);
   const [memsBinance, setMemsBinance] = useState([]);
   const [memsFantom, setMemsFantom] = useState([]);
-  const [chain, setChain] = useState("BSC Testnet");
+  const [chain, setChain] = useState("Smart Chain");
 
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
@@ -48,9 +48,9 @@ export default function Supporters(user) {
   const memosPoly = async () => {
     let memoArrayPoly;
     if (user.user.ethAddress) {
-      memoArrayPoly = await getMemos(user.user.ethAddress, "Polygon Mumbai");
+      memoArrayPoly = await getMemos(user.user.ethAddress, "Polygon");
       setMemsMumbai(memoArrayPoly.reverse());
-      if (chain === "Polygon Mumbai") {
+      if (chain === "Polygon") {
         setMems(memoArrayPoly);
         setPages(Math.ceil(memoArrayPoly.length / memePerPage));
 
@@ -66,12 +66,29 @@ export default function Supporters(user) {
   const memosBinance = async () => {
     let memoArrayBinance;
     if (user.user.ethAddress) {
-      memoArrayBinance = await getMemos(user.user.ethAddress, "BSC Testnet");
+      memoArrayBinance = await getMemos(user.user.ethAddress, "Smart Chain");
       setMemsBinance(memoArrayBinance.reverse());
-      if (chain === "BSC Testnet") {
+      if (chain === "Smart Chain") {
         setMems(memoArrayBinance);
         setPages(Math.ceil(memoArrayBinance.length / memePerPage));
         if (Math.ceil(memoArrayBinance.length / memePerPage) === 1) {
+          setEnd(true);
+        } else {
+          setEnd(false);
+        }
+      }
+    }
+  };
+
+  const memosFantom = async () => {
+    let memoArrayFantom;
+    if (user.user.ethAddress) {
+      memoArrayFantom = await getMemos(user.user.ethAddress, "Fantom");
+      setMemsFantom(memoArrayFantom.reverse());
+      if (chain === "Fantom") {
+        setMems(memoArrayFantom);
+        setPages(Math.ceil(memoArrayFantom.length / memePerPage));
+        if (Math.ceil(memoArrayFantom.length / memePerPage) === 1) {
           setEnd(true);
         } else {
           setEnd(false);
@@ -84,16 +101,21 @@ export default function Supporters(user) {
     memosBinance();
 
     memosPoly();
+
+    memosFantom();
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
       if (successfullTx) {
-        if (chain === "Polygon Mumbai") {
+        if (chain === "Polygon") {
           memosPoly();
         }
-        if (chain === "BSC Testnet") {
+        if (chain === "Smart Chain") {
           memosBinance();
+        }
+        if (chain === "Fantom") {
+          memosFantom();
         }
       }
     }, 2000);
@@ -104,7 +126,7 @@ export default function Supporters(user) {
   };
 
   const changeChains = (chosenChain) => {
-    if (chosenChain === "Polygon Mumbai") {
+    if (chosenChain === "Polygon") {
       setPage(1);
       setMems(memsMumbai);
       setPages(Math.ceil(memsMumbai.length / memePerPage));
@@ -114,8 +136,8 @@ export default function Supporters(user) {
         setEnd(false);
       }
       setStart(true);
-      setChain("Polygon Mumbai");
-    } else if (chosenChain === "BSC Testnet") {
+      setChain("Polygon");
+    } else if (chosenChain === "Smart Chain") {
       setPage(1);
       setMems(memsBinance);
       setPages(Math.ceil(memsBinance.length / memePerPage));
@@ -125,7 +147,18 @@ export default function Supporters(user) {
         setEnd(false);
       }
       setStart(true);
-      setChain("BSC Testnet");
+      setChain("Smart Chain");
+    } else if (chosenChain === "Fantom") {
+      setPage(1);
+      setMems(memsFantom);
+      setPages(Math.ceil(memsFantom.length / memePerPage));
+      if (Math.ceil(memsFantom.length / memePerPage) === 1) {
+        setEnd(true);
+      } else {
+        setEnd(false);
+      }
+      setStart(true);
+      setChain("Fantom");
     }
   };
 
@@ -141,8 +174,8 @@ export default function Supporters(user) {
           <p className='text-xs font-CircularMedium'>
             {(memo[5] / 1000000000000000000).toFixed(5)}
             {"... "}
-            {chain === "Polygon Mumbai" && "MATIC"}{" "}
-            {chain === "BSC Testnet" && "TBSC"}
+            {chain === "Polygon" && "MATIC"} {chain === "Smart Chain" && "BSC"}{" "}
+            {chain === "Fantom" && "FTM"}
           </p>
         </div>
         <div className='mt-2 flex justify-between text-xs'>
@@ -178,10 +211,10 @@ export default function Supporters(user) {
       </h4>
       <div className='flex justify-end mx-4 mb-5 dark:text-black'>
         <button
-          disabled={chain === "BSC Testnet"}
+          disabled={chain === "Smart Chain"}
           className='mr-1 font-CircularMedium bg-yellow-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-yellow-300 disabled:ring-2  md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           onClick={() => {
-            changeChains("BSC Testnet");
+            changeChains("Smart Chain");
           }}
         >
           <span className='text-xs mr-2 align-bottom '>
@@ -190,22 +223,24 @@ export default function Supporters(user) {
           Binance
         </button>
         <button
-          disabled={chain === "Polygon Mumbai"}
+          disabled={chain === "Polygon"}
           className='mx-1 font-CircularMedium bg-purple-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
           onClick={() => {
-            changeChains("Polygon Mumbai");
+            changeChains("Polygon");
           }}
         >
           <span className='text-xs mr-2 align-bottom '>
             <Image width='20px' height='20px' src={PolygonLogo} />
           </span>
-          Mumbai
+          Polygon
         </button>
 
         <button
-          disabled={chain === "Fantom Testnet"}
+          disabled={chain === "Fantom"}
           className='ml-1 font-CircularMedium bg-blue-100 rounded-full mt-1 py-2 w-32 text-center disabled:bg-white disabled:ring-violet-300 disabled:ring-2 disabled:hover:scale-100 md:max-w-xs md:mx-auto hover:scale-105 transition-all'
-          onClick={() => {}}
+          onClick={() => {
+            changeChains("Fantom");
+          }}
         >
           <span className='text-xs mr-2 align-bottom '>
             <Image width='20px' height='20px' src={FantomLogo} />

@@ -31,6 +31,7 @@ export default function Dashboard({}) {
   const { username, userETH } = useContext(UserContext);
   const [earningsPoly, setEarningsPoly] = useState(0);
   const [earningsBinance, setEarningsBinance] = useState(0);
+  const [earningsFantom, setEarningsFantom] = useState(0);
 
   const [currentChainEarnings, setCurrentChainEarnings] = useState(0);
 
@@ -40,14 +41,18 @@ export default function Dashboard({}) {
 
   const getEarningsFrom = async () => {
     try {
-      const getPoly = await getEarnings(userETH, "Polygon Mumbai");
+      const getPoly = await getEarnings(userETH, "Polygon");
       setEarningsPoly(Number(getPoly) / 1000000000000000000);
-      const getBinance = await getEarnings(userETH, "BSC Testnet");
+      const getBinance = await getEarnings(userETH, "Smart Chain");
       setEarningsBinance(Number(getBinance) / 1000000000000000000);
-      if (chain.name === "Polygon Mumbai") {
+      const getFantom = await getEarnings(userETH, "Fantom");
+      setEarningsFantom(Number(getFantom) / 1000000000000000000);
+      if (chain.name === "Polygon") {
         setCurrentChainEarnings(Number(getPoly) / 1000000000000000000);
-      } else if (chain.name === "BSC Testnet") {
+      } else if (chain.name === "Smart Chain") {
         setCurrentChainEarnings(Number(getBinance) / 1000000000000000000);
+      } else if (chain.name === "Fantom") {
+        setCurrentChainEarnings(Number(getFantom) / 1000000000000000000);
       }
     } catch (error) {}
   };
@@ -58,9 +63,11 @@ export default function Dashboard({}) {
 
   useEffect(() => {
     if (chain) {
-      if (chain.name === "Polygon Mumbai") {
+      if (chain.name === "Polygon") {
         setCurrentChainEarnings(earningsPoly);
-      } else if (chain.name === "BSC Testnet") {
+      } else if (chain.name === "Smart Chain") {
+        setCurrentChainEarnings(earningsBinance);
+      } else if (chain.name === "Fantom") {
         setCurrentChainEarnings(earningsBinance);
       }
     }
@@ -78,7 +85,7 @@ export default function Dashboard({}) {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x8f9AeAd37C002d2FF07B6951b79D48E3Ae1aC38b",
+    address: "0xAe634f8A025AAf53cc3AfCf29C4323085b40406F",
     abi: [
       {
         inputs: [],
@@ -173,7 +180,9 @@ export default function Dashboard({}) {
                 </span>
                 FTM{" "}
               </h4>
-              <p className='mt-2 font-CircularMedium text-2xl'>0</p>
+              <p className='mt-2 font-CircularMedium text-2xl'>
+                {earningsFantom.toFixed(5)}...
+              </p>
             </div>
           </div>
           <form

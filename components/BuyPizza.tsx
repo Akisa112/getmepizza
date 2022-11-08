@@ -80,7 +80,7 @@ export default function BuyPizza(user) {
   try {
     value = ReadDataPrice.toNumber() * 10000000000;
 
-    console.log(BigNumber.from((value * slices).toString()));
+    console.log((value * slices).toString());
   } catch (error) {}
 
   const {
@@ -113,13 +113,13 @@ export default function BuyPizza(user) {
             type: "uint256",
           },
         ],
-        name: "buyPizza",
+        name: "tipPizza",
         outputs: [],
         stateMutability: "payable",
         type: "function",
       },
     ],
-    functionName: "buyPizza",
+    functionName: "tipPizza",
     overrides: {
       value: BigNumber.from((value * slices).toString()),
     },
@@ -138,7 +138,7 @@ export default function BuyPizza(user) {
     hash: data?.hash,
     onSuccess(data) {
       toast.success(
-        `You have tipped ${user.user.displayName}! \n We have sent you ${slices} $pizza points!`,
+        `You have tipped ${user.user.displayName}! \n We have sent you ${slices} 🍕 points!`,
         { duration: 3000 }
       );
       setSuccesfullTx(true);
@@ -156,8 +156,8 @@ export default function BuyPizza(user) {
         params: {
           type: "ERC20",
           options: {
-            address: "0x8f9AeAd37C002d2FF07B6951b79D48E3Ae1aC38b", // ERC20 token address
-            symbol: `PIZZA`,
+            address: "0xAe634f8A025AAf53cc3AfCf29C4323085b40406F", // ERC20 token address
+            symbol: `🍕`,
             decimals: 18,
             image:
               "https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f355.png",
@@ -279,19 +279,18 @@ export default function BuyPizza(user) {
               `Support $${slices} 
                 
                 (${((value * slices) / 1000000000000000000).toFixed(
-                  5
+                  10
                 )}..) ${chainSymbol}`}
           </button>
         )}
         <div className='relative inline-block tooltip'>
           <p className='mt-4 uppercase text-xs font-CircularMedium text-green-600 cursor-help'>
-            Tip {user.user.displayName} ${slices} & receive {slices} $Pizza
-            Points*
+            Tip {user.user.displayName} ${slices} & receive {slices} 🍕 Points*
           </p>
           <div className='flex flex-col p-4 top-8 bg-black bg-opacity-90 text-white w-60 h-30 rounded-md z-20 absolute right-3 invisible tooltip-item transition-all '>
             <p className='font-CircularMedium text-sm'>
-              Pizza points can be collected, traded and used in our ecosystem.{" "}
-              <Link href='./faq'>
+              🍕 points can be collected, traded and used in our ecosystem.{" "}
+              <Link href='./faq#coupons'>
                 <a className='text-orange-600 cursor-pointer'>Learn More</a>
               </Link>
             </p>
@@ -307,7 +306,7 @@ export default function BuyPizza(user) {
           <span className='mt-[3px]'>
             <Image width={15} height={15} src={MetaMaskIcon} />
           </span>
-          <span className='ml-2 dark:text-black'>Add $PIZZA Points</span>
+          <span className='ml-2 dark:text-black'>Add 🍕 Points</span>
         </button>
       )}
     </div>

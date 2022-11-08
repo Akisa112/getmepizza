@@ -21,50 +21,72 @@ import PageLoader from "../components/PageLoader";
 import { motion } from "framer-motion";
 
 const binanceChain: Chain = {
-  id: 97,
-  name: "BSC Testnet",
+  id: 56,
+  name: "Smart Chain",
   network: "BinanceSmartChain",
   iconUrl:
     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
   iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: "Smart Chain - Testnet",
-    symbol: "TBNB",
+    name: "Smart Chain",
+    symbol: "BNB",
   },
   rpcUrls: {
-    default: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    default: "https://bsc-dataseed.binance.org/",
   },
   blockExplorers: {
-    default: { name: "BSCScan", url: "https://testnet.bscscan.com" },
-    etherscan: { name: "BSCScan", url: "https://testnet.bscscan.com" },
+    default: { name: "BSCScan", url: "https://bscscan.com" },
+    etherscan: { name: "BSCScan", url: "https://bscscan.com" },
   },
-  testnet: true,
+  testnet: false,
 };
 
 const fantomChain: Chain = {
-  id: 4002,
-  name: "Fantom Testnet",
-  network: "Fantom Testnet",
+  id: 250,
+  name: "Fantom",
+  network: "Fantom",
   iconUrl: "https://cryptologos.cc/logos/fantom-ftm-logo.png",
   iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: "Fantom Testnet",
+    name: "Fantom",
     symbol: "FTM",
   },
   rpcUrls: {
-    default: "https://rpc.testnet.fantom.network/",
+    default: "https://rpc.ankr.com/fantom/",
   },
   blockExplorers: {
-    default: { name: "FTMScan", url: "https://testnet.ftmscan.com/" },
-    etherscan: { name: "FTMScan", url: "https://testnet.ftmscan.com/" },
+    default: { name: "FTMScan", url: "https://ftmscan.com/" },
+    etherscan: { name: "FTMScan", url: "https://ftmscan.com/" },
   },
-  testnet: true,
+  testnet: false,
+};
+
+const polyChain: Chain = {
+  id: 137,
+  name: "Polygon",
+  network: "Polygon",
+  iconUrl:
+    "https://seeklogo.com/images/P/polygon-matic-logo-1DFDA3A3A8-seeklogo.com.png",
+  iconBackground: "#fff",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Matic",
+    symbol: "MATIC",
+  },
+  rpcUrls: {
+    default: "https://polygon-rpc.com",
+  },
+  blockExplorers: {
+    default: { name: "PolyScan", url: "https://polygonscan.com/" },
+    etherscan: { name: "PolyScan", url: "https://polygonscan.com/" },
+  },
+  testnet: false,
 };
 
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai, binanceChain, fantomChain],
+  [polyChain, binanceChain, fantomChain],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     publicProvider(),
@@ -135,7 +157,6 @@ function MyApp({ Component, pageProps, router }) {
             }}
           >
             <UserContext.Provider value={userData}>
-              <Alpha />
               <NavBar changeMode={changeMode} darkMode={darkMode} />
 
               <motion.div

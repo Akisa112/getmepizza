@@ -87,14 +87,16 @@ export async function getMemos(ethAddress, chosenChain) {
     const address = process.env.NEXT_PUBLIC_POLY_CONTRACT;
   
     let chain; 
-    if (chosenChain === 'Polygon Mumbai') {
-        chain = EvmChain.MUMBAI
+    if (chosenChain === 'Polygon') {
+        chain = EvmChain.POLYGON
     }
-    if (chosenChain === 'BSC Testnet') {
-        chain = EvmChain.BSC_TESTNET
+    if (chosenChain === 'Smart Chain') {
+        chain = EvmChain.BSC
 		// chain = EvmChain.MUMBAI // FOR TESTING ON ONE CHAIN ONLY
     }
-
+	if (chosenChain === 'Fantom') {
+		chain = EvmChain.FANTOM
+	}
     ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
 
     await Moralis.start({
@@ -143,12 +145,15 @@ export async function getEarnings(ethAddress, chosenChain) {
     const address = process.env.NEXT_PUBLIC_POLY_CONTRACT;
   
     let chain; 
-    if (chosenChain === 'Polygon Mumbai') {
-        chain = EvmChain.MUMBAI
+    if (chosenChain === 'Polygon') {
+        chain = EvmChain.POLYGON
     }
-    if (chosenChain === 'BSC Testnet') {
-         chain = EvmChain.BSC_TESTNET
+    if (chosenChain === 'Smart Chain') {
+         chain = EvmChain.BSC
     }
+	if (chosenChain === 'Fantom') {
+		chain = EvmChain.FANTOM
+	}
     ///  ADD IF STATEMENTS HERE FOR EVERY CHAIN SUPPORTED. 
 
     await Moralis.start({

@@ -55,7 +55,7 @@ export default function Custom404() {
               <br />
               So I spent 1 month throughout the Moralis x Google Defining Defi
               Hackathon building the basic features of GetMe.🍕 using Next,
-              Firebase, Moralis, Wagmi, RainbowKit, and Tailwindcss.
+              Firebase, Moralis, Wagmi, Chainlink, RainbowKit, and Tailwindcss.
               <br />
               <br />
               That said, I intend to build upon this mvp by adding more features

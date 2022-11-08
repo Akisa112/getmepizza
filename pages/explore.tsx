@@ -86,6 +86,13 @@ export default function Explore(props) {
             </ul>
           </nav>
 
+          <h1 className='font-CircularMedium'>LATEST GAMERS</h1>
+          <nav className='pt-1 mb-5'>
+            <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
+              <ExploreList users={latestUsers} SelectedFeed={"Gamer"} />
+            </ul>
+          </nav>
+
           <h1 className='font-CircularMedium'>LATEST ARTISTS</h1>
           <nav className='pt-1 mb-5'>
             <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
@@ -104,13 +111,6 @@ export default function Explore(props) {
           <nav className='pt-1 mb-5'>
             <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
               <ExploreList users={latestUsers} SelectedFeed={"Musician"} />
-            </ul>
-          </nav>
-
-          <h1 className='font-CircularMedium'>LATEST GAMERS</h1>
-          <nav className='pt-1 mb-5'>
-            <ul className='flex items-center overflow-x-auto scrollbar-hide  scroll-auto'>
-              <ExploreList users={latestUsers} SelectedFeed={"Gamer"} />
             </ul>
           </nav>
 
