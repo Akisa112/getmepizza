@@ -106,13 +106,12 @@ export default function FAQ() {
               🍕 points are blockchain tokens that supporters receive when
               tipping a creator. They are cross-chain and can be swapped between
               chains on{" "}
-              <a
-                className='text-orange-500'
+              <Link
                 href='https://app.multichain.org/#/router/🍕'
                 target='_blank'
               >
-                multichain app.
-              </a>{" "}
+                <a className='text-orange-500'>multichain app.</a>{" "}
+              </Link>
               🍕 points will be used on future features such as buying digital
               items from creators and getme.pizza.
             </p>
