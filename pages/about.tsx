@@ -60,7 +60,7 @@ export default function Custom404() {
               <br />
               That said, I intend to build upon this mvp by adding more features
               that allows web3 creators and artists to unlock their true
-              potential value by adding new ways to connect with their audience.
+              potential value by adding new ways to connect with their fans.
               <br />
               <br />
               LFG!
